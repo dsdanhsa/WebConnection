@@ -6,11 +6,6 @@ class BenefitPlans(models.Model):
     DEDUCTABLE = models.DecimalField(max_digits=18, decimal_places=0, null=True)
     PERCENTAGE_COPAY = models.DecimalField(max_digits=18, decimal_places=0, null=True)
 
-    class Meta:
-        constraints = [
-            models.PrimaryKey('BENEFIT_PLANS_ID', name='PK_BENEFIT_PLANS')
-        ]
-
 class Employment(models.Model):
     EMPLOYMENT_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
     EMPLOYMENT_CODE = models.CharField(max_length=50, null=True)
@@ -46,7 +41,7 @@ class JobHistory(models.Model):
 class Personal(models.Model):
     PERSONAL_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
     CURRENT_FIRST_NAME = models.CharField(max_length=50, null=True)
-    CURRENT_LAST_NAME = models.TextField(null=True)
+    CURRENT_LAST_NAME = models.CharField(max_length=50, null=True)
     CURRENT_MIDDLE_NAME = models.CharField(max_length=50, null=True)
     BIRTH_DATE = models.DateField(null=True)
     SOCIAL_SECURITY_NUMBER = models.CharField(max_length=20, null=True)
