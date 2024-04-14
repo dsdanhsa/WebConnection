@@ -22,7 +22,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     path('accounts/', include('login.urls'), name='signup'),
-    path('hr/', include('hr_app.urls', namespace='hr_app')),
+    path('hr/', include('hrapp.urls', namespace='hrapp')),
     path('payroll/', include('payroll_app.urls', namespace='payroll')),
 ]
 

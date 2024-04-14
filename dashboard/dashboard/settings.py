@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hr_app',
+    'hrapp',
     'payroll_app',
     'login.apps.LoginConfig',
 ]

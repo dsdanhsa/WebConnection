@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class BenefitPlans(models.Model):
     BENEFIT_PLANS_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
@@ -10,8 +11,8 @@ class Employment(models.Model):
     EMPLOYMENT_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
     EMPLOYMENT_CODE = models.CharField(max_length=50, null=True)
     EMPLOYMENT_STATUS = models.CharField(max_length=10, null=True)
-    HIRE_DATE_FOR_WORKING = models.DateField(null=True)
-    WORKERS_COMP_CODE = models.CharField(max_length=10, null=True, verbose_name='MÃ CÔNG VIỆC')  # Thêm phần mô tả
+    HIRE_DATE_FOR_WORKING = models.DateField(default=timezone.now, null=True)  # Set default value to current date and time
+    WORKERS_COMP_CODE = models.CharField(max_length=10, null=True, verbose_name='MÃ CÔNG VIỆC')
     TERMINATION_DATE = models.DateField(null=True)
     REHIRE_DATE_FOR_WORKING = models.DateField(null=True)
     LAST_REVIEW_DATE = models.DateField(null=True)
@@ -21,7 +22,7 @@ class Employment(models.Model):
 class EmploymentWorkingTime(models.Model):
     EMPLOYMENT_WORKING_TIME_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
     EMPLOYMENT = models.ForeignKey(Employment, on_delete=models.CASCADE, null=True, related_name='working_times')
-    YEAR_WORKING = models.DateField(null=True)
+    YEAR_WORKING = models.DateField(default=timezone.now, null=True)  # Set default value to current date and time
     MONTH_WORKING = models.DecimalField(max_digits=2, decimal_places=0, null=True)
     NUMBER_DAYS_ACTUAL_OF_WORKING_PER_MONTH = models.DecimalField(max_digits=2, decimal_places=0, null=True)
     TOTAL_NUMBER_VACATION_WORKING_DAYS_PER_MONTH = models.DecimalField(max_digits=2, decimal_places=0, null=True)
@@ -31,7 +32,7 @@ class JobHistory(models.Model):
     EMPLOYMENT = models.ForeignKey(Employment, on_delete=models.CASCADE, null=True, related_name='job_histories')
     DEPARTMENT = models.CharField(max_length=250, null=True)
     DIVISION = models.CharField(max_length=250, null=True)
-    FROM_DATE = models.DateField(null=True)
+    FROM_DATE = models.DateField(default=timezone.now, null=True)  # Set default value to current date and time
     THRU_DATE = models.DateField(null=True)
     JOB_TITLE = models.CharField(max_length=250, null=True)
     SUPERVISOR = models.CharField(max_length=250, null=True)
@@ -43,7 +44,7 @@ class Personal(models.Model):
     CURRENT_FIRST_NAME = models.CharField(max_length=50, null=True)
     CURRENT_LAST_NAME = models.CharField(max_length=50, null=True)
     CURRENT_MIDDLE_NAME = models.CharField(max_length=50, null=True)
-    BIRTH_DATE = models.DateField(null=True)
+    BIRTH_DATE = models.DateField(default=timezone.now, null=True)  # Set default value to current date and time
     SOCIAL_SECURITY_NUMBER = models.CharField(max_length=20, null=True)
     DRIVERS_LICENSE = models.CharField(max_length=50, null=True)
     CURRENT_ADDRESS_1 = models.CharField(max_length=255, null=True)
