@@ -16,6 +16,13 @@ class PayRate(models.Model):
     class Meta:
         ordering = ['idPayRates']
 
+    def total_vacationday(self):
+        # Lấy tổng số ngày nghỉ của mức lương
+        total_vacation_days = 0
+        for employee in self.employee_set.all():
+            total_vacation_days += employee.total_vacation_days
+        return total_vacation_days
+
 class Employee(models.Model):
     idEmployee = models.AutoField(primary_key=True)
     EmployeeNumber = models.IntegerField(unique=True)
@@ -31,10 +38,12 @@ class Employee(models.Model):
         return f"{self.LastName}, {self.FirstName}"
 
     class Meta:
-        ordering = ['idEmployee'] 
-    
+        ordering = ['idEmployee']
+
+
     def total_payrate(self):
         return int(self.PayRates_idPay.PayAmount.to_integral_value())
-    
-    
-    
+
+
+    def total_vacationday(self):
+        return self.VacationDays if self.VacationDays else 0
