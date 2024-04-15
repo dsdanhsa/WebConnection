@@ -2,109 +2,165 @@
 
 {% block title %}Login{% endblock %}
 
-{% block content %}
 {% block content123 %}
-<style>
-    body{
-  padding:0;
-  margin:0;
+<style media="screen">
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
-.vid-container{
-  position:relative;
-  height:100vh;
-  overflow:hidden;
+body {
+    background-color: #080710;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
 }
-.bgvid{
-  position:absolute;
-  left:0;
-  top:0;
-  width:100vw;
+.background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
 }
-.inner-container{
-  width:400px;
-  height:400px;
-  position:absolute;
-  top:calc(50vh - 200px);
-  left:calc(50vw - 200px);
-  overflow:hidden;
+.background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
 }
-.bgvid.inner{
-  top:calc(-50vh + 200px);
-  left:calc(-50vw + 200px);
-  filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='10'%20/></filter></svg>#blur");
-  -webkit-filter:blur(10px);
-  -ms-filter: blur(10px);
-  -o-filter: blur(10px);
-  filter:blur(10px);
+.shape:first-child {
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: -80px;
+    top: -80px;
 }
-.box{
-  position:absolute;
-  height:100%;
-  width:100%;
-  font-family:Helvetica;
-  color:#fff;
-  background:rgba(0,0,0,0.13);
-  padding:30px 0px;
+.shape:last-child {
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    right: -30px;
+    bottom: -80px;
 }
-.box h1{
-  text-align:center;
-  margin:30px 0;
-  font-size:30px;
+form {
+    height: 520px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
 }
-.box input{
-  display:block;
-  width:300px;
-  margin:20px auto;
-  padding:15px;
-  background:rgba(0,0,0,0.2);
-  color:#fff;
-  border:0;
+form h3 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+    margin-bottom: 30px;
 }
-.box input:focus,.box input:active,.box button:focus,.box button:active{
-  outline:none;
+label {
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    margin-top: 20px;
 }
-.box button{
-  background:#2ecc71;
-  border:0;
-  color:#fff;
-  padding:10px;
-  font-size:20px;
-  width:330px;
-  margin:20px auto;
-  display:block;
-  cursor:pointer;
+input {
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    border: none;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
 }
-.box button:active{
-  background:#27ae60;
+::placeholder {
+    color: #e5e5e5;
 }
-.box p{
-  font-size:14px;
-  text-align:center;
+button {
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
 }
-.box p span{
-  cursor:pointer;
-  color:#666;
+
+button:hover {
+    background-color: #00f0ec;
 }
-</style>
+
+.bottom-text {
+    text-align: center;
+    margin-top: 20px;
+}
+.bottom-text p a {
+    color: #23a2f6;
+    text-decoration: none;
+}
+.bottom-text p a:hover {
+    text-decoration: underline;
+}
+.social {
+    margin-top: 30px;
+    display: flex;
+}
+.social div {
+    width: 150px;
+    border-radius: 3px;
+    padding: 5px 10px 10px 5px;
+    background-color: rgba(255,255,255,0.27);
+    color: #eaf0fb;
+    text-align: center;
+    margin-left: 25px;
+}
+.social div:hover {
+    background-color: #00f0ec;
+}
+.social i {
+    margin-right: 4px;
+}
+    </style>
 {% endblock %}
-<div class="vid-container">
-    <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop>
-        <source src="https://videos.pexels.com/video-files/19247660/19247660-uhd_3840_2160_60fps.mp4" type="video/webm">
-    </video>
-    <div class="inner-container">
-      <video class="bgvid inner" autoplay="autoplay" muted="muted" preload="auto" loop>
-        <source src="https://videos.pexels.com/video-files/19247660/19247660-uhd_3840_2160_60fps.mp4?random=1" type="video/webm">
-      </video>
-      <div class="box">
-        <h1>Login</h1>
-        <form method="post">
-          {% csrf_token %}
-          <input type="text" placeholder="Username" name="username"/>
-          <input type="password" placeholder="Password" name="password"/>
-          <button type="submit">Login</button>
-        </form>
-        <p>Not a member? <span><a href="{% url 'signup' %}">Sign Up</a></span></p>
-      </div>
+{% block content %}
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <h3>Login</h3>
+    <label for="username">Username</label>
+    <input type="text" placeholder="Email or Phone" id="username" name="username">
+
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" id="password" name="password">
+
+    <button>Log In</button>
+
+    <div class="bottom-text">
+        <p>Not a member? <a href="{% url 'signup' %}">Sign Up</a></p>
     </div>
-  </div>
+
+    <div class="social">
+        <div class="go"><i class="fab fa-google"></i>  Google</div>
+        <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+    </div>
+</form>
 {% endblock %}

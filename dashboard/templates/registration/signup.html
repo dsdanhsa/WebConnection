@@ -2,169 +2,171 @@
 
 {% block title %}Sign Up{% endblock %}
 {% block content123 %}
-  <style>
-    body{
-  margin: 0;
-  padding: 0;
-  font-family: Roboto;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background: linear-gradient(120deg, #007bff, #d0314c);
-  height: 100vh;
-  overflow: hidden;
-}
-
-.center{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 29vw;
-  background: white;
-  border-radius: 10px;
-}
-
-.center h1{
-  text-align: center;
-  padding: 0 0 20px 0;
-  border-bottom: 1px solid silver;
-}
-
-.center form{
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-
-form .txt_field{
-  position: relative;
-  border-bottom: 2px solid #adadad;
-  margin: 30px 0;
-}
-
-.txt_field input{
-  width: 100%;
-  padding: 0 5px;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  background: none;
-  outline: none;
-}
-
-.txt_field label{
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  color: #adadad;
-  transform: translateY(-50%);
-  font-size: 16px;
-  pointer-events: none;
-}
-
-.txt_field span::before{
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 0;
-  width: 0px;
-  height: 2px;
-  background: #2691d9;
-  transition: .5s;
-}
-
-.txt_field input:focus ~ label,
-.txt_field input:valid ~ label{
-  top: -5px;
-  color: #2691d9;
-}
-
-.txt_field input:focus ~ span::before,
-.txt_field input:Valid ~ span::before{
-  width: 100%;
-}
-
-.pass{
-  margin: -5px 0 20px 5px;
-  color: #a6a6a6;
-  cursor: pointer;
-}
-
-.pass:hover{
-  text-decoration: underline;
-}
-
-input[type="Submit"]{
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  border-radius: 25px;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-
-}
-
-input[type="Submit"]:hover{
-  background: #2691d9;
-  color: #e9f4fb;
-  transition: .5s;
-}
-
-.signup_link{
-  margin: 30px 0;
-  text-align: center;
-  font-size: 16px;
-  color: #666666;
-}
-
-.signup_link a{
-  color: #2691d9;
-  text-decoration: none;
-}
-
-.signup_link a:hover{
-  text-decoration: underline;
-}
-
-.HomeAbout{
-  width: 100vw;
-  height: 25vh;
-}
-  </style>
+  <style media="screen">
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #080710;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+        .background {
+            width: 430px;
+            height: 620px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+        }
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .shape:first-child {
+            background: linear-gradient(#1845ad, #23a2f6);
+            left: -80px;
+            top: -80px;
+        }
+        .shape:last-child {
+            background: linear-gradient(to right, #ff512f, #f09819);
+            right: -30px;
+            bottom: -80px;
+        }
+        form {
+            width: 400px;
+            background-color: rgba(255,255,255,0.13);
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(8,7,16,0.6);
+            padding: 50px 35px;
+        }
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        label {
+            font-size: 16px;
+            font-weight: 500;
+            display: block;
+            margin-top: 20px;
+        }
+        input {
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+        input::placeholder {
+            color: #e5e5e5;
+        }
+        input:focus {
+            background-color: rgba(255,255,255,0.2);
+        }
+        button {
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            border: none;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #00f0ec;
+        }
+        .bottom-text {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .bottom-text p a {
+            color: #23a2f6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .bottom-text p a:hover {
+            color: #0d8af5;
+        }
+        .social {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        .social div {
+            width: 150px;
+            border-radius: 3px;
+            padding: 5px 10px 10px 5px;
+            background-color: rgba(255,255,255,0.27);
+            color: #eaf0fb;
+            text-align: center;
+            margin-left: 25px;
+            transition: background-color 0.3s ease;
+        }
+        .social div:hover {
+            background-color: #00f0ec;
+        }
+        .social i {
+            margin-right: 4px;
+        }
+    </style>
 {% endblock %}
 {% block content %}
 
+<div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Sign Up</h3>
 
-<div class="container">
-  <div class="center">
-    <h1>Register</h1>
-    <form method="POST" action="">
-      {% csrf_token %}
-      <div class="txt_field">
-        <input type="text" name="name" required>
-        <span></span>
-        <label>Name</label>
-      </div>
-      <div class="txt_field">
-        <input type="email" name="email" required>
-        <span></span>
-        <label>Email</label>
-      </div>
-      <div class="txt_field">
-        <input type="password" name="password" required>
-        <span></span>
-        <label>Password</label>
-      </div>
-      <div class="txt_field">
-        <input type="password" name="cpassword" required>
-        <span></span>
-        <label>Confirm Password</label>
-      </div>
-      <input name="submit" type="Submit" value="Sign Up">
-      <div class="signup_link">
-        Have an Account ? <a href="{% url 'login' %}">Login Here</a>
-      </div>
+        <label for="username">Username</label>
+        <input type="text" placeholder="Username" id="username" name="name">
+
+        <label for="email">Email</label>
+        <input type="email" placeholder="Email" id="email" name="email">
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password" id="password" name="password">
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" placeholder="Confirm Password" id="confirmPassword" name="cpassword">
+
+        <button>Sign Up</button>
+
+        <div class="bottom-text">
+            <p>Already a member? <a href="{% url 'login' %}">LogIn Here</a></p>
+        </div>
+
+        <div class="social">
+            <div class="go"><i class="fab fa-google"></i>  Google</div>
+            <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+        </div>
     </form>
-  </div>
-</div>
+
 {% endblock %}
