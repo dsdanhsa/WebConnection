@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+{% block title %}Payrate list {% endblock %}
 {% block content123 %}
 <style>
     body {
@@ -42,9 +44,26 @@ tr:hover {
 </style>
 {% endblock %}
 {% block content %}
+<div class="main_first-card">
+            <div class="all-first_card" style="margin-bottom:0px">
+                <a href="#" class="card" style="background-color:#FFE2E5; text-decoration: none; color: black;" >
+                    <img class="card_img" style="background-color: #FA5A7D;" src="{% static 'assest/earning.svg' %}" alt="">
+                    <div class="card_title">
+                        <p class="card_percent" style="margin-bottom: 20px;">{{totalpayrate}}</p>
+                        <p>Earnings</p>
+                    </div>
+                </a>
 
-<div class="container">
-    <h1>Employee List</h1>
+                <a href="#" class="card" style="background-color: #FFF4DE; text-decoration: none; color: black;">
+                    <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/vacation.svg' %}" alt="">
+                    <div class="card_title">
+                        <p class="card_percent" style="margin-bottom: 20px;">{{totalvacationday}}</p>
+                        <p>Vacation Days</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+<div class="container" style="padding-top:0px">
     <table>
         <thead>
             <tr>
@@ -74,10 +93,6 @@ tr:hover {
         </tbody>
     </table>
     <br/>
-    <p><a href="{% url 'payroll_app:payrate_list' %}">Payrate list</a></p>
-    <br/>
-    <h1>Total rate: {{totalpayrate}}</h1>
-    <h1>Total vacationday: {{totalvacationday}}</h1>
 </div>
 
 

@@ -18,3 +18,5 @@ def employee_list(request):
         totalvacationday += i.total_vacationday()
     content = {'Employees': Employees, 'totalpayrate':totalpayrate, 'totalvacationday': totalvacationday}
     return render(request, 'payroll_app/list_employee__payroll.html',content)
+
+

@@ -1,0 +1,159 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.topBar{
+    display: flex;
+    justify-content: space-between;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    margin-left: 356px;
+    align-items: center;
+    height: 115px;
+
+}
+
+.topBar_title{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+
+}
+
+.search{
+  position: relative;
+}
+
+.img_search{
+  position: absolute;
+  left: 2%;
+  top: 10px;
+}
+
+.header__search{
+  background-color: #F9FAFB;
+  border-radius: 16px;
+  border: none;
+  padding: 20px;
+  padding-left: 45px;
+  width: 439px;
+}
+
+.topBar_right{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.body{
+  background-color: #F9FAFB;
+}
+
+.side_bar{
+  background-color: #ffff;
+  width: 346px;
+  height: 893px;
+  position: absolute;
+  top:0;
+}
+
+.side_bar-top{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  text-align: center;
+  margin-top: 38px;
+}
+
+.side_bar-top-img{
+  background-color: #5D5FEF;
+  padding: 7px;
+  border-radius: 8px;
+}
+
+.side_bar-top-title{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+.side_bar-menu{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.side_bar-content{
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px;
+  width: 287px;
+  height: 70px;
+  font-size: 18px;
+  padding-top: 21.5px;
+  padding-bottom: 21.5px;
+  padding-left: 37px;
+}
+
+.main_first-card{
+  background-color: #ffffff;
+  padding: 10px;
+  margin-top: 25px;
+  margin-right: 21px;
+  border-radius: 20px;
+}
+
+.all-first_card{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+
+.card{
+  width: 195px;
+  height: 199px;
+  border-radius: 16px;
+}
+
+.card_img{
+  border-radius: 30px;
+  padding: 7px;
+  margin: 20px 0 25px 20px ;
+}
+
+.card_title{
+  font-family: "Poppins", sans-serif;
+  margin-left: 21px;
+}
+.card_percent{  
+  font-weight: bold;
+}
+
+.main_generality{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main_second-card{
+  background-color: #ffffff;
+  padding: 10px;
+  margin-top: 25px;
+  margin-right: 21px;
+  border-radius: 20px;
+}
+
+.all-second_card{
+  display: flex;
+  justify-content: space-around;
+  gap: 31px;
+  margin: 0 25px 0 25px;
+}
+
