@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Home{% endblock %}
+{% block title %}Birth Day{% endblock %}
 
 {% block content %}
         <div class="main_first-card">
@@ -71,7 +71,21 @@
             </div>
 
             <div class="main_last-chart" style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
-                <img src="data:image/png;base64,{{ chart_data }}" style="width: 500px;height: 375px;" alt="">
+                <P style="margin-top: 20px; border-top-width: 20px; margin-bottom: 20px; margin-left: 30px;">List of benefits for employees and shareholders</P>
+                <table border="1">
+                    <tr>
+                        <th>PLAN NAME</th>
+                        <th>DEDUCTABLE</th>
+                        <th>PERCENTAGE COPAY</th>
+                    </tr>
+                    {% for benefit in benefits %}
+                    <tr>
+                        <td style="padding-left: 15px;">{{ benefit.PLAN_NAME }}</td>
+                        <td style="padding-left: 40px;">{{ benefit.DEDUCTABLE }}</td>
+                        <td style="padding-left: 80px;">{{ benefit.PERCENTAGE_COPAY }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
         </div>
 {% endblock %}

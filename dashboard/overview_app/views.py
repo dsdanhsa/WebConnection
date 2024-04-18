@@ -7,7 +7,6 @@ from io import BytesIO
 from datetime import datetime
 import base64
 
-
 @login_required
 def totalpayrate(request):
     totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count = calculate_totals()
@@ -67,6 +66,17 @@ def birthday_count(request):
     return render(request, 'overview_app/birthday.html',
                   {'birthday_count': birthday_count, 'birthday_list': birthday_list})
 
+@login_required
+def benefitplan(request):
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count = calculate_totals()
+    benefits = BenefitPlans.objects.all()
+    context = {
+        'benefits': benefits,
+        'totalpayrate': totalpayrate,
+        'totalvacationday': totalvacationday,
+        'birthday_count': birthday_count
+    }
+    return render(request, 'overview_app/benefitplan.html', context)
 def calculate_totals():
     Employees = Employee.objects.all()
     totalpayrate = 0
