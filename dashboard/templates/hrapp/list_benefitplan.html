@@ -5,7 +5,7 @@
     font-family: Arial, sans-serif;
 }
 
-.list_payrate__payroll {
+.list_benefitplan {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -43,29 +43,23 @@ tr:hover {
 {% endblock %}
 {% block content %}
 
-<div class="list_payrate__payroll">
+<div class="list_benefitplan">
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>PayRate Name</th>
-                <th>Value</th>
-                <th>Tax Percentage</th>
-                <th>Pay Type</th>
-                <th>Pay Amount</th>
-                <th>PT Level C</th>
+                <th>BENEFIT PLANS ID</th>
+                <th>PLAN NAME</th>
+                <th>DEDUCTABLE</th>
+                <th>PERCENTAGE COPAY</th>
             </tr>
         </thead>
         <tbody>
-            {% for payrate in payrates %}
+            {% for benefitplan in benefitplans %}
             <tr>
-                <td>{{ payrate.idPayRates }}</td>
-                <td>{{ payrate.PayRateName }}</td>
-                <td>{{ payrate.Value }}</td>
-                <td>{{ payrate.TaxPercentage }}</td>
-                <td>{{ payrate.PayType }}</td>
-                <td>{{ payrate.PayAmount }}</td>
-                <td>{{ payrate.PTLevelC }}</td>
+                <td>{{ benefitplan.BENEFIT_PLANS_ID }}</td>
+                <td>{{ benefitplan.PLAN_NAME }}</td>
+                <td>{{ benefitplan.DEDUCTABLE }}</td>
+                <td>{{ benefitplan.PERCENTAGE_COPAY }}</td>
             </tr>
             {% endfor %}
         </tbody>

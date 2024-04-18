@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content123 %}
+<style>
+    body {
+    font-family: Arial, sans-serif;
+}
+
+.list_employmentworkingtimes {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="list_employmentworkingtimes">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>EMPLOYMENT</th>
+                <th>YEAR WORKING</th>
+                <th>MONTH WORKING</th>
+                <th>DAYS ACTUAL WORKING PER MONTH</th>
+                <th>TOTAL VACATION </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employmentworkingtime in employmentworkingtimes %}
+            <tr>
+                <td>{{ employmentworkingtime.EMPLOYMENT_WORKING_TIME_ID }}</td>
+                <td>{{ employmentworkingtime.EMPLOYMENT }}</td>
+                <td>{{ employmentworkingtime.YEAR_WORKING }}</td>
+                <td>{{ employmentworkingtime.MONTH_WORKING }}</td>
+                <td>{{ employmentworkingtime.NUMBER_DAYS_ACTUAL_OF_WORKING_PER_MONTH }}</td>
+                <td>{{ employmentworkingtime.TOTAL_NUMBER_VACATION_WORKING_DAYS_PER_MONTH }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

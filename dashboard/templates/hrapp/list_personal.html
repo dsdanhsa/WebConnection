@@ -5,7 +5,7 @@
     font-family: Arial, sans-serif;
 }
 
-.list_payrate__payroll {
+.list_jobhistory {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -43,29 +43,27 @@ tr:hover {
 {% endblock %}
 {% block content %}
 
-<div class="list_payrate__payroll">
+<div class="list_jobhistory">
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>PayRate Name</th>
-                <th>Value</th>
-                <th>Tax Percentage</th>
-                <th>Pay Type</th>
-                <th>Pay Amount</th>
-                <th>PT Level C</th>
+                <th>NAME</th>
+                <th>ADDRESS</th>
+                <th>Birth Date</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>MARITAL STATUS</th>
             </tr>
         </thead>
         <tbody>
-            {% for payrate in payrates %}
+            {% for personal in personals %}
             <tr>
-                <td>{{ payrate.idPayRates }}</td>
-                <td>{{ payrate.PayRateName }}</td>
-                <td>{{ payrate.Value }}</td>
-                <td>{{ payrate.TaxPercentage }}</td>
-                <td>{{ payrate.PayType }}</td>
-                <td>{{ payrate.PayAmount }}</td>
-                <td>{{ payrate.PTLevelC }}</td>
+                <td>{{ personal.CURRENT_FIRST_NAME }} {{ personal.CURRENT_MIDDLE_NAME }} {{ personal.CURRENT_LAST_NAME }}</td>
+                <td>{{ personal.CURRENT_ADDRESS_1 }}</td>
+                <td>{{ personal.BIRTH_DATE }}</td>
+                <td>{{ personal.CURRENT_PERSONAL_EMAIL }} </td>
+                <td>{{ personal.CURRENT_PHONE_NUMBER }}</td>
+                <td>{{ personal.CURRENT_MARITAL_STATUS }}</td>
             </tr>
             {% endfor %}
         </tbody>

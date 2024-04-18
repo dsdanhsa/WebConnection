@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content123 %}
+<style>
+    body {
+    font-family: Arial, sans-serif;
+}
+
+.list_jobhistory {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="list_jobhistory">
+    <table>
+        <thead>
+            <tr>
+                <th>EMPLOYMENT</th>
+                <th>DEPARTMENT</th>
+                <th>DIVISION</th>
+                <th>FROM DATE - THRU DATE</th>
+                <th>JOB_TITLE</th>
+                <th>SUPERVISOR</th>
+                <th>LOCATION</th>
+                <th>TYPE OF WORK</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jobhistory in jobhistorys %}
+            <tr>
+                <td>{{ jobhistory.EMPLOYMENT }}</td>
+                <td>{{ jobhistory.DEPARTMENT }}</td>
+                <td>{{ jobhistory.DIVISION }}</td>
+                <td>{{ jobhistory.FROM_DATE }} - {{ jobhistory.THRU_DATE }}</td>
+                <td>{{ jobhistory.JOB_TITLE }}</td>
+                <td>{{ jobhistory.SUPERVISOR }}</td>
+                <td>{{ jobhistory.LOCATION }}</td>
+                <td>{{ jobhistory.TYPE_OF_WORK }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

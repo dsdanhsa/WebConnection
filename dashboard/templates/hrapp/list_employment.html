@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content123 %}
+<style>
+    body {
+    font-family: Arial, sans-serif;
+}
+
+.list_employment {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="list_employment">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>EMPLOYMENT CODE</th>
+                <th>Personal</th>
+                <th>EMPLOYMENT STATUS</th>
+                <th>HIRE DATE</th>
+                <th>WORKERS COMP CODE</th>
+                <th>TERMINATION DATE</th>
+                <th>REHIRE DATE </th>
+                <th>LAST REVIEW DATE</th>
+                <th>DAYS REQUIREMENT WORKING PER MONTH</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for employment in employments %}
+            <tr>
+                <td>{{ employment.EMPLOYMENT_ID }}</td>
+                <td>{{ employment.EMPLOYMENT_CODE }}</td>
+                <td>{{ employment.personal }}</td>
+                <td>{{ employment.EMPLOYMENT_STATUS }}</td>
+                <td>{{ employment.HIRE_DATE_FOR_WORKING }}</td>
+                <td>{{ employment.WORKERS_COMP_CODE }}</td>
+                <td>{{ employment.TERMINATION_DATE }}</td>
+                <td>{{ employment.REHIRE_DATE_FOR_WORKING }}</td>
+                <td>{{ employment.LAST_REVIEW_DATE }}</td>
+                <td>{{ employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
