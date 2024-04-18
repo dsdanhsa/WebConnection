@@ -33,7 +33,7 @@ class Employee(models.Model):
     PayRates_idPay = models.ForeignKey('PayRate', on_delete=models.CASCADE)  # Sử dụng 'PayRate' thay vì trường cụ thể
     VacationDays = models.IntegerField(null=True, blank=True)
     PaidToDate = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-
+    PaidLastYear = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     def __str__(self):
         return f"{self.LastName}, {self.FirstName}"
 

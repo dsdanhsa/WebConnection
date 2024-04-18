@@ -7,4 +7,4 @@ class PayRateAdmin(admin.ModelAdmin):
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ['idEmployee', 'EmployeeNumber', 'LastName', 'FirstName', 'SSN', 'PayRate', 'VacationDays', 'PaidToDate']
+    list_display = ['idEmployee', 'EmployeeNumber', 'LastName', 'FirstName', 'SSN', 'PayRate', 'VacationDays', 'PaidToDate', 'PaidLastYear']

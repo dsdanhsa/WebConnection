@@ -7,6 +7,12 @@ class BenefitPlans(models.Model):
     DEDUCTABLE = models.DecimalField(max_digits=18, decimal_places=0, null=True)
     PERCENTAGE_COPAY = models.DecimalField(max_digits=18, decimal_places=0, null=True)
 
+    def __str__(self):
+        return self.PLAN_NAME
+
+    class Meta:
+        ordering = ['BENEFIT_PLANS_ID']
+
 class Employment(models.Model):
     EMPLOYMENT_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
     EMPLOYMENT_CODE = models.CharField(max_length=50, null=True)
@@ -19,6 +25,12 @@ class Employment(models.Model):
     NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = models.DecimalField(max_digits=18, decimal_places=0, null=True)
     personal = models.ForeignKey('Personal', on_delete=models.CASCADE, null=True, related_name='employments')
 
+    def __str__(self):
+        return self.EMPLOYMENT_CODE if self.EMPLOYMENT_CODE else str(self.EMPLOYMENT_ID)
+
+    class Meta:
+        ordering = ['EMPLOYMENT_ID']
+
 class EmploymentWorkingTime(models.Model):
     EMPLOYMENT_WORKING_TIME_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
     EMPLOYMENT = models.ForeignKey(Employment, on_delete=models.CASCADE, null=True, related_name='working_times')
@@ -26,6 +38,12 @@ class EmploymentWorkingTime(models.Model):
     MONTH_WORKING = models.DecimalField(max_digits=2, decimal_places=0, null=True)
     NUMBER_DAYS_ACTUAL_OF_WORKING_PER_MONTH = models.DecimalField(max_digits=2, decimal_places=0, null=True)
     TOTAL_NUMBER_VACATION_WORKING_DAYS_PER_MONTH = models.DecimalField(max_digits=2, decimal_places=0, null=True)
+
+    def __str__(self):
+        return str(self.EMPLOYMENT_WORKING_TIME_ID)
+
+    class Meta:
+        ordering = ['EMPLOYMENT_WORKING_TIME_ID']
 
 class JobHistory(models.Model):
     JOB_HISTORY_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
@@ -38,6 +56,12 @@ class JobHistory(models.Model):
     SUPERVISOR = models.CharField(max_length=250, null=True)
     LOCATION = models.CharField(max_length=250, null=True)
     TYPE_OF_WORK = models.SmallIntegerField(null=True)
+
+    def __str__(self):
+        return str(self.JOB_HISTORY_ID)
+
+    class Meta:
+        ordering = ['JOB_HISTORY_ID']
 
 class Personal(models.Model):
     PERSONAL_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
@@ -59,3 +83,9 @@ class Personal(models.Model):
     ETHNICITY = models.CharField(max_length=10, null=True)
     SHAREHOLDER_STATUS = models.SmallIntegerField(null=True)
     BENEFIT_PLAN = models.ForeignKey(BenefitPlans, on_delete=models.CASCADE, null=True, related_name='personals')
+
+    def __str__(self):
+        return f"{self.CURRENT_FIRST_NAME} {self.CURRENT_MIDDLE_NAME} {self.CURRENT_LAST_NAME}"
+
+    class Meta:
+        ordering = ['PERSONAL_ID']
