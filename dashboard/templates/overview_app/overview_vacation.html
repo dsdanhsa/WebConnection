@@ -6,7 +6,7 @@
         <div class="main_first-card">
             <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;" >Overview</h3>
             <div class="all-first_card">
-                <a href="#" class="card" style="background-color:#FFE2E5; text-decoration: none; color: black;" >
+                <a href="{% url 'totalpayrate' %}" class="card" style="background-color:#FFE2E5; text-decoration: none; color: black;" >
                     <img class="card_img" style="background-color: #FA5A7D;" src="{% static 'assest/earning.svg' %}" alt="">
                     <div class="card_title">
                         <p class="card_percent" style="margin-bottom: 20px;">{{ totalpayrate }}</p>
@@ -14,7 +14,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="card" style="background-color: #FFF4DE; text-decoration: none; color: black;">
+                <a href="{% url 'totalvacation' %}" class="card" style="background-color: #FFF4DE; text-decoration: none; color: black;">
                     <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/vacation.svg' %}" alt="">
                     <div class="card_title">
                         <p class="card_percent" style="margin-bottom: 20px;">{{ totalvacationday }}</p>
@@ -61,10 +61,10 @@
                         </div>
                     </a>
 
-                    <a href="#" class="card" style="background-color: #FFF4DE; text-decoration: none; color: black;">
+                    <a href="{% url 'birthday_count' %}" class="card" style="background-color: #FFF4DE; text-decoration: none; color: black;">
                         <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/birthday-cake.svg' %}" alt="">
                         <div class="card_title">
-                            <p class="card_percent" style="margin-bottom: 20px;">3%</p>
+                            <p class="card_percent" style="margin-bottom: 20px;">{{birthday_count}}</p>
                             <p>Birthdays</p>
                         </div>
                     </a>
@@ -72,7 +72,7 @@
             </div>
 
             <div class="main_last-chart" style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
-                <img src="{% static 'assest/chart.svg' %}" alt="">
+                <img src="data:image/png;base64,{{ chart_data }}" style="width: 500px;height: 375px;" alt="">
             </div>
         </div>
 {% endblock %}

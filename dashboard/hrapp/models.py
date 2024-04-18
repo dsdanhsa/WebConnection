@@ -68,7 +68,7 @@ class Personal(models.Model):
     CURRENT_FIRST_NAME = models.CharField(max_length=50, null=True)
     CURRENT_LAST_NAME = models.CharField(max_length=50, null=True)
     CURRENT_MIDDLE_NAME = models.CharField(max_length=50, null=True)
-    BIRTH_DATE = models.DateField(default=timezone.now, null=True)  # Set default value to current date and time
+    BIRTH_DATE = models.DateField(default=timezone.now, null=True)
     SOCIAL_SECURITY_NUMBER = models.CharField(max_length=20, null=True)
     DRIVERS_LICENSE = models.CharField(max_length=50, null=True)
     CURRENT_ADDRESS_1 = models.CharField(max_length=255, null=True)

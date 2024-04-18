@@ -22,8 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
-    path("overview/", include('overview.urls')),
-    path("", TemplateView.as_view(template_name="overview/home.html"), name="home"),
+    path("", include('overview_app.urls'), name='overview'),
+    path("overview/", TemplateView.as_view(template_name="overview_app/home.html"), name="home"),
     path('accounts/', include('login.urls'), name='signup'),
     path('hr/', include('hrapp.urls', namespace='hrapp')),
     path('payroll/', include('payroll_app.urls', namespace='payroll')),
