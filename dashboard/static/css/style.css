@@ -1,41 +1,37 @@
-
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.topBar{
-    display: flex;
-    justify-content: space-between;
-    background: #ffffff;
-    padding: 10px;
-    border-radius: 5px;
-    position: relative;
-    margin-left: 356px;
-    align-items: center;
-    height: 115px;
-
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 10px;
+  position: relative;
+  margin-left: 345px;
+  align-items: center;
+  height: 115px;
 }
 
-.topBar_title{
+.topBar_title {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-
 }
 
-.search{
+.search {
   position: relative;
 }
 
-.img_search{
+.img_search {
   position: absolute;
   left: 2%;
   top: 10px;
 }
 
-.header__search{
-  background-color: #F9FAFB;
+.header__search {
+  background-color: #f9fafb;
   border-radius: 16px;
   border: none;
   padding: 20px;
@@ -43,25 +39,110 @@
   width: 439px;
 }
 
-.topBar_right{
+.topBar_right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
-.body{
-  background-color: #F9FAFB;
+
+.dropdown{
+  position: relative;
 }
 
-.side_bar{
+
+.dropdown_select {
+  position: relative;
+}
+.dropdown_list {
+  margin-top: 2.5rem;
+  border-radius: 4px;
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  left: -100px;
+  width: 308px;
+  display: none;
+}
+
+.dropdown:hover .dropdown_list{
+  display: block;
+
+}
+
+/* .dropdown_list::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 3rem;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid ;
+  transform: translateY(-100%);
+
+
+} */
+
+/* .dropdown_items {
+  padding: 20px 60px;
+  background-color: #ffff;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s linear;
+  opacity: 0.9;
+
+} */
+.dropdown::before{
+  content: "";
+  height: 70px;
+  position: absolute;
+  bottom: 0;
+  width: 308px;
+  top: 62px;
+  background-color: black;
+  right: -151px;
+  background-color: transparent;
+}
+
+
+.dropdown_items:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.dropdown_items:last-child {
+  border-radius: 0 0 20px 20px;
+}
+
+
+
+.dropdown_items a{
+  padding: 20px 60px;
+  background-color: #ffff;
+  /* color: #ffffff; */
+  cursor: pointer;
+  transition: background-color 0.2s linear;
+  opacity: 0.9;
+  display: block;
+}
+
+.dropdown_items a:hover{
+  background-color: #808080;
+  color: #ffff;
+}
+
+.body {
+  background-color: #f9fafb;
+}
+
+.side_bar {
   background-color: #ffff;
   width: 346px;
-  height: 893px;
+  height: 1080px;
   position: absolute;
-  top:0;
+  top: 0;
 }
 
-.side_bar-top{
+.side_bar-top {
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -69,18 +150,18 @@
   margin-top: 38px;
 }
 
-.side_bar-top-img{
-  background-color: #5D5FEF;
+.side_bar-top-img {
+  background-color: #5d5fef;
   padding: 7px;
   border-radius: 8px;
 }
 
-.side_bar-top-title{
+.side_bar-top-title {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
 }
 
-.side_bar-menu{
+.side_bar-menu {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,21 +169,38 @@
   margin-top: 32px;
 }
 
-.side_bar-content{
+.side_bar-content {
   border-radius: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #808080;
+  /* margin: 10px 10px 0 10px; */
   margin: 10px;
   width: 287px;
   height: 70px;
   font-size: 18px;
-  padding-top: 21.5px;
-  padding-bottom: 21.5px;
-  padding-left: 37px;
+  padding: 21.5px 0 21.5px 37px;
 }
 
-.main_first-card{
+/*them*/
+.side_bar-content:hover {
+  background-color: #5d5fef;
+  color: #ffff;
+}
+
+a {
+  color: #737791;
+  text-decoration: none;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+}
+
+.side_bar-content:hover a {
+  color: white;
+}
+
+.main_first-card {
   background-color: #ffffff;
   padding: 10px;
   margin-top: 25px;
@@ -110,39 +208,39 @@
   border-radius: 20px;
 }
 
-.all-first_card{
+.all-first_card {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   margin-bottom: 44px;
 }
 
-.card{
+.card {
   width: 195px;
   height: 199px;
   border-radius: 16px;
 }
 
-.card_img{
+.card_img {
   border-radius: 30px;
   padding: 7px;
-  margin: 20px 0 25px 20px ;
+  margin: 20px 0 25px 20px;
 }
 
-.card_title{
+.card_title {
   font-family: "Poppins", sans-serif;
   margin-left: 21px;
 }
-.card_percent{  
+.card_percent {
   font-weight: bold;
 }
 
-.main_generality{
+.main_generality {
   display: flex;
   flex-wrap: wrap;
 }
 
-.main_second-card{
+.main_second-card {
   background-color: #ffffff;
   padding: 10px;
   margin-top: 25px;
@@ -150,10 +248,96 @@
   border-radius: 20px;
 }
 
-.all-second_card{
+.all-second_card {
   display: flex;
   justify-content: space-around;
   gap: 31px;
   margin: 0 25px 0 25px;
 }
 
+/*payroll*/
+.submenu li {
+  list-style: none;
+  text-align: center;
+  font-family: Poppins, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #808080;
+  margin: 20px 0px;
+}
+
+.submenu li a {
+  padding: 10px 75px;
+  border-radius: 10px;
+}
+li {
+  list-style: none;
+}
+
+.submenu {
+  background-color: #d9d9d9;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 0;
+  transition: all 0.3s;
+  overflow: hidden;
+  padding: 0px 14px;
+}
+.submenu.active {
+  height: 161px;
+  /* width: 287px; */
+  /* border-radius: 0 0 15px 15px; */
+}
+
+.submenu li a:hover {
+  background-color: #7d7d7e;
+  color: #ffff;
+}
+
+/*HR*/
+.submenu1 li {
+  list-style: none;
+  text-align: center;
+  font-family: Poppins, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #808080;
+  margin: 20px 0px;
+}
+
+.submenu1 li a:hover {
+  background-color: #7d7d7e;
+  color: #ffff;
+}
+
+.submenu1 li a {
+  padding: 10px 3px;
+  border-radius: 10px;
+  word-break: break-word;
+}
+li {
+  list-style: none;
+}
+
+.submenu1 {
+  background-color: #d9d9d9;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 0;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+.submenu1.active1 {
+  height: 400px;
+  /* width: 287px; */
+  /* border-radius: 0 0 15px 15px; */
+}
+
+.submenu1 li a:hover {
+  background-color: #7d7d7e;
+  color: #ffff;
+}
