@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from payroll_app.models import PayRate, Employee
 from django.contrib.auth.decorators import login_required
 from hrapp.models import BenefitPlans, Employment, EmploymentWorkingTime, JobHistory, Personal
@@ -9,7 +9,7 @@ import base64
 
 @login_required
 def totalpayrate(request):
-    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count = calculate_totals()
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
 
     # Tạo biểu đồ Pay Amount by Employee Number
     plt.bar(categories, pay_values)
@@ -26,14 +26,15 @@ def totalpayrate(request):
         'totalpayrate': totalpayrate,
         'totalvacationday': totalvacationday,
         'chart_data': img_base64,
-        'birthday_count': birthday_count
+        'birthday_count': birthday_count,
+        'totalexcess' : totalexcess
     }
 
     return render(request, 'overview_app/home.html', content)
 
 @login_required
 def totalvacation(request):
-    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count = calculate_totals()
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
 
     # Tạo biểu đồ Vacation Days by Employee Number
     plt.bar(categories, vacation_values)
@@ -50,7 +51,8 @@ def totalvacation(request):
         'chart_data': img_base64,
         'totalpayrate': totalpayrate,
         'totalvacationday': totalvacationday,
-        'birthday_count': birthday_count
+        'birthday_count': birthday_count,
+        'totalexcess' : totalexcess
     }
 
     return render(request, 'overview_app/overview_vacation.html', context)
@@ -68,19 +70,60 @@ def birthday_count(request):
 
 @login_required
 def benefitplan(request):
-    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count = calculate_totals()
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
     benefits = BenefitPlans.objects.all()
     context = {
         'benefits': benefits,
         'totalpayrate': totalpayrate,
         'totalvacationday': totalvacationday,
-        'birthday_count': birthday_count
+        'birthday_count': birthday_count,
+        'totalexcess' : totalexcess
     }
     return render(request, 'overview_app/benefitplan.html', context)
+
+@login_required
+def excessvacationday(request):
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
+    excess = []
+    Employees = Employee.objects.all()
+    for employee in Employees:
+        if employee.VacationDays > 2:
+            excess.append(employee)
+    context = {
+        'totalpayrate': totalpayrate,
+        'totalvacationday': totalvacationday,
+        'birthday_count': birthday_count,
+        'totalexcess': totalexcess,
+        'excess': excess
+    }
+    return render(request, 'overview_app/excessvacationday.html', context)
+
+@login_required
+def changebenefit_detail(request):
+    changebenefits = BenefitPlans.objects.all()
+    context = {'changebenefits': changebenefits}
+    return render(request, 'overview_app/changebenefit_detail.html', context)
+
+@login_required
+def changebenefit_update(request, benefitid):
+    changebenefits = get_object_or_404(BenefitPlans, BENEFIT_PLANS_ID=benefitid)
+    if request.method == 'POST':
+        planname = request.POST.get('planname')
+        deductable = request.POST.get('deductable')
+        percentage_copay = request.POST.get('percentage_copay')
+
+        changebenefits.PLAN_NAME = planname
+        changebenefits.DEDUCTABLE = deductable
+        changebenefits.PERCENTAGE_COPAY = percentage_copay
+        changebenefits.save()
+        return redirect('benefit_detail')
+    return render(request, 'overview_app/changebenefit_update.html', {'changebenefits': changebenefits})
+
 def calculate_totals():
     Employees = Employee.objects.all()
     totalpayrate = 0
     totalvacationday = 0
+    totalexcess = 0
     categories = []
     pay_values = []
     vacation_values = []
@@ -95,5 +138,7 @@ def calculate_totals():
         categories.append(employee.EmployeeNumber)
         pay_values.append(employee.PayRates_idPay.PayAmount)
         vacation_values.append(employee.VacationDays)
+        if employee.VacationDays > 2:
+            totalexcess += 1
+    return totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess
 
-    return totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count

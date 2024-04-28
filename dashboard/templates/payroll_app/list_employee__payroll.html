@@ -1,69 +1,51 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}Payrate list {% endblock %}
+{% block title %}Employee list {% endblock %}
+
 {% block content123 %}
 <style>
     body {
-    font-family: Arial, sans-serif;
-}
+        font-family: Arial, sans-serif;
+    }
 
-.list_employee__payroll {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
+    .list_employee__payroll {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-h1 {
-    text-align: center;
-}
+    h1 {
+        text-align: center;
+    }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
 
-th {
-    background-color: #f2f2f2;
-    text-align: left;
-}
+    th {
+        background-color: #f2f2f2;
+        text-align: left;
+    }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
 
-tr:hover {
-    background-color: #ddd;
-}
-
+    tr:hover {
+        background-color: #ddd;
+    }
 </style>
 {% endblock %}
-{% block content %}
-<div class="main_first-card">
-            <div class="all-first_card" style="margin-bottom:0px">
-                <a href="#" class="card" style="background-color:#FFE2E5; text-decoration: none; color: black;" >
-                    <img class="card_img" style="background-color: #FA5A7D;" src="{% static 'assest/earning.svg' %}" alt="">
-                    <div class="card_title">
-                        <p class="card_percent" style="margin-bottom: 20px;">{{totalpayrate}}</p>
-                        <p>Earnings</p>
-                    </div>
-                </a>
 
-                <a href="#" class="card" style="background-color: #FFF4DE; text-decoration: none; color: black;">
-                    <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/vacation.svg' %}" alt="">
-                    <div class="card_title">
-                        <p class="card_percent" style="margin-bottom: 20px;">{{totalvacationday}}</p>
-                        <p>Vacation Days</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-<div class="list_employee__payroll" style="padding-top:0px">
+{% block content %}
+<div class="list_employee__payroll">
+    <h1>Payrate List</h1>
     <table>
         <thead>
             <tr>
@@ -73,9 +55,9 @@ tr:hover {
                 <th>SSN</th>
                 <th>PayRate</th>
                 <th>ID PayRate</th>
-                <th>Vacationdays</th>
-                <th>PaidToDate</th>
-                <th>PaidLastYear</th>
+                <th>Vacation Days</th>
+                <th>Paid To Date</th>
+                <th>Paid Last Year</th>
             </tr>
         </thead>
         <tbody>
@@ -96,6 +78,4 @@ tr:hover {
     </table>
     <br/>
 </div>
-
-
 {% endblock %}

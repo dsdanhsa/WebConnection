@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 class BenefitPlans(models.Model):
     BENEFIT_PLANS_ID = models.DecimalField(primary_key=True, max_digits=18, decimal_places=0)
@@ -9,6 +10,9 @@ class BenefitPlans(models.Model):
 
     def __str__(self):
         return self.PLAN_NAME
+
+    def get_absolute_url(self):
+        return reverse('benefitplans_detail', args=[str(self.BENEFIT_PLANS_ID)])
 
     class Meta:
         ordering = ['BENEFIT_PLANS_ID']

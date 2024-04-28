@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Benefit update{% endblock %}
+{% block content123 %}
+<style>
+    /* Form styling */
+.buttom {
+  margin-top: 20px;
+}
+
+.main_submmit {
+  margin-bottom: 15px;
+}
+
+.main_submmit p {
+  margin-bottom: 5px;
+}
+
+.main_submmit input[type="text"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.main_submmit input[type="text"]:focus {
+  border-color: #0095ff;
+}
+
+.submit button {
+  width: calc(100% - 20px);
+  padding: 12px;
+  background-color: #0095ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit button:hover {
+  background-color: #007acc;
+}
+
+.submit button:active {
+  transform: translateY(2px);
+}
+
+/* Animation */
+.submit button {
+  position: relative;
+  overflow: hidden;
+}
+
+.submit button:after {
+  content: "";
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.3);
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  border-radius: 50%;
+  transition: width 0.3s ease, height 0.3s ease;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.submit button:hover:after {
+  width: 0;
+  height: 0;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<form method="post" action="{% url 'overview_app:benefit_update' benefitid=changebenefits.BENEFIT_PLANS_ID %}">
+    {% csrf_token %}
+    <div class="buttom">
+        <div class="main_submmit">
+            <p>Plan Name</p>
+            <input type="text" name="planname" value="{{ changebenefits.PLAN_NAME }}">
+        </div>
+
+        <div class="main_submmit">
+            <p>Deductible</p>
+            <input type="text" name="deductible" value="{{ changebenefits.DEDUCTABLE }}">
+        </div>
+
+        <div class="main_submmit">
+            <p>Percentage Copay</p>
+            <input type="text" name="percentage_copay" value="{{ changebenefits.PERCENTAGE_COPAY }}">
+        </div>
+
+        <div class="submit">
+            <button type="submit">Submit</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

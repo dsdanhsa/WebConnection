@@ -37,10 +37,10 @@
                     </div>
                 </a>
 
-                <a href="#" class="card" style="background-color: #F3E8FF; text-decoration: none; color: black;">
+                <a href="{% url 'overview_app:excessvacationday' %}" class="card" style="background-color: #F3E8FF; text-decoration: none; color: black;">
                     <img class="card_img" style="background-color: #BF83FF;" src="{% static 'assest/vacationday.svg' %}" alt="">
                     <div class="card_title">
-                        <p class="card_percent" style="margin-bottom: 20px;">3%</p>
+                        <p class="card_percent" style="margin-bottom: 20px;">{{totalexcess}}</p>
                         <p style="margin-right: 10px;">Excess vacation days</p>
                     </div>
                 </a>
