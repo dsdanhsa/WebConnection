@@ -46,6 +46,7 @@
     .main_last-chart a:hover {
         color: #005a9c;
     }
+
 </style>
 {% endblock %}
 
@@ -54,33 +55,34 @@
 <div class="main_last-chart">
     <table>
         <thead>
-            <tr>
-                <th>Employee code</th>
-                <th>Name</th>
-                <th>SSN</th>
-                <th>Birth Date</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Update</th>
-            </tr>
+        <tr>
+            <th>Employee code</th>
+            <th>Name</th>
+            <th>SSN</th>
+            <th>Birth Date</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Update</th>
+        </tr>
         </thead>
         <tbody>
-            {% csrf_token %}
-            {% for employee, employment, personal in employee_data %}
-            <tr>
-                <td>{{ employee.EmployeeNumber }}</td>
-                <td>{{ employee.LastName }} {{ employee.FirstName }}</td>
-                <td>{{ employee.SSN }}</td>
-                <td>{{ personal.BIRTH_DATE }}</td>
-                <td>{{ personal.CURRENT_ADDRESS_1 }}</td>
-                <td>{{ personal.CURRENT_PHONE_NUMBER }}</td>
-                <td>
-                    <a href="{% url 'overview_app:employee_update' employeeid=employee.idEmployee %}">Employee |</a>
-                    <a href="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}">Employment |</a>
-                    <a href="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}">Personal</a>
-                </td>
-            </tr>
-            {% endfor %}
+        {% csrf_token %}
+        {% for employee, employment, personal in employee_data %}
+        <tr>
+            <td>{{ employee.EmployeeNumber }}</td>
+            <td>{{ employee.LastName }} {{ employee.FirstName }}</td>
+            <td>{{ employee.SSN }}</td>
+            <td>{{ personal.BIRTH_DATE }}</td>
+            <td>{{ personal.CURRENT_ADDRESS_1 }}</td>
+            <td>{{ personal.CURRENT_PHONE_NUMBER }}</td>
+            <td>
+                <a href="{% url 'overview_app:employee_update' employeeid=employee.idEmployee %}">Employee |</a>
+                <a href="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}">Employment
+                    |</a>
+                <a href="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}">Personal</a>
+            </td>
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>

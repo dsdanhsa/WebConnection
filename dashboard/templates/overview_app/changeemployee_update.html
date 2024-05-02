@@ -59,52 +59,61 @@ input[type="hidden"] {
   display: none; /* Ẩn phần tử hidden */
 }
 
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-  <div class="mb-3">
-    <h1>Update Employee</h1>
-  </div>
-  <form action="{% url 'overview_app:employee_update' employeeid=employee.idEmployee %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" id="employee_id" name="employee_id" value="{{ employee.idEmployee }}">
     <div class="mb-3">
-      <label for="employee_number" class="form-label">Employee code</label>
-      <input type="text" class="form-control" id="employee_number" name="employee_number" value="{{ employee.EmployeeNumber }}">
+        <h1>Update Employee</h1>
     </div>
-    <div class="mb-3">
-      <label for="last_name" class="form-label">Họ</label>
-      <input type="text" class="form-control" id="last_name" name="last_name" value="{{ employee.LastName }}" placeholder="Nhập họ của nhân viên">
-    </div>
-    <div class="mb-3">
-      <label for="first_name" class="form-label">Tên</label>
-      <input type="text" class="form-control" id="first_name" name="first_name" value="{{ employee.FirstName }}" placeholder="Nhập tên của nhân viên">
-    </div>
-    <div class="mb-3">
-      <label for="ssn" class="form-label">SSN</label>
-      <input type="text" class="form-control" id="ssn" name="ssn" value="{{ employee.SSN }}" placeholder="Nhập số SSN">
-    </div>
-    <div class="mb-3">
-      <label for="pay_rate" class="form-label">Pay Rate</label>
-      <input type="text" class="form-control" id="pay_rate" name="pay_rate" value="{{ employee.PayRate }}" placeholder="Nhập mức lương">
-    </div>
-    <div class="mb-3">
-      <label for="vacation_days" class="form-label">Vacation Days</label>
-      <input type="text" class="form-control" id="vacation_days" name="vacation_days" value="{{ employee.VacationDays }}" placeholder="Nhập số ngày nghỉ phép">
-    </div>
-    <div class="mb-3">
-      <label for="paid_to_date" class="form-label">Paid To Date</label>
-      <input type="text" class="form-control" id="paid_to_date" name="paid_to_date" value="{{ employee.PaidToDate }}" placeholder="Nhập số tiền đã thanh toán đến ngày">
-    </div>
-    <div class="mb-3">
-      <label for="paid_last_year" class="form-label">Paid Last Year</label>
-      <input type="text" class="form-control" id="paid_last_year" name="paid_last_year" value="{{ employee.PaidLastYear }}" placeholder="Nhập số tiền đã thanh toán năm trước">
-    </div>
-    <div class="mb-3" style="text-align: center">
-      <button type="submit" class="btn btn-primary">Update</button>
-    </div>
-  </form>
+    <form action="{% url 'overview_app:employee_update' employeeid=employee.idEmployee %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" id="employee_id" name="employee_id" value="{{ employee.idEmployee }}">
+        <div class="mb-3">
+            <label for="employee_number" class="form-label">Employee code</label>
+            <input type="text" class="form-control" id="employee_number" name="employee_number"
+                   value="{{ employee.EmployeeNumber }}">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Họ</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ employee.LastName }}"
+                   placeholder="Nhập họ của nhân viên">
+        </div>
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Tên</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ employee.FirstName }}"
+                   placeholder="Nhập tên của nhân viên">
+        </div>
+        <div class="mb-3">
+            <label for="ssn" class="form-label">SSN</label>
+            <input type="text" class="form-control" id="ssn" name="ssn" value="{{ employee.SSN }}"
+                   placeholder="Nhập số SSN">
+        </div>
+        <div class="mb-3">
+            <label for="pay_rate" class="form-label">Pay Rate</label>
+            <input type="text" class="form-control" id="pay_rate" name="pay_rate" value="{{ employee.PayRate }}"
+                   placeholder="Nhập mức lương">
+        </div>
+        <div class="mb-3">
+            <label for="vacation_days" class="form-label">Vacation Days</label>
+            <input type="text" class="form-control" id="vacation_days" name="vacation_days"
+                   value="{{ employee.VacationDays }}" placeholder="Nhập số ngày nghỉ phép">
+        </div>
+        <div class="mb-3">
+            <label for="paid_to_date" class="form-label">Paid To Date</label>
+            <input type="text" class="form-control" id="paid_to_date" name="paid_to_date"
+                   value="{{ employee.PaidToDate }}" placeholder="Nhập số tiền đã thanh toán đến ngày">
+        </div>
+        <div class="mb-3">
+            <label for="paid_last_year" class="form-label">Paid Last Year</label>
+            <input type="text" class="form-control" id="paid_last_year" name="paid_last_year"
+                   value="{{ employee.PaidLastYear }}" placeholder="Nhập số tiền đã thanh toán năm trước">
+        </div>
+        <div class="mb-3" style="text-align: center">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

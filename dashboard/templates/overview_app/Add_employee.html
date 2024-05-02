@@ -59,52 +59,174 @@ input[type="hidden"] {
   display: none; /* Ẩn phần tử hidden */
 }
 
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-  <div class="mb-3">
-    <h1>Update Employee</h1>
-  </div>
-  <form action="" method="post">
-    {% csrf_token %}
-    <input type="hidden" id="employee_id" name="employee_id" value="{{ employee.idEmployee }}">
-    <div class="mb-3">
-      <label for="employee_number" class="form-label">Employee code</label>
-      <input type="text" class="form-control" id="employee_number" name="employee_number" value="{{ employee.EmployeeNumber }}">
-    </div>
-    <div class="mb-3">
-      <label for="last_name" class="form-label">Họ</label>
-      <input type="text" class="form-control" id="last_name" name="last_name" value="{{ employee.LastName }}" placeholder="Nhập họ của nhân viên">
-    </div>
-    <div class="mb-3">
-      <label for="first_name" class="form-label">Tên</label>
-      <input type="text" class="form-control" id="first_name" name="first_name" value="{{ employee.FirstName }}" placeholder="Nhập tên của nhân viên">
-    </div>
-    <div class="mb-3">
-      <label for="ssn" class="form-label">SSN</label>
-      <input type="text" class="form-control" id="ssn" name="ssn" value="{{ employee.SSN }}" placeholder="Nhập số SSN">
-    </div>
-    <div class="mb-3">
-      <label for="pay_rate" class="form-label">Pay Rate</label>
-      <input type="text" class="form-control" id="pay_rate" name="pay_rate" value="{{ employee.PayRate }}" placeholder="Nhập mức lương">
-    </div>
-    <div class="mb-3">
-      <label for="vacation_days" class="form-label">Vacation Days</label>
-      <input type="text" class="form-control" id="vacation_days" name="vacation_days" value="{{ employee.VacationDays }}" placeholder="Nhập số ngày nghỉ phép">
-    </div>
-    <div class="mb-3">
-      <label for="paid_to_date" class="form-label">Paid To Date</label>
-      <input type="text" class="form-control" id="paid_to_date" name="paid_to_date" value="{{ employee.PaidToDate }}" placeholder="Nhập số tiền đã thanh toán đến ngày">
-    </div>
-    <div class="mb-3">
-      <label for="paid_last_year" class="form-label">Paid Last Year</label>
-      <input type="text" class="form-control" id="paid_last_year" name="paid_last_year" value="{{ employee.PaidLastYear }}" placeholder="Nhập số tiền đã thanh toán năm trước">
-    </div>
-    <div class="mb-3" style="text-align: center">
-      <button type="submit" class="btn btn-primary">Update</button>
-    </div>
-  </form>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h1> Add Employee</h1>
+        <input type="hidden" id="employee_id" name="employee_id">
+        <div class="mb-3">
+            <label for="employee_number" class="form-label">Employee code</label>
+            <input type="text" class="form-control" id="employee_number" name="employee_number"
+                   placeholder="Nhập mã nhân viên">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Nhập họ của nhân viên">
+        </div>
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name"
+                   placeholder="Nhập tên của nhân viên">
+        </div>
+        <div class="mb-3">
+            <label for="ssn" class="form-label">SSN</label>
+            <input type="text" class="form-control" id="ssn" name="ssn" placeholder="Nhập số SSN">
+        </div>
+        <div class="mb-3">
+            <label for="pay_rate" class="form-label">Pay Rate</label>
+            <input type="text" class="form-control" id="pay_rate" name="pay_rate" placeholder="Nhập mức lương">
+        </div>
+        <div class="mb-3">
+            <label for="vacation_days" class="form-label">Vacation Days</label>
+            <input type="text" class="form-control" id="vacation_days" name="vacation_days"
+                   placeholder="Nhập số ngày nghỉ phép">
+        </div>
+        <div class="mb-3">
+            <label for="paid_to_date" class="form-label">Paid To Date</label>
+            <input type="text" class="form-control" id="paid_to_date" name="paid_to_date"
+                   placeholder="Nhập số tiền đã thanh toán đến ngày">
+        </div>
+        <div class="mb-3">
+            <label for="paid_last_year" class="form-label">Paid Last Year</label>
+            <input type="text" class="form-control" id="paid_last_year" name="paid_last_year"
+                   placeholder="Nhập số tiền đã thanh toán năm trước">
+        </div>
+
+        <br>
+        <h1> Add Employment</h1>
+        <div class="mb-3">
+            <label for="employment_status" class="form-label">Employment Status</label>
+            <input type="text" class="form-control" id="employment_status" name="employment_status">
+        </div>
+        <div class="mb-3">
+            <label for="hire_date_for_working" class="form-label">Hire Date for Working</label>
+            <input type="date" class="form-control" id="hire_date_for_working" name="hire_date_for_working">
+        </div>
+        <div class="mb-3">
+            <label for="workers_comp_code" class="form-label">Workers Comp Code</label>
+            <input type="text" class="form-control" id="workers_comp_code" name="workers_comp_code">
+        </div>
+        <div class="mb-3">
+            <label for="termination_date" class="form-label">Termination Date</label>
+            <input type="date" class="form-control" id="termination_date" name="termination_date">
+        </div>
+        <div class="mb-3">
+            <label for="rehire_date_for_working" class="form-label">Rehire Date for Working</label>
+            <input type="date" class="form-control" id="rehire_date_for_working" name="rehire_date_for_working">
+        </div>
+        <div class="mb-3">
+            <label for="last_review_date" class="form-label">Last Review Date</label>
+            <input type="date" class="form-control" id="last_review_date" name="last_review_date">
+        </div>
+        <div class="mb-3">
+            <label for="number_days_requirement_of_working_per_month" class="form-label">Number Days Requirement of
+                Working Per Month</label>
+            <input type="number" class="form-control" id="number_days_requirement_of_working_per_month"
+                   name="number_days_requirement_of_working_per_month">
+        </div>
+
+        <br>
+        <h1> Add Peronal</h1>
+        <div class="mb-3">
+            <label for="birth_date" class="form-label">Birth Date</label>
+            <input type="date" class="form-control" id="birth_date" name="birth_date">
+        </div>
+        <div class="mb-3">
+            <label for="social_security_number" class="form-label">Social Security Number</label>
+            <input type="text" class="form-control" id="social_security_number" name="social_security_number"
+                   placeholder="Enter SSN">
+        </div>
+        <div class="mb-3">
+            <label for="drivers_license" class="form-label">Driver's License</label>
+            <input type="text" class="form-control" id="drivers_license" name="drivers_license"
+                   placeholder="Enter driver's license">
+        </div>
+        <div class="mb-3">
+            <label for="current_address_1" class="form-label">Address 1</label>
+            <input type="text" class="form-control" id="current_address_1" name="current_address_1"
+                   placeholder="Enter address line 1">
+        </div>
+        <div class="mb-3">
+            <label for="current_address_2" class="form-label">Address 2</label>
+            <input type="text" class="form-control" id="current_address_2" name="current_address_2"
+                   placeholder="Enter address line 2">
+        </div>
+        <div class="mb-3">
+            <label for="current_city" class="form-label">City</label>
+            <input type="text" class="form-control" id="current_city" name="current_city" placeholder="Enter city">
+        </div>
+        <div class="mb-3">
+            <label for="current_country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="current_country" name="current_country"
+                   placeholder="Enter country">
+        </div>
+        <div class="mb-3">
+            <label for="current_zip" class="form-label">ZIP</label>
+            <input type="text" class="form-control" id="current_zip" name="current_zip" placeholder="Enter ZIP code">
+        </div>
+        <div class="mb-3">
+            <label for="current_gender" class="form-label">Gender</label>
+            <select class="form-control" id="current_gender" name="current_gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="current_phone_number" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="current_phone_number" name="current_phone_number"
+                   placeholder="Enter phone number">
+        </div>
+        <div class="mb-3">
+            <label for="current_personal_email" class="form-label">Personal Email</label>
+            <input type="email" class="form-control" id="current_personal_email" name="current_personal_email"
+                   placeholder="Enter personal email">
+        </div>
+        <div class="mb-3">
+            <label for="current_marital_status" class="form-label">Marital Status</label>
+            <select class="form-control" id="current_marital_status" name="current_marital_status">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="ethnicity" class="form-label">Ethnicity</label>
+            <input type="text" class="form-control" id="ethnicity" name="ethnicity" placeholder="Enter ethnicity">
+        </div>
+        <div class="mb-3">
+            <label for="shareholder_status" class="form-label">Shareholder Status</label>
+            <input type="number" class="form-control" id="shareholder_status" name="shareholder_status"
+                   placeholder="Enter shareholder status">
+        </div>
+        <div class="mb-3">
+            <label for="benefit_plan" class="form-label">Benefit Plan</label>
+            <select class="form-control" id="benefit_plan" name="benefit_plan">
+                {% for plan in benefit_plans %}
+                <option value="{{ plan.BENEFIT_PLANS_ID }}">{{ plan.PLAN_NAME }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3" style="text-align: center">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

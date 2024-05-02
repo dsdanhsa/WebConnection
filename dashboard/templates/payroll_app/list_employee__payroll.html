@@ -40,6 +40,7 @@
     tr:hover {
         background-color: #ddd;
     }
+
 </style>
 {% endblock %}
 
@@ -48,32 +49,32 @@
     <h1>Payrate List</h1>
     <table>
         <thead>
-            <tr>
-                <th>Employee Number</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>SSN</th>
-                <th>PayRate</th>
-                <th>ID PayRate</th>
-                <th>Vacation Days</th>
-                <th>Paid To Date</th>
-                <th>Paid Last Year</th>
-            </tr>
+        <tr>
+            <th>Employee Number</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>SSN</th>
+            <th>PayRate</th>
+            <th>ID PayRate</th>
+            <th>Vacation Days</th>
+            <th>Paid To Date</th>
+            <th>Paid Last Year</th>
+        </tr>
         </thead>
         <tbody>
-            {% for Employee in Employees %}
-            <tr>
-                <td>{{ Employee.EmployeeNumber }}</td>
-                <td>{{ Employee.LastName }}</td>
-                <td>{{ Employee.FirstName }}</td>
-                <td>{{ Employee.SSN }}</td>
-                <td>{{ Employee.PayRate }}</td>
-                <td>{{ Employee.PayRates_idPay }}</td>
-                <td>{{ Employee.VacationDays }}</td>
-                <td>{{ Employee.PaidToDate }}</td>
-                <td>{{ Employee.PaidLastYear }}</td>
-            </tr>
-            {% endfor %}
+        {% for Employee in Employees %}
+        <tr>
+            <td>{{ Employee.EmployeeNumber }}</td>
+            <td>{{ Employee.LastName }}</td>
+            <td>{{ Employee.FirstName }}</td>
+            <td>{{ Employee.SSN }}</td>
+            <td>{{ Employee.PayRate }}</td>
+            <td>{{ Employee.PayRates_idPay }}</td>
+            <td>{{ Employee.VacationDays }}</td>
+            <td>{{ Employee.PaidToDate }}</td>
+            <td>{{ Employee.PaidLastYear }}</td>
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
     <br/>

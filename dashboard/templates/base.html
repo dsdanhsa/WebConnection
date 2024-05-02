@@ -11,8 +11,8 @@
     <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %} ">
     <link rel="preconnect" href="{% static 'https://fonts.gstatic.com' %}" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <style>
@@ -360,131 +360,139 @@ li {
   color: #ffff;
 }
 
+
 </style>
 
 {% block content123 %}
 {% endblock %}
 
 <body style="background: #F9FAFB; position: relative;">
-    <div class="topBar">
-        <h1 class="topBar_title">DashBoard</h1>
-        <div class="topBar_right">
+<div class="topBar">
+    <h1 class="topBar_title">DashBoard</h1>
+    <div class="topBar_right">
 
-            <div class="dropdown">
-                <div class="dropdown_select">
-                    <img src="{% static 'assest/Notifications.svg' %}" alt="chuong">
-                </div>
-                <ul class="dropdown_list">
-                    <li class="dropdown_items">
-                        <a  href="{% url 'overview_app:excessvacationday' %}" class="drowdown_text">Ngày nghỉ phép tích lũy </a>
-                    </li>
-
-                    <li class="dropdown_items">
-                        <a href="{% url 'overview_app:birthday_count' %}" class="drowdown_text">Có sinh nhật tháng này</a>
-                    </li>
-
-                    <li class="dropdown_items">
-                        <a href="{% url 'overview_app:benefit_detail' %}" class="drowdown_text">Thay đổi phúc lợi</a>
-                    </li>
-
-                    <li class="dropdown_items">
-                        <a href="" class="drowdown_text">Ngày kỉ niệm</a>
-                    </li>
-                </ul>
+        <div class="dropdown">
+            <div class="dropdown_select">
+                <img src="{% static 'assest/Notifications.svg' %}" alt="chuong">
             </div>
-            <img src="{% static 'assest/admin.svg' %}" alt="admin">
-            <div class="topBar_right-content">
-                {% if user.is_authenticated %}
-                    <h4 class="group_context" style="font-family: Poppins, sans-serif;">Hi {{ user.username }}</h4>
-                {% else %}
-                    <a href="{% url 'login' %}" class="admin" style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">Login</a>
-                    <a href="{% url 'signup' %}" class="admin" style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">| Sìnup</a>
-                {% endif %}
-            </div>
+            <ul class="dropdown_list">
+                <li class="dropdown_items">
+                    <a href="{% url 'overview_app:excessvacationday' %}" class="drowdown_text">Ngày nghỉ phép tích
+                        lũy </a>
+                </li>
+
+                <li class="dropdown_items">
+                    <a href="{% url 'overview_app:birthday_count' %}" class="drowdown_text">Có sinh nhật tháng này</a>
+                </li>
+
+                <li class="dropdown_items">
+                    <a href="{% url 'overview_app:benefit_detail' %}" class="drowdown_text">Thay đổi phúc lợi</a>
+                </li>
+
+                <li class="dropdown_items">
+                    <a href="" class="drowdown_text">Ngày kỉ niệm</a>
+                </li>
+            </ul>
+        </div>
+        <img src="{% static 'assest/admin.svg' %}" alt="admin">
+        <div class="topBar_right-content">
+            {% if user.is_authenticated %}
+            <h4 class="group_context" style="font-family: Poppins, sans-serif;">Hi {{ user.username }}</h4>
+            {% else %}
+            <a href="{% url 'login' %}" class="admin"
+               style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">Login</a>
+            <a href="{% url 'signup' %}" class="admin"
+               style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">| Sìnup</a>
+            {% endif %}
         </div>
     </div>
+</div>
 
-    <div class="side_bar">
-        <div class="side_bar-top">
-            <img class="side_bar-top-img" src="{% static 'assest/Fire.svg' %}" alt="">
+<div class="side_bar">
+    <div class="side_bar-top">
+        <img class="side_bar-top-img" src="{% static 'assest/Fire.svg' %}" alt="">
 
-            <h1>
-                <a class="side_bar-top-title" href="{% url 'overview_app:totalpayrate' %}"
-                    style="color: black; text-decoration: none; font-family: Poppins, sans-serif;">CEO MEMO</a>
-            </h1>
+        <h1>
+            <a class="side_bar-top-title" href="{% url 'overview_app:totalpayrate' %}"
+               style="color: black; text-decoration: none; font-family: Poppins, sans-serif;">CEO MEMO</a>
+        </h1>
+    </div>
+    <div class="side_bar-menu">
+        <div class="side_bar-content" style="background-color: #5D5FEF;">
+            <img src="{% static 'assest/overview.svg' %}" alt="">
+            <a href="{% url 'overview_app:totalpayrate' %}"
+               style="color: #ffff; text-decoration: none; font-family: Poppins, sans-serif; font-weight: bold;">Overview</a>
         </div>
-        <div class="side_bar-menu">
-            <div class="side_bar-content" style="background-color: #5D5FEF;">
-                <img src="{% static 'assest/overview.svg' %}" alt="">
-                <a href="{% url 'overview_app:totalpayrate' %}"
-                    style="color: #ffff; text-decoration: none; font-family: Poppins, sans-serif; font-weight: bold;">Overview</a>
-            </div>
 
-            <div class="side_bar-content dropdown-btn1">
-                <svg width="32" height="31" viewBox="0 0 32 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
+        <div class="side_bar-content dropdown-btn1">
+            <svg width="32" height="31" viewBox="0 0 32 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
                         d="M4.69283 6.01836C2.97213 6.01836 1.56428 7.37249 1.56428 9.02754C1.56428 10.6826 2.97213 12.0367 4.69283 12.0367C6.41353 12.0367 7.82138 10.6976 7.82138 9.02754C7.82138 7.35744 6.42918 6.01836 4.69283 6.01836ZM15.6428 3.00918C15.024 3.00918 14.4191 3.18567 13.9046 3.51632C13.3901 3.84697 12.9892 4.31694 12.7524 4.8668C12.5156 5.41665 12.4536 6.0217 12.5743 6.60542C12.695 7.18914 12.993 7.72533 13.4305 8.14617C13.8681 8.56701 14.4255 8.85361 15.0324 8.96972C15.6393 9.08583 16.2683 9.02624 16.84 8.79848C17.4117 8.57072 17.9003 8.18503 18.2441 7.69017C18.5878 7.19531 18.7713 6.61352 18.7713 6.01836C18.7713 4.34826 17.3791 3.00918 15.6428 3.00918ZM26.5927 0C24.872 0 23.4641 1.35413 23.4641 3.00918C23.4641 4.66423 24.872 6.01836 26.5927 6.01836C28.3134 6.01836 29.7213 4.67927 29.7213 3.00918C29.7213 1.33908 28.329 0 26.5927 0ZM2.34641 13.5413C1.04807 13.5413 0 14.5494 0 15.7982V22.5688H1.56428V30.0918H7.82138V22.5688H9.38566V15.7982C9.38566 14.5494 8.33759 13.5413 7.03924 13.5413H2.34641ZM13.2963 10.5321C11.998 10.5321 10.9499 11.5402 10.9499 12.789V19.5597H12.5142V27.0826H18.7713V19.5597H20.3356V12.789C20.3356 11.5402 19.2875 10.5321 17.9892 10.5321H13.2963ZM24.2463 7.52295C22.9479 7.52295 21.8999 8.53102 21.8999 9.77983V16.5505H23.4641V24.0734H29.7213V16.5505H31.2855V9.77983C31.2855 8.53102 30.2375 7.52295 28.9391 7.52295H24.2463Z"
-                        fill="currentColor" />
-                </svg>
-                <a href="#" style=" text-decoration: none; font-family: Poppins, sans-serif; font-weight: 500">Human Resources</a>
-                <svg width="7" height="16" viewBox="0 0 7 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
+                        fill="currentColor"/>
+            </svg>
+            <a href="#" style=" text-decoration: none; font-family: Poppins, sans-serif; font-weight: 500">Human
+                Resources</a>
+            <svg width="7" height="16" viewBox="0 0 7 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
                         d="M0.28666 14.9549C0.095553 14.7028 0 14.3819 0 13.9923C0 13.6027 0.095553 13.2818 0.28666 13.0297L4.35202 7.66653L0.28666 2.3034C0.095553 2.05128 0 1.73041 0 1.34078C0 0.951154 0.095553 0.630282 0.28666 0.378169C0.477767 0.126056 0.720993 0 1.01634 0C1.31169 0 1.55491 0.126056 1.74602 0.378169L6.54106 6.70392C6.6453 6.84143 6.71932 6.99041 6.7631 7.15085C6.80688 7.31128 6.82842 7.48318 6.82772 7.66653C6.82772 7.84989 6.80583 8.02178 6.76205 8.18222C6.71827 8.34265 6.64461 8.49163 6.54106 8.62915L1.74602 14.9549C1.55491 15.207 1.31169 15.3331 1.01634 15.3331C0.720993 15.3331 0.477767 15.207 0.28666 14.9549Z"
-                        fill="currentColor" />
-                </svg>
-            </div>
+                        fill="currentColor"/>
+            </svg>
+        </div>
 
-            <ul class="submenu1">
-                <li><a href="{% url 'hrapp:employment' %}">Employment</a></li>
-                <li><a href="{% url 'hrapp:employmentworkingtime' %}">Employment Working Time</a></li>
-                <li><a href="{% url 'hrapp:personal' %}">Personal</a></li>
-                <li><a href="{% url 'hrapp:benefitplans' %}">Benefit Plans</a></li>
-                <li><a href="{% url 'hrapp:jobhistory' %}">Job History</a></li>
-            </ul>
+        <ul class="submenu1">
+            <li><a href="{% url 'hrapp:employment' %}">Employment</a></li>
+            <li><a href="{% url 'hrapp:employmentworkingtime' %}">Employment Working Time</a></li>
+            <li><a href="{% url 'hrapp:personal' %}">Personal</a></li>
+            <li><a href="{% url 'hrapp:benefitplans' %}">Benefit Plans</a></li>
+            <li><a href="{% url 'hrapp:jobhistory' %}">Job History</a></li>
+        </ul>
 
-            <div class="side_bar-content dropdown-btn">
-                <svg width="29" height="31" viewBox="0 0 29 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
+        <div class="side_bar-content dropdown-btn">
+            <svg width="29" height="31" viewBox="0 0 29 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
                         d="M8.86502 27.1797H11.3673L12.2353 22.2642C12.4039 21.3039 12.9466 20.4293 13.7658 19.7979C14.585 19.1664 15.627 18.8194 16.7043 18.8192H17.511C21.83 18.8192 24.0613 17.3879 24.8518 13.7187C25.1874 12.1666 25.0406 11.1998 24.5759 10.6581C22.6286 15.1049 18.4613 16.7152 13.3437 16.7152H11.9175C11.298 16.7152 10.6381 17.0195 10.5429 17.5597L8.86502 27.1797ZM0.888563 26.7517C0.760123 26.7516 0.63322 26.7264 0.51659 26.6779C0.399961 26.6293 0.296375 26.5585 0.212964 26.4704C0.129553 26.3822 0.0682974 26.2788 0.033414 26.1673C-0.00146945 26.0557 -0.00915231 25.9387 0.0108947 25.8242L4.32502 1.12988C4.38031 0.815044 4.55818 0.528319 4.82669 0.321222C5.0952 0.114124 5.43675 0.000228884 5.78996 0H16.1542C19.7246 0 22.5141 0.679967 24.0597 2.2685C25.4617 3.70997 25.8698 5.30287 25.4633 7.64416C26.0441 7.92227 26.541 8.26298 26.9411 8.67212C28.2625 10.0306 28.5206 11.9628 28.0205 14.2778C26.825 19.818 22.7351 21.7327 17.511 21.7327H16.7043C16.3951 21.7327 16.0961 21.8323 15.861 22.0136C15.6259 22.1948 15.4701 22.4458 15.4217 22.7214L14.2891 29.1032C14.2411 29.3786 14.0857 29.6296 13.8508 29.8108C13.616 29.9921 13.3171 30.0917 13.0081 30.0918H5.99969C5.88714 30.0918 5.77594 30.0697 5.67373 30.0272C5.57152 29.9847 5.48072 29.9227 5.40759 29.8455C5.33446 29.7683 5.28073 29.6777 5.25009 29.58C5.21946 29.4822 5.21264 29.3797 5.23012 29.2793L5.67218 26.7517H0.888563ZM11.9175 13.8017H13.3453C18.4903 13.8017 21.2411 12.037 22.1898 7.64416C22.222 7.4971 22.2495 7.34859 22.2769 7.19425C22.5447 5.65086 22.3576 4.93303 21.6332 4.19046C20.8829 3.41876 19.0469 2.91206 16.1542 2.91206H7.2807L3.62321 23.8396H6.14167L7.31942 17.1011L7.33233 17.1025C7.56921 16.1649 8.15188 15.3277 8.9849 14.728C9.81793 14.1283 10.8519 13.8017 11.9175 13.8017Z"
-                        fill="currentColor" />
-                </svg>
-                <a href="#">Payrolls</a>
-                <!-- <img src="./assest/muiten.svg" style="margin-left: 104px;" alt=""> -->
-                <svg style="margin-left: 104px;" height="16" viewBox="0 0 7 16" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
+                        fill="currentColor"/>
+            </svg>
+            <a href="#">Payrolls</a>
+            <!-- <img src="./assest/muiten.svg" style="margin-left: 104px;" alt=""> -->
+            <svg style="margin-left: 104px;" height="16" viewBox="0 0 7 16" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path
                         d="M0.28666 14.9549C0.095553 14.7028 0 14.3819 0 13.9923C0 13.6027 0.095553 13.2818 0.28666 13.0297L4.35202 7.66653L0.28666 2.3034C0.095553 2.05128 0 1.73041 0 1.34078C0 0.951154 0.095553 0.630282 0.28666 0.378169C0.477767 0.126056 0.720993 0 1.01634 0C1.31169 0 1.55491 0.126056 1.74602 0.378169L6.54106 6.70392C6.6453 6.84143 6.71932 6.99041 6.7631 7.15085C6.80688 7.31128 6.82842 7.48318 6.82772 7.66653C6.82772 7.84989 6.80583 8.02178 6.76205 8.18222C6.71827 8.34265 6.64461 8.49163 6.54106 8.62915L1.74602 14.9549C1.55491 15.207 1.31169 15.3331 1.01634 15.3331C0.720993 15.3331 0.477767 15.207 0.28666 14.9549Z"
-                        fill="currentColor" />
-                </svg>
-            </div>
+                        fill="currentColor"/>
+            </svg>
+        </div>
 
-            <ul class="submenu">
-                <li><a href="{% url 'payroll_app:employee_list' %}">Employee</a></li>
-                <li><a href="{% url 'payroll_app:payrate_list' %}">Pay Rates</a></li>
-            </ul>
+        <ul class="submenu">
+            <li><a href="{% url 'payroll_app:employee_list' %}">Employee</a></li>
+            <li><a href="{% url 'payroll_app:payrate_list' %}">Pay Rates</a></li>
+        </ul>
 
-            <div class="side_bar-content">
-                {% if user.is_authenticated %}
-                <svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M21.8362 24.3047L26.4118 18.4944C26.6303 18.2232 26.7421 17.8807 26.7422 17.5364C26.7424 17.3009 26.6902 17.0645 26.5842 16.8495C26.5371 16.7536 26.4796 16.6626 26.4118 16.5784L21.8362 10.7681C21.3556 10.1578 20.5114 10.0871 19.9507 10.6101C19.3899 11.1332 19.3249 12.0519 19.8055 12.6622L22.4979 16.081L12.1418 16.081C11.4032 16.081 10.8046 16.7326 10.8046 17.5363C10.8046 18.3401 11.4032 18.9916 12.1418 18.9916L22.498 18.9916L19.8055 22.4107C19.3249 23.0209 19.3899 23.9397 19.9507 24.4627C20.5114 24.9857 21.3556 24.915 21.8362 24.3047ZM13.3703 8.80452C14.1088 8.80452 14.7075 9.45608 14.7075 10.2598L14.7075 12.4428C14.7075 13.2465 15.3061 13.8981 16.0447 13.8981C16.7832 13.8981 17.3819 13.2465 17.3819 12.4428L17.3819 10.2598C17.3819 7.8486 15.5858 5.89392 13.3703 5.89392L9.35867 5.89392C7.14313 5.89392 5.34708 7.8486 5.34708 10.2598L5.34708 24.8128C5.34708 27.224 7.14313 29.1787 9.35867 29.1787L13.3703 29.1787C15.5858 29.1787 17.3819 27.224 17.3819 24.8128L17.3819 22.6298C17.3819 21.8261 16.7832 21.1746 16.0447 21.1746C15.3061 21.1746 14.7075 21.8261 14.7075 22.6298L14.7075 24.8128C14.7075 25.6165 14.1088 26.2681 13.3703 26.2681L9.35867 26.2681C8.62016 26.2681 8.02147 25.6165 8.02147 24.8128L8.02147 10.2598C8.02147 9.45608 8.62016 8.80452 9.35867 8.80452L13.3703 8.80452Z"
-                        fill="currentColor" />
-                </svg>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" style="color: #737791; background: none; border: none; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 500;">Sign Out</button>
-                </form>
-                {% endif %}
-            </div>
+        <div class="side_bar-content">
+            {% if user.is_authenticated %}
+            <svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M21.8362 24.3047L26.4118 18.4944C26.6303 18.2232 26.7421 17.8807 26.7422 17.5364C26.7424 17.3009 26.6902 17.0645 26.5842 16.8495C26.5371 16.7536 26.4796 16.6626 26.4118 16.5784L21.8362 10.7681C21.3556 10.1578 20.5114 10.0871 19.9507 10.6101C19.3899 11.1332 19.3249 12.0519 19.8055 12.6622L22.4979 16.081L12.1418 16.081C11.4032 16.081 10.8046 16.7326 10.8046 17.5363C10.8046 18.3401 11.4032 18.9916 12.1418 18.9916L22.498 18.9916L19.8055 22.4107C19.3249 23.0209 19.3899 23.9397 19.9507 24.4627C20.5114 24.9857 21.3556 24.915 21.8362 24.3047ZM13.3703 8.80452C14.1088 8.80452 14.7075 9.45608 14.7075 10.2598L14.7075 12.4428C14.7075 13.2465 15.3061 13.8981 16.0447 13.8981C16.7832 13.8981 17.3819 13.2465 17.3819 12.4428L17.3819 10.2598C17.3819 7.8486 15.5858 5.89392 13.3703 5.89392L9.35867 5.89392C7.14313 5.89392 5.34708 7.8486 5.34708 10.2598L5.34708 24.8128C5.34708 27.224 7.14313 29.1787 9.35867 29.1787L13.3703 29.1787C15.5858 29.1787 17.3819 27.224 17.3819 24.8128L17.3819 22.6298C17.3819 21.8261 16.7832 21.1746 16.0447 21.1746C15.3061 21.1746 14.7075 21.8261 14.7075 22.6298L14.7075 24.8128C14.7075 25.6165 14.1088 26.2681 13.3703 26.2681L9.35867 26.2681C8.62016 26.2681 8.02147 25.6165 8.02147 24.8128L8.02147 10.2598C8.02147 9.45608 8.62016 8.80452 9.35867 8.80452L13.3703 8.80452Z"
+                      fill="currentColor"/>
+            </svg>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"
+                        style="color: #737791; background: none; border: none; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 500;">
+                    Sign Out
+                </button>
+            </form>
+            {% endif %}
         </div>
     </div>
+</div>
 
-    <div class="main" style="margin-left: 356px;">
-        {% block content %}
-        {% endblock %}
-    </div>
+<div class="main" style="margin-left: 356px;">
+    {% block content %}
+    {% endblock %}
+</div>
 </body>
-<script >
+<script>
 const dropdown = document.querySelector('.side_bar-content.dropdown-btn');
 const subMenu = document.querySelector('.submenu');
 
@@ -499,6 +507,7 @@ const subMenu1 = document.querySelector('.submenu1');
 dropdown1.onclick = function(){
     subMenu1.classList.toggle('active1');
 }
+
 </script>
 
 </html>

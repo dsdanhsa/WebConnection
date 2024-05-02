@@ -281,6 +281,8 @@ def personal_update(request, personalid):
 @login_required
 def employee_add(request):
     if request.method == "POST":
+
+        #add employee
         rq_employee_number = request.POST.get("employee_number")
         rq_last_name = request.POST.get("last_name")
         rq_first_name = request.POST.get("first_name")
@@ -289,12 +291,54 @@ def employee_add(request):
         rq_vacation_days = request.POST.get("vacation_days")
         rq_paid_to_date = request.POST.get("paid_to_date")
         rq_paid_last_year = request.POST.get("paid_last_year")
-        data = Employee(EmployeeNumber = rq_employee_number, LastName = rq_last_name,FirstName = rq_first_name,SSN = rq_ssn, PayRate = rq_pay_rate, VacationDays = rq_vacation_days, PaidToDate = rq_paid_to_date, PaidLastYear = rq_paid_last_year)
+        data = Employee(EmployeeNumber = rq_employee_number, LastName = rq_last_name,FirstName = rq_first_name,SSN = rq_ssn, PayRate = rq_pay_rate,
+                        VacationDays = rq_vacation_days, PaidToDate = rq_paid_to_date, PaidLastYear = rq_paid_last_year)
         data.save()
+
+        #add employment
+        rq_employment_code = request.POST.get("employee_number")
+        rq_employment_status = request.POST.get("employment_status")
+        rq_hire_date_for_working = request.POST.get("hire_date_for_working")
+        rq_workers_comp_code = request.POST.get("workers_comp_code")
+        rq_termination_date = request.POST.get("termination_date")
+        rq_rehire_date_for_working = request.POST.get("rehire_date_for_working")
+        rq_last_review_date = request.POST.get("last_review_date")
+        rq_number_days_requirement_of_working_per_month = request.POST.get("number_days_requirement_of_working_per_month")
+        datahr1 = Employment(EMPLOYMENT_CODE = rq_employment_code, EMPLOYMENT_STATUS = rq_employment_status, HIRE_DATE_FOR_WORKING = rq_hire_date_for_working,
+                             WORKERS_COMP_CODE = rq_workers_comp_code, TERMINATION_DATE = rq_termination_date, REHIRE_DATE_FOR_WORKING = rq_rehire_date_for_working,
+                             LAST_REVIEW_DATE = rq_last_review_date, NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = rq_number_days_requirement_of_working_per_month)
+        datahr1.save()
+
+        #add peronal
+        arr_first_name = rq_first_name.split()
+        rq_hr_first_name= arr_first_name[0]
+        rq_hr_first_name = rq_hr_first_name.title()
+        rq_hr_middle_name = arr_first_name[1:]
+        rq_hr_middle_name = rq_hr_middle_name.title()
+        rq_birth_date = request.POST.get("birth_date")
+        rq_social_security_number = request.POST.get("social_security_number")
+        rq_drivers_license = request.POST.get("drivers_license")
+        rq_current_address_1 = request.POST.get("current_address_1")
+        rq_current_address_2 = request.POST.get("current_address_2")
+        rq_current_city = request.POST.get("current_city")
+        rq_current_country = request.POST.get("current_country")
+        rq_current_zip = request.POST.get("current_zip") #
+        rq_current_gender = request.POST.get("current_gender")
+        rq_current_phone_number = request.POST.get("current_phone_number")
+        rq_current_personal_email = request.POST.get("current_personal_email")
+        rq_current_marital_status = request.POST.get("current_marital_status")
+        rq_ethnicity = request.POST.get("ethnicity")
+        rq_shareholder_status = request.POST.get("shareholder_status")
+        rq_benefit_plan = request.POST.get("benefit_plan")
+        datahr2 = Personal(CURRENT_FIRST_NAME = rq_hr_first_name, CURRENT_LAST_NAME = rq_last_name, CURRENT_MIDDLE_NAME = rq_hr_middle_name, BIRTH_DATE = rq_birth_date,
+                           SOCIAL_SECURITY_NUMBER = rq_social_security_number, DRIVERS_LICENSE = rq_drivers_license, CURRENT_ADDRESS_1 = rq_current_address_1, CURRENT_ADDRESS_2 = rq_current_address_2,
+                           CURRENT_CITY = rq_current_city, CURRENT_COUNTRY = rq_current_country, CURRENT_ZIP = rq_current_zip, CURRENT_GENDER = rq_current_gender, CURRENT_PHONE_NUMBER = rq_current_phone_number,
+                           CURRENT_PERSONAL_EMAIL = rq_current_personal_email, CURRENT_MARITAL_STATUS = rq_current_marital_status, ETHNICITY = rq_ethnicity, SHAREHOLDER_STATUS = rq_shareholder_status, BENEFIT_PLANS_ID = rq_benefit_plan)
 
         return render(request, "overview_app/changeemployee_detail.html")
     else:
         employees = Employee.objects.all()
         payrate = PayRate.objects.all()
-        context = {'employees': employees, 'payrate': payrate}
+        benefit_plans = BenefitPlans.objects.all()
+        context = {'employees': employees, 'payrate': payrate, 'benefit_plans' : benefit_plans}
         return render(request, 'overview_app/Add_employee.html', context)

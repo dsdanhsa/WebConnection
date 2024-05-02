@@ -3,46 +3,56 @@
 
 {% block content %}
 <div class="container">
-  <div class="mb-3">
-    <h1>Update Employment</h1>
-  </div>
-  <form action="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}" method="post">
-    {% csrf_token %}
     <div class="mb-3">
-      <label for="employment_code" class="form-label">Employment Code</label>
-      <input type="text" class="form-control" id="employment_code" name="employment_code" value="{{ employment.EMPLOYMENT_CODE }}">
+        <h1>Update Employment</h1>
     </div>
-    <div class="mb-3">
-      <label for="employment_status" class="form-label">Employment Status</label>
-      <input type="text" class="form-control" id="employment_status" name="employment_status" value="{{ employment.EMPLOYMENT_STATUS }}">
-    </div>
-    <div class="mb-3">
-      <label for="hire_date_for_working" class="form-label">Hire Date for Working</label>
-      <input type="date" class="form-control" id="hire_date_for_working" name="hire_date_for_working" value="{{ employment.HIRE_DATE_FOR_WORKING }}">
-    </div>
-    <div class="mb-3">
-      <label for="workers_comp_code" class="form-label">Workers Comp Code</label>
-      <input type="text" class="form-control" id="workers_comp_code" name="workers_comp_code" value="{{ employment.WORKERS_COMP_CODE }}">
-    </div>
-    <div class="mb-3">
-      <label for="termination_date" class="form-label">Termination Date</label>
-      <input type="date" class="form-control" id="termination_date" name="termination_date" value="{{ employment.TERMINATION_DATE }}">
-    </div>
-    <div class="mb-3">
-      <label for="rehire_date_for_working" class="form-label">Rehire Date for Working</label>
-      <input type="date" class="form-control" id="rehire_date_for_working" name="rehire_date_for_working" value="{{ employment.REHIRE_DATE_FOR_WORKING }}">
-    </div>
-    <div class="mb-3">
-      <label for="last_review_date" class="form-label">Last Review Date</label>
-      <input type="date" class="form-control" id="last_review_date" name="last_review_date" value="{{ employment.LAST_REVIEW_DATE }}">
-    </div>
-    <div class="mb-3">
-      <label for="number_days_requirement_of_working_per_month" class="form-label">Number Days Requirement of Working Per Month</label>
-      <input type="number" class="form-control" id="number_days_requirement_of_working_per_month" name="number_days_requirement_of_working_per_month" value="{{ employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH }}">
-    </div>
-    <div class="mb-3" style="text-align: center">
-      <button type="submit" class="btn btn-primary">Update</button>
-    </div>
-  </form>
+    <form action="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="employment_code" class="form-label">Employment Code</label>
+            <input type="text" class="form-control" id="employment_code" name="employment_code"
+                   value="{{ employment.EMPLOYMENT_CODE }}">
+        </div>
+        <div class="mb-3">
+            <label for="employment_status" class="form-label">Employment Status</label>
+            <input type="text" class="form-control" id="employment_status" name="employment_status"
+                   value="{{ employment.EMPLOYMENT_STATUS }}">
+        </div>
+        <div class="mb-3">
+            <label for="hire_date_for_working" class="form-label">Hire Date for Working</label>
+            <input type="date" class="form-control" id="hire_date_for_working" name="hire_date_for_working"
+                   value="{{ employment.HIRE_DATE_FOR_WORKING }}">
+        </div>
+        <div class="mb-3">
+            <label for="workers_comp_code" class="form-label">Workers Comp Code</label>
+            <input type="text" class="form-control" id="workers_comp_code" name="workers_comp_code"
+                   value="{{ employment.WORKERS_COMP_CODE }}">
+        </div>
+        <div class="mb-3">
+            <label for="termination_date" class="form-label">Termination Date</label>
+            <input type="date" class="form-control" id="termination_date" name="termination_date"
+                   value="{{ employment.TERMINATION_DATE }}">
+        </div>
+        <div class="mb-3">
+            <label for="rehire_date_for_working" class="form-label">Rehire Date for Working</label>
+            <input type="date" class="form-control" id="rehire_date_for_working" name="rehire_date_for_working"
+                   value="{{ employment.REHIRE_DATE_FOR_WORKING }}">
+        </div>
+        <div class="mb-3">
+            <label for="last_review_date" class="form-label">Last Review Date</label>
+            <input type="date" class="form-control" id="last_review_date" name="last_review_date"
+                   value="{{ employment.LAST_REVIEW_DATE }}">
+        </div>
+        <div class="mb-3">
+            <label for="number_days_requirement_of_working_per_month" class="form-label">Number Days Requirement of
+                Working Per Month</label>
+            <input type="number" class="form-control" id="number_days_requirement_of_working_per_month"
+                   name="number_days_requirement_of_working_per_month"
+                   value="{{ employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH }}">
+        </div>
+        <div class="mb-3" style="text-align: center">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

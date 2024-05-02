@@ -40,6 +40,8 @@ tr:hover {
     background-color: #ddd;
 }
 
+
+
 </style>
 {% endblock %}
 {% block content %}
@@ -47,28 +49,28 @@ tr:hover {
 <div class="list_payrate__payroll">
     <table>
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>PayRate Name</th>
-                <th>Value</th>
-                <th>Tax Percentage</th>
-                <th>Pay Type</th>
-                <th>Pay Amount</th>
-                <th>PT Level C</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>PayRate Name</th>
+            <th>Value</th>
+            <th>Tax Percentage</th>
+            <th>Pay Type</th>
+            <th>Pay Amount</th>
+            <th>PT Level C</th>
+        </tr>
         </thead>
         <tbody>
-            {% for payrate in payrates %}
-            <tr>
-                <td>{{ payrate.idPayRates }}</td>
-                <td>{{ payrate.PayRateName }}</td>
-                <td>{{ payrate.Value }}</td>
-                <td>{{ payrate.TaxPercentage }}</td>
-                <td>{{ payrate.PayType }}</td>
-                <td>{{ payrate.PayAmount }}</td>
-                <td>{{ payrate.PTLevelC }}</td>
-            </tr>
-            {% endfor %}
+        {% for payrate in payrates %}
+        <tr>
+            <td>{{ payrate.idPayRates }}</td>
+            <td>{{ payrate.PayRateName }}</td>
+            <td>{{ payrate.Value }}</td>
+            <td>{{ payrate.TaxPercentage }}</td>
+            <td>{{ payrate.PayType }}</td>
+            <td>{{ payrate.PayAmount }}</td>
+            <td>{{ payrate.PTLevelC }}</td>
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>
