@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Employee detail{% endblock %}
+
+{% block content123 %}
+<style>
+    /* Table styling */
+    .main_last-chart {
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 20px;
+        margin-top: 25px;
+    }
+
+    /* Table header */
+    .main_last-chart table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .main_last-chart th {
+        padding: 15px;
+        background-color: #0095ff;
+        color: #ffffff;
+        border-bottom: 2px solid #007acc;
+        text-align: left;
+    }
+
+    /* Table rows */
+    .main_last-chart td {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Alternate row background */
+    .main_last-chart tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Update link */
+    .main_last-chart a {
+        color: #007acc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .main_last-chart a:hover {
+        color: #005a9c;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'overview_app:employee_add' %}">Add employee</a>
+<div class="main_last-chart">
+    <table>
+        <thead>
+            <tr>
+                <th>Employee code</th>
+                <th>Name</th>
+                <th>SSN</th>
+                <th>Birth Date</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% csrf_token %}
+            {% for employee, employment, personal in employee_data %}
+            <tr>
+                <td>{{ employee.EmployeeNumber }}</td>
+                <td>{{ employee.LastName }} {{ employee.FirstName }}</td>
+                <td>{{ employee.SSN }}</td>
+                <td>{{ personal.BIRTH_DATE }}</td>
+                <td>{{ personal.CURRENT_ADDRESS_1 }}</td>
+                <td>{{ personal.CURRENT_PHONE_NUMBER }}</td>
+                <td>
+                    <a href="{% url 'overview_app:employee_update' employeeid=employee.idEmployee %}">Employee |</a>
+                    <a href="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}">Employment |</a>
+                    <a href="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}">Personal</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
