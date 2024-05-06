@@ -196,7 +196,7 @@ def employee_update(request, employeeid):
         return redirect('overview_app:employee_detail')
     else:
         context = {'employee': employee}
-        return render(request, 'overview_app/changeemployee_update.html', context)
+        return render(request, 'overview_app/Update_employee.html', context)
 
 #update employment
 @login_required
@@ -229,7 +229,7 @@ def employment_update(request, employmentid):
         return redirect('overview_app:employee_detail')  # Using the correct URL pattern name
     else:
         context = {'employment': employment}
-        return render(request, 'overview_app/employment_update.html', context)
+        return render(request, 'overview_app/Update_employment.html', context)
 
 #update personal
 @login_required
@@ -282,7 +282,7 @@ def personal_update(request, personalid):
     else:
         benefit_plans = BenefitPlans.objects.all()
         context = {'personal': personal, 'benefit_plans': benefit_plans}
-        return render(request, 'overview_app/personal_update.html', context)
+        return render(request, 'overview_app/Update_personal.html', context)
 
 #add emplployee
 def employee_add(request):
@@ -310,7 +310,7 @@ def employee_add(request):
         return redirect('overview_app:personal_add')
     else:
         context = {'employees': Employee.objects.all(), 'payrate': PayRate.objects.all()}
-        return render(request, 'overview_app/Add_employee_test.html', context)
+        return render(request, 'overview_app/Add_employee.html', context)
 
 @login_required
 def personal_add(request):
