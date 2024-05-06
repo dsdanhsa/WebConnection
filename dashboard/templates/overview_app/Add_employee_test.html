@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Add Employee{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <h1> Add Employee</h1>
+        <div class="mb-3">
+            <label for="employee_number" class="form-label">Employee code</label>
+            <input type="text" class="form-control" id="employee_number" name="employee_number"
+                   placeholder="Nhập mã nhân viên">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Nhập họ của nhân viên">
+        </div>
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name"
+                   placeholder="Nhập tên của nhân viên">
+        </div>
+        <div class="mb-3">
+            <label for="ssn" class="form-label">SSN</label>
+            <input type="text" class="form-control" id="ssn" name="ssn" placeholder="Nhập số SSN">
+        </div>
+        <div class="mb-3">
+            <label for="pay_rate" class="form-label">Pay Rate</label>
+            <input type="text" class="form-control" id="pay_rate" name="pay_rate" placeholder="Nhập mức lương">
+        </div>
+        <div class="mb-3">
+            <label for="PayRates_idPay_id" class="form-label">Payrate ID</label>
+            <select class="form-control" id="PayRates_idPay_id" name="PayRates_idPay_id">
+                {% for payids in payrate %}
+                <option value="{{ payids.idPayRates }}">{{ payids.PayRateName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="vacation_days" class="form-label">Vacation Days</label>
+            <input type="text" class="form-control" id="vacation_days" name="vacation_days"
+                   placeholder="Nhập số ngày nghỉ phép">
+        </div>
+        <div class="mb-3">
+            <label for="paid_to_date" class="form-label">Paid To Date</label>
+            <input type="text" class="form-control" id="paid_to_date" name="paid_to_date"
+                   placeholder="Nhập số tiền đã thanh toán đến ngày">
+        </div>
+        <div class="mb-3">
+            <label for="paid_last_year" class="form-label">Paid Last Year</label>
+            <input type="text" class="form-control" id="paid_last_year" name="paid_last_year"
+                   placeholder="Nhập số tiền đã thanh toán năm trước">
+        </div>
+
+        <br>
+        <div class="mb-3" style="text-align: center">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import totalpayrate, totalvacation, birthday_count, benefitplan, excessvacationday, changebenefit_detail, changebenefit_update, changeemployee_detail, employee_update, employment_update, personal_update, employee_add
+from .views import totalpayrate, totalvacation, birthday_count, benefitplan, excessvacationday, changebenefit_detail, changebenefit_update, changeemployee_detail, employee_update, employment_update, personal_update, employee_add, personal_add, employment_add, employee_delete
 
 app_name = 'overview_app'
 
@@ -20,4 +20,9 @@ urlpatterns = [
 
     #add HR và payroll
     path('employee_add/', employee_add, name='employee_add'),
+    path('personal_add/', personal_add, name='personal_add'),
+    path('employment_add/', employment_add, name='employment_add'),
+
+    #Xóa HR và Payroll
+    path('employee_delete/', employee_delete, name='employee_delete'),
 ]

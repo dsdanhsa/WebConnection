@@ -60,6 +60,7 @@ input[type="hidden"] {
 }
 
 
+
 </style>
 {% endblock %}
 
@@ -92,6 +93,14 @@ input[type="hidden"] {
             <input type="text" class="form-control" id="pay_rate" name="pay_rate" placeholder="Nhập mức lương">
         </div>
         <div class="mb-3">
+            <label for="PayRates_idPay_id" class="form-label">Payrate ID</label>
+            <select class="form-control" id="PayRates_idPay_id" name="PayRates_idPay_id">
+                {% for payids in payrate %}
+                <option value="{{ payids.idPayRates }}">{{ payids.PayRateName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="vacation_days" class="form-label">Vacation Days</label>
             <input type="text" class="form-control" id="vacation_days" name="vacation_days"
                    placeholder="Nhập số ngày nghỉ phép">
@@ -109,6 +118,11 @@ input[type="hidden"] {
 
         <br>
         <h1> Add Employment</h1>
+        <input type="hidden" id="employment_id" name="employment_id" value="{{ employment_id }}">
+        <div class="mb-3">
+            <label for="employment_status" class="form-label">Employment code</label>
+            <input type="text" class="form-control" id="employment_code" name="employment_code">
+        </div>
         <div class="mb-3">
             <label for="employment_status" class="form-label">Employment Status</label>
             <input type="text" class="form-control" id="employment_status" name="employment_status">

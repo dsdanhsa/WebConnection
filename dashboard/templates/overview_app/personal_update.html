@@ -1,109 +1,186 @@
 {% extends "base.html" %}
 {% block title %}Personal Information Update{% endblock %}
 
+{% block content123 %}
+<style>
+    body {
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    margin-top: 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    color: #fff;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+}
+
+</style>
+{% endblock %}
+
 {% block content %}
+
+
 <div class="container">
-    <div class="mb-3">
-        <h1>Update Personal Information</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Update Personal Information</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}"
+                          method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="current_first_name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="current_first_name" name="current_first_name"
+                                   value="{{ personal.CURRENT_FIRST_NAME }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_last_name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="current_last_name" name="current_last_name"
+                                   value="{{ personal.CURRENT_LAST_NAME }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_middle_name" class="form-label">Middle Name</label>
+                            <input type="text" class="form-control" id="current_middle_name" name="current_middle_name"
+                                   value="{{ personal.CURRENT_MIDDLE_NAME }}">
+                        </div>
+                        <div class="mb-3">
+    <label for="birth_date" class="form-label">Birth Date</label>
+    <input type="date" class="form-control" id="birth_date" name="birth_date"
+           value="{% if personal.BIRTH_DATE %}{{ personal.BIRTH_DATE|date:"Y-m-d" }}{% endif %}">
+</div>
+                        <div class="mb-3">
+                            <label for="social_security_number" class="form-label">Social Security Number</label>
+                            <input type="text" class="form-control" id="social_security_number"
+                                   name="social_security_number"
+                                   value="{{ personal.SOCIAL_SECURITY_NUMBER }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="drivers_license" class="form-label">Driver's License</label>
+                            <input type="text" class="form-control" id="drivers_license" name="drivers_license"
+                                   value="{{ personal.DRIVERS_LICENSE }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_address_1" class="form-label">Address Line 1</label>
+                            <input type="text" class="form-control" id="current_address_1" name="current_address_1"
+                                   value="{{ personal.CURRENT_ADDRESS_1 }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_address_2" class="form-label">Address Line 2</label>
+                            <input type="text" class="form-control" id="current_address_2" name="current_address_2"
+                                   value="{{ personal.CURRENT_ADDRESS_2 }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="current_city" name="current_city"
+                                   value="{{ personal.CURRENT_CITY }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_country" class="form-label">Country</label>
+                            <input type="text" class="form-control" id="current_country" name="current_country"
+                                   value="{{ personal.CURRENT_COUNTRY }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_zip" class="form-label">ZIP Code</label>
+                            <input type="text" class="form-control" id="current_zip" name="current_zip"
+                                   value="{{ personal.CURRENT_ZIP }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_gender" class="form-label">Gender</label>
+                            <input type="text" class="form-control" id="current_gender" name="current_gender"
+                                   value="{{ personal.CURRENT_GENDER }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_phone_number" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="current_phone_number"
+                                   name="current_phone_number"
+                                   value="{{ personal.CURRENT_PHONE_NUMBER }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_personal_email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="current_personal_email"
+                                   name="current_personal_email"
+                                   value="{{ personal.CURRENT_PERSONAL_EMAIL }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="current_marital_status" class="form-label">Marital Status</label>
+                            <input type="text" class="form-control" id="current_marital_status"
+                                   name="current_marital_status"
+                                   value="{{ personal.CURRENT_MARITAL_STATUS }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ethnicity" class="form-label">Ethnicity</label>
+                            <input type="text" class="form-control" id="ethnicity" name="ethnicity"
+                                   value="{{ personal.ETHNICITY }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="shareholder_status" class="form-label">Shareholder Status</label>
+                            <input type="text" class="form-control" id="shareholder_status" name="shareholder_status"
+                                   value="{{ personal.SHAREHOLDER_STATUS }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="benefit_plan" class="form-label">Benefit Plan</label>
+                            <select class="form-control" id="benefit_plan" name="benefit_plan">
+                                {% for plan in benefit_plans %}
+                                <option value="{{ plan.BENEFIT_PLANS_ID }}" {% if
+                                        personal.BENEFIT_PLAN.BENEFIT_PLANS_ID== plan.BENEFIT_PLANS_ID %} selected {%
+                                        endif %}>
+                                    {{ plan.PLAN_NAME }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <form action="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}" method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="current_first_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="current_first_name" name="current_first_name"
-                   value="{{ personal.CURRENT_FIRST_NAME }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="current_last_name" name="current_last_name"
-                   value="{{ personal.CURRENT_LAST_NAME }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_middle_name" class="form-label">Middle Name</label>
-            <input type="text" class="form-control" id="current_middle_name" name="current_middle_name"
-                   value="{{ personal.CURRENT_MIDDLE_NAME }}">
-        </div>
-        <div class="mb-3">
-            <label for="birth_date" class="form-label">Birth Date</label>
-            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ personal.BIRTH_DATE }}">
-        </div>
-        <div class="mb-3">
-            <label for="social_security_number" class="form-label">Social Security Number</label>
-            <input type="text" class="form-control" id="social_security_number" name="social_security_number"
-                   value="{{ personal.SOCIAL_SECURITY_NUMBER }}">
-        </div>
-        <div class="mb-3">
-            <label for="drivers_license" class="form-label">Driver's License</label>
-            <input type="text" class="form-control" id="drivers_license" name="drivers_license"
-                   value="{{ personal.DRIVERS_LICENSE }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_address_1" class="form-label">Address Line 1</label>
-            <input type="text" class="form-control" id="current_address_1" name="current_address_1"
-                   value="{{ personal.CURRENT_ADDRESS_1 }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_address_2" class="form-label">Address Line 2</label>
-            <input type="text" class="form-control" id="current_address_2" name="current_address_2"
-                   value="{{ personal.CURRENT_ADDRESS_2 }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_city" class="form-label">City</label>
-            <input type="text" class="form-control" id="current_city" name="current_city"
-                   value="{{ personal.CURRENT_CITY }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_country" class="form-label">Country</label>
-            <input type="text" class="form-control" id="current_country" name="current_country"
-                   value="{{ personal.CURRENT_COUNTRY }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_zip" class="form-label">ZIP Code</label>
-            <input type="text" class="form-control" id="current_zip" name="current_zip"
-                   value="{{ personal.CURRENT_ZIP }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_gender" class="form-label">Gender</label>
-            <input type="text" class="form-control" id="current_gender" name="current_gender"
-                   value="{{ personal.CURRENT_GENDER }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_phone_number" class="form-label">Phone Number</label>
-            <input type="text" class="form-control" id="current_phone_number" name="current_phone_number"
-                   value="{{ personal.CURRENT_PHONE_NUMBER }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_personal_email" class="form-label">Email</label>
-            <input type="text" class="form-control" id="current_personal_email" name="current_personal_email"
-                   value="{{ personal.CURRENT_PERSONAL_EMAIL }}">
-        </div>
-        <div class="mb-3">
-            <label for="current_marital_status" class="form-label">Marital Status</label>
-            <input type="text" class="form-control" id="current_marital_status" name="current_marital_status"
-                   value="{{ personal.CURRENT_MARITAL_STATUS }}">
-        </div>
-        <div class="mb-3">
-            <label for="ethnicity" class="form-label">Ethnicity</label>
-            <input type="text" class="form-control" id="ethnicity" name="ethnicity" value="{{ personal.ETHNICITY }}">
-        </div>
-        <div class="mb-3">
-            <label for="shareholder_status" class="form-label">Shareholder Status</label>
-            <input type="text" class="form-control" id="shareholder_status" name="shareholder_status"
-                   value="{{ personal.SHAREHOLDER_STATUS }}">
-        </div>
-        <div class="mb-3">
-            <label for="benefit_plan" class="form-label">Benefit Plan</label>
-            <select class="form-control" id="benefit_plan" name="benefit_plan">
-                {% for plan in benefit_plans %}
-                <option value="{{ plan.BENEFIT_PLANS_ID }}" {% if personal.BENEFIT_PLAN.BENEFIT_PLANS_ID==
-                        plan.BENEFIT_PLANS_ID %} selected {% endif %}>{{ plan.PLAN_NAME }}
-                </option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3" style="text-align: center">
-            <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-    </form>
 </div>
 {% endblock %}

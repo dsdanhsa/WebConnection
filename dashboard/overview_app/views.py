@@ -1,3 +1,5 @@
+import decimal
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, get_object_or_404, redirect
 from payroll_app.models import PayRate, Employee
 from django.contrib.auth.decorators import login_required
@@ -6,6 +8,11 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 from datetime import datetime
 import base64
+from django.http import JsonResponse, HttpResponse
+from uuid import uuid4
+from django.contrib import messages
+from django.utils import timezone
+from django.utils.dateparse import parse_date
 
 #tổng tiền lương và vẽ biểu đồ
 @login_required
@@ -186,9 +193,7 @@ def employee_update(request, employeeid):
 
         employee.save()
 
-        list_employee = Employee.objects.all()
-        context = {'list_employee': list_employee}
-        return render(request, "overview_app/changeemployee_detail.html", context)
+        return redirect('overview_app:employee_detail')
     else:
         context = {'employee': employee}
         return render(request, 'overview_app/changeemployee_update.html', context)
@@ -199,27 +204,29 @@ def employment_update(request, employmentid):
     employment = get_object_or_404(Employment, EMPLOYMENT_ID=employmentid)
 
     if request.method == "POST":
-        rq_employment_code = request.POST.get("employment_code")
-        rq_employment_status = request.POST.get("employment_status")
-        rq_hire_date_for_working = request.POST.get("hire_date_for_working")
-        rq_workers_comp_code = request.POST.get("workers_comp_code")
-        rq_termination_date = request.POST.get("termination_date")
-        rq_rehire_date_for_working = request.POST.get("rehire_date_for_working")
-        rq_last_review_date = request.POST.get("last_review_date")
-        rq_number_days_requirement_of_working_per_month = request.POST.get("number_days_requirement_of_working_per_month")
+        try:
+            # Parse dates
+            hire_date_for_working = parse_date(request.POST.get("hire_date_for_working"))
+            termination_date = parse_date(request.POST.get("termination_date"))
+            rehire_date_for_working = parse_date(request.POST.get("rehire_date_for_working"))
+            last_review_date = parse_date(request.POST.get("last_review_date"))
+        except ValueError:
+            return HttpResponse("Invalid date format. Please use YYYY-MM-DD.")
 
-        employment.EMPLOYMENT_CODE = rq_employment_code
-        employment.EMPLOYMENT_STATUS = rq_employment_status
-        employment.HIRE_DATE_FOR_WORKING = rq_hire_date_for_working
-        employment.WORKERS_COMP_CODE = rq_workers_comp_code
-        employment.TERMINATION_DATE = rq_termination_date
-        employment.REHIRE_DATE_FOR_WORKING = rq_rehire_date_for_working
-        employment.LAST_REVIEW_DATE = rq_last_review_date
-        employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = rq_number_days_requirement_of_working_per_month
+        # Update employment object
+        employment.EMPLOYMENT_CODE = request.POST.get("employment_code")
+        employment.EMPLOYMENT_STATUS = request.POST.get("employment_status")
+        employment.HIRE_DATE_FOR_WORKING = hire_date_for_working
+        employment.WORKERS_COMP_CODE = request.POST.get("workers_comp_code")
+        employment.TERMINATION_DATE = termination_date
+        employment.REHIRE_DATE_FOR_WORKING = rehire_date_for_working
+        employment.LAST_REVIEW_DATE = last_review_date
+        employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = request.POST.get("number_days_requirement_of_working_per_month")
 
         employment.save()
 
-        return render(request, "overview_app/changeemployee_detail.html")
+        # Redirect to employee_detail page
+        return redirect('overview_app:employee_detail')  # Using the correct URL pattern name
     else:
         context = {'employment': employment}
         return render(request, 'overview_app/employment_update.html', context)
@@ -271,74 +278,148 @@ def personal_update(request, personalid):
 
         personal.save()
 
-        return render(request, "overview_app/changeemployee_detail.html")
+        return redirect('overview_app:employee_detail')
     else:
         benefit_plans = BenefitPlans.objects.all()
         context = {'personal': personal, 'benefit_plans': benefit_plans}
         return render(request, 'overview_app/personal_update.html', context)
 
 #add emplployee
-@login_required
 def employee_add(request):
     if request.method == "POST":
-
-        #add employee
-        rq_employee_number = request.POST.get("employee_number")
-        rq_last_name = request.POST.get("last_name")
-        rq_first_name = request.POST.get("first_name")
-        rq_ssn = request.POST.get("ssn")
         rq_pay_rate = request.POST.get("pay_rate")
-        rq_vacation_days = request.POST.get("vacation_days")
-        rq_paid_to_date = request.POST.get("paid_to_date")
-        rq_paid_last_year = request.POST.get("paid_last_year")
-        data = Employee(EmployeeNumber = rq_employee_number, LastName = rq_last_name,FirstName = rq_first_name,SSN = rq_ssn, PayRate = rq_pay_rate,
-                        VacationDays = rq_vacation_days, PaidToDate = rq_paid_to_date, PaidLastYear = rq_paid_last_year)
+        if rq_pay_rate:
+            try:
+                rq_pay_rate_decimal = decimal.Decimal(rq_pay_rate)
+            except decimal.InvalidOperation:
+                raise ValidationError("Pay rate must be a valid decimal number.")
+        else:
+            rq_pay_rate_decimal = None
+        data = Employee(
+            EmployeeNumber=request.POST.get("employee_number"),
+            LastName=request.POST.get("last_name"),
+            FirstName=request.POST.get("first_name"),
+            SSN=request.POST.get("ssn"),
+            PayRate=rq_pay_rate_decimal,
+            PayRates_idPay_id=request.POST.get("PayRates_idPay_id"),
+            VacationDays=request.POST.get("vacation_days"),
+            PaidToDate=request.POST.get("paid_to_date"),
+            PaidLastYear=request.POST.get("paid_last_year")
+        )
         data.save()
+        return redirect('overview_app:personal_add')
+    else:
+        context = {'employees': Employee.objects.all(), 'payrate': PayRate.objects.all()}
+        return render(request, 'overview_app/Add_employee_test.html', context)
 
-        #add employment
-        rq_employment_code = request.POST.get("employee_number")
-        rq_employment_status = request.POST.get("employment_status")
-        rq_hire_date_for_working = request.POST.get("hire_date_for_working")
-        rq_workers_comp_code = request.POST.get("workers_comp_code")
-        rq_termination_date = request.POST.get("termination_date")
-        rq_rehire_date_for_working = request.POST.get("rehire_date_for_working")
-        rq_last_review_date = request.POST.get("last_review_date")
-        rq_number_days_requirement_of_working_per_month = request.POST.get("number_days_requirement_of_working_per_month")
-        datahr1 = Employment(EMPLOYMENT_CODE = rq_employment_code, EMPLOYMENT_STATUS = rq_employment_status, HIRE_DATE_FOR_WORKING = rq_hire_date_for_working,
-                             WORKERS_COMP_CODE = rq_workers_comp_code, TERMINATION_DATE = rq_termination_date, REHIRE_DATE_FOR_WORKING = rq_rehire_date_for_working,
-                             LAST_REVIEW_DATE = rq_last_review_date, NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = rq_number_days_requirement_of_working_per_month)
-        datahr1.save()
-
-        #add peronal
-        arr_first_name = rq_first_name.split()
-        rq_hr_first_name= arr_first_name[0]
-        rq_hr_first_name = rq_hr_first_name.title()
-        rq_hr_middle_name = arr_first_name[1:]
-        rq_hr_middle_name = rq_hr_middle_name.title()
-        rq_birth_date = request.POST.get("birth_date")
-        rq_social_security_number = request.POST.get("social_security_number")
-        rq_drivers_license = request.POST.get("drivers_license")
-        rq_current_address_1 = request.POST.get("current_address_1")
-        rq_current_address_2 = request.POST.get("current_address_2")
-        rq_current_city = request.POST.get("current_city")
-        rq_current_country = request.POST.get("current_country")
-        rq_current_zip = request.POST.get("current_zip") #
-        rq_current_gender = request.POST.get("current_gender")
-        rq_current_phone_number = request.POST.get("current_phone_number")
-        rq_current_personal_email = request.POST.get("current_personal_email")
-        rq_current_marital_status = request.POST.get("current_marital_status")
-        rq_ethnicity = request.POST.get("ethnicity")
-        rq_shareholder_status = request.POST.get("shareholder_status")
-        rq_benefit_plan = request.POST.get("benefit_plan")
-        datahr2 = Personal(CURRENT_FIRST_NAME = rq_hr_first_name, CURRENT_LAST_NAME = rq_last_name, CURRENT_MIDDLE_NAME = rq_hr_middle_name, BIRTH_DATE = rq_birth_date,
-                           SOCIAL_SECURITY_NUMBER = rq_social_security_number, DRIVERS_LICENSE = rq_drivers_license, CURRENT_ADDRESS_1 = rq_current_address_1, CURRENT_ADDRESS_2 = rq_current_address_2,
-                           CURRENT_CITY = rq_current_city, CURRENT_COUNTRY = rq_current_country, CURRENT_ZIP = rq_current_zip, CURRENT_GENDER = rq_current_gender, CURRENT_PHONE_NUMBER = rq_current_phone_number,
-                           CURRENT_PERSONAL_EMAIL = rq_current_personal_email, CURRENT_MARITAL_STATUS = rq_current_marital_status, ETHNICITY = rq_ethnicity, SHAREHOLDER_STATUS = rq_shareholder_status, BENEFIT_PLANS_ID = rq_benefit_plan)
-
-        return render(request, "overview_app/changeemployee_detail.html")
+@login_required
+def personal_add(request):
+    if request.method == "POST":
+        benefit_plan_id = request.POST.get("benefit_plan")
+        benefit_plan_instance = BenefitPlans.objects.get(BENEFIT_PLANS_ID=benefit_plan_id)
+        datahr2 = Personal(
+            PERSONAL_ID= request.POST.get("personalid"),
+            CURRENT_FIRST_NAME=request.POST.get("first_name"),
+            CURRENT_LAST_NAME=request.POST.get("last_name"),
+            CURRENT_MIDDLE_NAME=request.POST.get("middle_name"),
+            BIRTH_DATE=request.POST.get("birth_date"),
+            SOCIAL_SECURITY_NUMBER=request.POST.get("social_security_number"),
+            DRIVERS_LICENSE=request.POST.get("drivers_license"),
+            CURRENT_ADDRESS_1=request.POST.get("current_address_1"),
+            CURRENT_ADDRESS_2=request.POST.get("current_address_2"),
+            CURRENT_CITY=request.POST.get("current_city"),
+            CURRENT_COUNTRY=request.POST.get("current_country"),
+            CURRENT_ZIP=request.POST.get("current_zip"),
+            CURRENT_GENDER=request.POST.get("current_gender"),
+            CURRENT_PHONE_NUMBER=request.POST.get("current_phone_number"),
+            CURRENT_PERSONAL_EMAIL=request.POST.get("current_personal_email"),
+            CURRENT_MARITAL_STATUS=request.POST.get("current_marital_status"),
+            ETHNICITY=request.POST.get("ethnicity"),
+            SHAREHOLDER_STATUS=request.POST.get("shareholder_status"),
+            BENEFIT_PLAN=benefit_plan_instance
+        )
+        datahr2.full_clean()
+        datahr2.save()
+        return redirect('overview_app:employment_add')
     else:
         employees = Employee.objects.all()
-        payrate = PayRate.objects.all()
         benefit_plans = BenefitPlans.objects.all()
-        context = {'employees': employees, 'payrate': payrate, 'benefit_plans' : benefit_plans}
-        return render(request, 'overview_app/Add_employee.html', context)
+        context = {'employees': employees, 'benefit_plans': benefit_plans}
+        return render(request, 'overview_app/Add_personal.html', context)
+
+@login_required
+def employment_add(request):
+    if request.method == "POST":
+        try:
+            # Tạo employment_id
+            num_employments = Employment.objects.count()
+            employment_id = num_employments + 1
+            personal_id = request.POST.get("personal_id")
+            personal = Personal.objects.get(PERSONAL_ID=personal_id)
+
+            employment = Employment(
+                EMPLOYMENT_ID=employment_id,
+                EMPLOYMENT_CODE=request.POST.get("employment_code"),
+                EMPLOYMENT_STATUS=request.POST.get("employment_status"),
+                HIRE_DATE_FOR_WORKING=request.POST.get("hire_date_for_working"),
+                WORKERS_COMP_CODE=request.POST.get("workers_comp_code"),
+                TERMINATION_DATE=request.POST.get("termination_date"),
+                REHIRE_DATE_FOR_WORKING=request.POST.get("rehire_date_for_working"),
+                LAST_REVIEW_DATE=request.POST.get("last_review_date"),
+                NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH=request.POST.get("number_days_requirement_of_working_per_month"),
+                personal=personal
+            )
+            employment.full_clean()
+            employment.save()
+
+            return redirect('overview_app:employee_detail')
+
+        except (ValidationError, Personal.DoesNotExist) as e:
+            messages.error(request, str(e))
+            return redirect('overview_app:employment_add')
+
+    else:
+        employees = Employee.objects.all()
+        personals = Personal.objects.all()
+        context = {'employees': employees, 'personals': personals}
+        return render(request, 'overview_app/Add_employment.html', context)
+
+'''
+@login_required
+def employee_delete(request):
+    if request.method == 'GET':
+        employee = Employee.objects.get(idEmployee=request.GET['employee_id'])
+        employment = Employment.objects.get(EMPLOYMENT_ID=request.GET['employment_id'])
+        personal = Personal.objects.get(PERSONAL_ID=request.GET['personal_id'])
+        employee.delete()
+        employment.delete()
+        personal.delete()
+        context = {
+            'mess': 'Đã xóa thành công'
+        }
+        return JsonResponse(context)
+'''
+@login_required
+def employee_delete(request):
+    if request.method == 'GET':
+        try:
+            employeeid = request.GET['employee_id']
+            employmentid = request.GET['employment_id']
+            personalid = request.GET['personal_id']
+
+            employee = Employee.objects.get(idEmployee=employeeid)
+            employment = Employment.objects.get(EMPLOYMENT_ID=employmentid)
+            personal = Personal.objects.get(PERSONAL_ID=personalid)
+
+            employee.delete()
+            employment.delete()
+            personal.delete()
+
+            context = {'mess': 'Đã xóa thành công'}
+            return JsonResponse(context)
+
+        except (Employee.DoesNotExist, Employment.DoesNotExist, Personal.DoesNotExist):
+            context = {'mess': 'Không thể xóa. Hồ sơ không tồn tại.'}
+            return JsonResponse(context, status=400)
+
+    return JsonResponse({'mess': 'Phương thức không hợp lệ.'}, status=405)
