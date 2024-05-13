@@ -2,3 +2,5 @@ virtualenv
 django
 mysqlclient
 matplotlib
+numpy
+matplotlib

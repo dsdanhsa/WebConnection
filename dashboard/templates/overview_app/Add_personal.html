@@ -1,180 +1,346 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Add Employee{% endblock %}
 
 {% block content %}
 <style>
-/* Định dạng phần tử container */
-.container {
-  font-size: 16px;
-  text-align: left;
-  margin-top: 30px;
+.main{
+    margin-left: 300px;
+    padding: 40px 20px;
+    font-family: "Poppins", sans-serif;
+
+}
+.title_main{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.list_main{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.previous_page{
+
+}
+.space{
+    font-weight: 600;
+    /* font-size: 20px;  */
+    color: #737791;
 }
 
-/* Định dạng tiêu đề */
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+.add_members{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+
+    /* display: none; */
 }
 
-/* Định dạng các nhãn trường nhập */
-.form-label {
-  font-weight: bold;
+.add_members.active{
+    display: block;
 }
 
-/* Định dạng các khung nhập liệu */
-.form-control {
-  width: calc(100% - 22px);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
+.add_member-list-1{
+    cursor: pointer;
 }
 
-/* Định dạng khi hover vào các khung nhập liệu */
-.form-control:hover,
-.form-control:focus {
-  border-color: #007bff;
+
+.list_content{
+
 }
 
-/* Định dạng nút submit */
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.add_member-title-1{
+    /* height: 0;
+    transition: all .3s;
+    overflow: hidden; */
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
 }
 
-/* Định dạng khi hover vào nút submit */
-.btn-primary:hover {
-  background-color: #0056b3;
+
+.input_information{
+    /* display: flex; */
+    padding: 10px;
+
+}
+.information_content{
+    /* min-width: 500px; */
+    /* font-size: 20px; */
 }
 
-/* Định dạng phần tử hidden */
-input[type="hidden"] {
-  display: none;
+.input{
+    width: 200px;
+    border-radius: 5px;
+    border: 2px solid #5d5fef;
+    padding: 3px;
 }
+
+/*alert*/
+button{
+    padding: 10px;
+}
+.notifications{
+    position: fixed;
+    top: 30px;
+    right: 20px;
+}
+.toast{
+    position: relative;
+    padding: 10px;
+    color: #fff;
+    margin-bottom: 10px;
+    width: 400px;
+    display: grid;
+    grid-template-columns: 70px 1fr 70px;
+    border-radius: 5px;
+    --color: #0abf30;
+    background-image:
+        linear-gradient(
+            to right, #0abf3055, #22242f 30%
+        );
+    animation: show 0.3s ease 1 forwards
+}
+.toast i{
+    color: var(--color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+}
+.toast .title{
+    font-size: x-large;
+    font-weight: bold;
+}
+.toast span, .toast i:nth-child(3){
+    color: #fff;
+    opacity: 0.6;
+}
+@keyframes show{
+    0%{
+        transform: translateX(100%);
+    }
+    40%{
+        transform: translateX(-5%);
+    }
+    80%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(-10%);
+    }
+}
+.toast::before{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color);
+    width: 100%;
+    height: 3px;
+    content: '';
+    box-shadow: 0 0 10px var(--color);
+    animation: timeOut 5s linear 1 forwards
+}
+@keyframes timeOut{
+    to{
+        width: 0;
+    }
+}
+
+
+.buttons{
+    text-align: center;
+    margin-top: 20px;
+}
+
+#success{
+    background-color: #5d5fef;
+    color: #ffffff;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+
+}
+
 </style>
 
-<div class="container">
-    <form method="post">
-        {% csrf_token %}
-        <h1> Add Personal</h1>
-        <div class="mb-3">
-            <label for="personalid" class="form-label">Personal ID:</label><br>
-            <input type="text" id="personalid" name="personalid" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="first_name" class="form-label">First Name:</label><br>
-            <input type="text" id="first_name" name="first_name" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="middle_name" class="form-label">Middle Name:</label><br>
-            <input type="text" id="middle_name" name="middle_name" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="last_name" class="form-label">Last Name:</label><br>
-            <input type="text" id="last_name" name="last_name" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="birth_date" class="form-label">Birth Date:</label><br>
-            <input type="date" id="birth_date" name="birth_date" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="social_security_number" class="form-label">Social Security Number:</label><br>
-            <input type="text" id="social_security_number" name="social_security_number" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="drivers_license" class="form-label">Driver's License:</label><br>
-            <input type="text" id="drivers_license" name="drivers_license" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="current_address_1" class="form-label">Current Address Line 1:</label><br>
-            <input type="text" id="current_address_1" name="current_address_1" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="current_address_2" class="form-label">Current Address Line 2:</label><br>
-            <input type="text" id="current_address_2" name="current_address_2" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="current_city" class="form-label">Current City:</label><br>
-            <input type="text" id="current_city" name="current_city" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="current_country" class="form-label">Current Country:</label><br>
-            <input type="text" id="current_country" name="current_country" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="current_zip" class="form-label">Current ZIP Code:</label><br>
-            <input type="text" id="current_zip" name="current_zip" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="current_gender" class="form-label">Gender</label>
-            <select class="form-control" id="current_gender" name="current_gender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="current_phone_number" class="form-label">Phone Number:</label><br>
-            <input type="text" id="current_phone_number" name="current_phone_number" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="current_personal_email" class="form-label">Personal Email:</label><br>
-            <input type="email" id="current_personal_email" name="current_personal_email" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="current_marital_status" class="form-label">Marital Status</label>
-            <select class="form-control" id="current_marital_status" name="current_marital_status">
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Widowed">Widowed</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="ethnicity" class="form-label">Ethnicity:</label><br>
-            <input type="text" id="ethnicity" name="ethnicity" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="shareholder_status" class="form-label">Shareholder Status:</label><br>
-            <input type="text" id="shareholder_status" name="shareholder_status" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label for="benefit_plan" class="form-label">Benefit Plan</label>
-            <select class="form-control" id="benefit_plan" name="benefit_plan">
-                {% for plan in benefit_plans %}
-                <option value="{{ plan.BENEFIT_PLANS_ID }}">{{ plan.PLAN_NAME }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="mb-3" style="text-align: center">
-            <button type="submit" class="btn btn-primary">Add</button>
-        </div>
-    </form>
+<div class="title_main">
+    <a style="padding-top: 5px;" href="">
+        <img src="{% static 'assest/previous.svg' %}" alt="">
+    </a>
+    <div class="list_main">
+        <a href="{% url 'overview_app:totalpayrate' %" class="previous_page">DashBoard</a>
+        <p class="space">/</p>
+        <a href="{% url 'overview_app:employee_detail' %}" class="previous_page">Employee Management</a>
+        <p class="space">/</p>
+        <a style="color: black;" href="" class="previous_page">Add Personal</a>
+    </div>
 </div>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="add_members">
+        <div class="add_member-list-1">
+            <h1 class="list_content">Add Personal</h1>
+        </div>
+
+        <ul class="add_member-title-1">
+            <div class="input_information-left">
+                <div class="input_information">
+                    <p for="personalid" class="information_content">Personal ID </p>
+                    <input class="input" type="text" id="personalid" name="personalid">
+                </div>
+
+                <div class="input_information">
+                    <p for="first_name" class="information_content">First Name </p>
+                    <input class="input" type="text" id="first_name" name="first_name">
+                </div>
+
+                <div  class="input_information">
+                    <p for="middle_name" class="information_content">Middle Name </p>
+                    <input class="input" type="text" id="middle_name" name="middle_name">
+                </div>
+
+                <div class="input_information">
+                    <p for="middle_name" class="information_content">Last name </p>
+                    <input class="input" type="text" id="last_name" name="last_name">
+                </div>
+
+                <div class="input_information">
+                    <p for="birth_date" class="information_content">Birth Date </p>
+                    <input class="input" type="date" id="birth_date" name="birth_date">
+                </div>
+
+                <div  class="input_information">
+                    <p for="social_security_number" class="information_content">Social Security Number</p>
+                    <input class="input" type="text" id="social_security_number" name="social_security_number">
+                </div>
+
+                <div class="input_information">
+                    <p for="drivers_license" class="information_content">Drivers License </p>
+                    <input id="drivers_license" name="drivers_license" class="input" type="text">
+                </div>
+            </div>
+
+            <div class="input_information-mid">
+                <div class="input_information">
+                    <p for="current_address_1" class="information_content">Current Address line 1 </p>
+                    <input class="input" type="text" id="current_address_1" name="current_address_1">
+                </div>
+
+                <div class="input_information">
+                    <p for="current_address_2" class="information_content">Current Address Line 2 </p>
+                    <input class="input" type="text" id="current_address_2" name="current_address_2">
+                </div>
+
+                <div class="input_information">
+                    <p for="current_city" class="information_content">Current City </p>
+                    <input class="input" type="text" id="current_city" name="current_city">
+                </div>
+
+                 <div class="input_information">
+                     <p for="current_country" class="information_content">Current Country </p>
+                     <input class="input" type="text" id="current_country" name="current_country">
+                 </div>
+
+                <div class="input_information">
+                    <p for="current_zip" class="information_content">Current zip Code </p>
+                    <input class="input" type="text" id="current_zip" name="current_zip">
+                </div>
+
+                <div class="input_information">
+                    <p for="current_gender" class="information_content"> Gender </p>
+                    <select class="input" id="current_gender" name="current_zip">
+                        <option value="">--Please choose an option--</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input_information-right">
+                <div class="input_information">
+                    <p for="current_phone_number" class="information_content">Phone Number </p>
+                    <input class="input" type="text" id="current_phone_number" name="current_phone_number">
+                </div>
+
+                <div class="input_information">
+                    <p for="current_personal_email" class="information_content">Personal Email </p>
+                    <input class="input" type="text" id="current_personal_email" name="current_personal_email">
+                </div>
+
+                <div class="input_information">
+                    <p for="current_marital_status" class="information_content">Marital Status </p>
+                    <select class="input" id="current_marital_status" name="current_marital_status">
+                        <option value="">--Please choose an option--</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                    </select>
+                </div>
+
+                <div class="input_information">
+                    <p for="ethnicity" class="information_content">Ethnicity </p>
+                    <input class="input" type="text" id="ethnicity" name="ethnicity">
+                </div>
+
+                <div class="input_information">
+                    <p for="shareholder_status" class="information_content">Shareholder Status </p>
+                    <input class="input" type="text" id="shareholder_status" name="shareholder_status">
+                </div>
+
+                <div class="input_information">
+                    <p for="benefit_plan" class="information_content">Benefit Plan </p>
+                    <select class="input" id="benefit_plan" name="benefit_plan">
+                        <option value="">--Please choose an option--</option>
+                        {% for plan in benefit_plans %}
+                        <option value="{{ plan.BENEFIT_PLANS_ID }}">{{ plan.PLAN_NAME }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </ul>
+
+        <div class="notifications"></div>
+            <div class="buttons">
+                <button id="success">ADD</button>
+            </div>
+        <script>
+            let notifications = document.querySelector('.notifications');
+            let success = document.getElementById('success');
+
+            function createToast(type, icon, title, text){
+        let newToast = document.createElement('div');
+        newToast.innerHTML = `
+            <div class="toast ${type}">
+                <i class="${icon}"></i>
+                <div class="content">
+                    <div class="title">${title}</div>
+                    <span>${text}</span>
+                </div>
+                <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+            </div>`;
+        notifications.appendChild(newToast);
+        newToast.timeOut = setTimeout(
+            ()=>newToast.remove(), 5000
+        )
+    }
+            success.onclick = function(){
+        let type = 'success';
+        let icon = 'fa-solid fa-circle-check';
+        let title = 'Success';
+        let text = 'This is a success toast.';
+        createToast(type, icon, title, text);
+    }
+        </script>
+    </div>
+    </form>
+
 {% endblock %}

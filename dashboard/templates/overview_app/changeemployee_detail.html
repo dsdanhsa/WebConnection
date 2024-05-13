@@ -48,6 +48,9 @@
     }
 
 
+
+
+
 </style>
 {% endblock %}
 
@@ -84,7 +87,8 @@
                 <a href="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}">Personal</a>
             </td>
             <td>
-                <a onclick="del_employee('{{employee.idEmployee}}', '{{employment.EMPLOYMENT_ID}}', '{{personal.PERSONAL_ID}}')" href="#">Xóa</a>
+                <a onclick="del_employee('{{employee.idEmployee}}', '{{employment.EMPLOYMENT_ID}}', '{{personal.PERSONAL_ID}}')"
+                   href="#">Xóa</a>
             </td>
         </tr>
         {% endfor %}
@@ -93,21 +97,24 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function del_employee(employeeid, employmentid, personalid) {
-    $.ajax({
-        type: "GET",
-        url: "/employee_delete/",
-        data: {
-            employee_id: employeeid,
-            employment_id: employmentid,
-            personal_id: personalid,
-        },
-        success: function (parsedData) {
-            console.log(parsedData)
-            alert(parsedData["mess"])
-            window.location.reload();
-        },
-    });
+function del_employee(employeeid, employmentid, personalid) {
+    var confirmation = confirm("Bạn có chắc chắn muốn xóa dữ liệu không?");
+    if (confirmation) {
+        $.ajax({
+            type: "GET",
+            url: "/employee_delete/",
+            data: {
+                employee_id: employeeid,
+                employment_id: employmentid,
+                personal_id: personalid,
+            },
+            success: function (parsedData) {
+                console.log(parsedData)
+                alert(parsedData["mess"])
+                window.location.reload();
+            },
+        });
+    }
 }
 </script>
 
