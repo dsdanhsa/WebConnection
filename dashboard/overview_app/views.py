@@ -4,43 +4,73 @@ from django.shortcuts import render, get_object_or_404, redirect
 from payroll_app.models import PayRate, Employee
 from django.contrib.auth.decorators import login_required
 from hrapp.models import BenefitPlans, Employment, EmploymentWorkingTime, JobHistory, Personal
+import matplotlib
+matplotlib.use('svg')
 import matplotlib.pyplot as plt
 from io import BytesIO
 from datetime import datetime
 import base64
 from django.http import JsonResponse, HttpResponse
-from uuid import uuid4
 from django.contrib import messages
-from django.utils import timezone
 from django.utils.dateparse import parse_date
 
-#tổng tiền lương và vẽ biểu đồ
-@login_required
-def totalpayrate(request):
-    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
 
-    # Tạo biểu đồ Pay Amount by Employee Number
+#tổng tiền lương và vẽ biểu đồ
+# @login_required
+# def totalpayrate(request):
+#     totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
+#
+#     # Tạo biểu đồ Pay Amount by Employee Number
+#     plt.bar(categories, pay_values)
+#     plt.xlabel('Employee Number')
+#     plt.ylabel('Pay Amount')
+#     plt.title('Pay Amount by Employee Number')
+#     img_data = BytesIO()
+#     plt.savefig(img_data, format='png')
+#     img_data.seek(0)
+#     img_base64 = base64.b64encode(img_data.getvalue()).decode()
+#     plt.close()
+#
+#     content = {
+#         'totalpayrate': totalpayrate,
+#         'totalvacationday': totalvacationday,
+#         'chart_data': img_base64,
+#         'birthday_count': birthday_count,
+#         'totalexcess' : totalexcess
+#     }
+#
+#     return render(request, 'overview_app/home.html', content)
+
+#tổng ngày nghĩ và vẽ biểu đồ
+
+def generate_pay_amount_plot(categories, pay_values):
     plt.bar(categories, pay_values)
     plt.xlabel('Employee Number')
     plt.ylabel('Pay Amount')
     plt.title('Pay Amount by Employee Number')
+
     img_data = BytesIO()
     plt.savefig(img_data, format='png')
     img_data.seek(0)
     img_base64 = base64.b64encode(img_data.getvalue()).decode()
     plt.close()
+    return img_base64
+@login_required
+def totalpayrate(request):
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
+
+    img_base64 = generate_pay_amount_plot(categories, pay_values)
 
     content = {
         'totalpayrate': totalpayrate,
         'totalvacationday': totalvacationday,
         'chart_data': img_base64,
         'birthday_count': birthday_count,
-        'totalexcess' : totalexcess
+        'totalexcess': totalexcess
     }
 
     return render(request, 'overview_app/home.html', content)
 
-#tổng ngày nghĩ và vẽ biểu đồ
 @login_required
 def totalvacation(request):
     totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()

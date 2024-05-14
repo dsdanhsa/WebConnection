@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Employee detail{% endblock %}
 
 {% block content123 %}
@@ -47,68 +48,317 @@
         color: #005a9c;
     }
 
+    /*-------------------*/
+    .main{
+    padding: 30px;
+    font-family: "Poppins", sans-serif;
+}
+.header_main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.header_main-right{
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+}
+.right_title::before{
+    content: "";
+    margin-left: 10px;
+}
+
+.line{
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    top: 60px;
+    background: linear-gradient(90deg, #FA5252 0%, #DD2476 100%);
+    border-radius: 2px;
+}
+
+.header_main-left{
+
+}
+
+.main-left_info{
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+
+}
+
+.main-left_title{
+
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 20px;
+}
+
+.navbar_title{
+    font-weight: 600;
+
+}
+
+.navbar_add{
+    background-color: #5d5fef;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.table_main{
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+
+}
+
+.table_main.hide{
+    display: none;
+}
+
+.table_main tbody tr:nth-child(even){
+
+    background-color: #c1bcbc65;
+}
+
+
+.table_list{
+    background-color: #5d5fef;
+    color: #ffffff;
+
+
+}
+.table_list-content{
+    text-align: center;
+    padding: 10px;
+   position: relative;
+
+
+
+}
+
+.table_list-edit{
+    cursor: pointer;
+}
+
+
+
+.add_members{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 50px;
+    display: none;
+}
+
+.add_members.active{
+    display: block;
+}
+
+.add_member-list-1{
+    cursor: pointer;
+}
+
+.add_member-list-2{
+    cursor: pointer;
+}
+
+.list_content{
+
+}
+
+.add_member-title-1{
+    height: 0;
+    transition: all .3s;
+    overflow: hidden;
+
+}
+
+.add_member-title-1.active{
+    height: max-content;
+
+}
+
+.add_member-title-2{
+    height: 0;
+    transition: all .3s;
+    overflow: hidden;
+}
+
+.add_member-title-2.active{
+    height: max-content;
+
+}
+
+.table-input_information{
+
+}
+.input_information{
+    display: flex;
+    padding: 10px;
+}
+.information_content{
+    min-width: 400px;
+}
+
+.note{
+    padding: 10px;
+    /* position: relative; */
+}
+
+.dropdown1{
+    padding: 10px;
+    border-radius: 5px;
+    width: 150px;
+    background: #f1ecec;
+    position: absolute;
+    top: 102%;
+    left: 19px;
+    display: none;
+    z-index: 9999;
+
+
+}
+
+.dropdown1.active{
+    display: block;
+}
+
+.img_note{
+    position: absolute;
+    top: -21px;
+    left: 30px;
+}
+
+.note_list{
+    padding-left: 15px;
+
+}
+
+.table_list-content:last-child{
+   display:flex;
+   justify-content: center;
+   gap: 10px;
+}
+
+
 
 </style>
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'overview_app:employee_add' %}">Add employee</a>
-<div class="main_last-chart">
-    <table>
-        <thead>
-        <tr>
-            <th>Employee code</th>
-            <th>Name</th>
-            <th>SSN</th>
-            <th>Birth Date</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% csrf_token %}
-        {% for employee, employment, personal in employee_data %}
-        <tr>
-            <td>{{ employee.EmployeeNumber }}</td>
-            <td>{{ employee.LastName }} {{ employee.FirstName }}</td>
-            <td>{{ employee.SSN }}</td>
-            <td>{{ personal.BIRTH_DATE }}</td>
-            <td>{{ personal.CURRENT_ADDRESS_1 }}</td>
-            <td>{{ personal.CURRENT_PHONE_NUMBER }}</td>
-            <td>
-                <a href="{% url 'overview_app:employee_update' employeeid=employee.idEmployee %}">Employee |</a>
-                <a href="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}">Employment
-                    |</a>
-                <a href="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}">Personal</a>
-            </td>
-            <td>
-                <a onclick="del_employee('{{employee.idEmployee}}', '{{employment.EMPLOYMENT_ID}}', '{{personal.PERSONAL_ID}}')" href="#">Xóa</a>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+<div class="header_main">
+    <div class="header_main-right">
+        <a href="#" class="right_title1">Employee</a>
+        <a href="#" class="right_title">Admin</a>
+        <div class="line"></div>
+    </div>
+
+    <div class="header_main-left">
+        <div class="main-left_info">
+            <h4 class="main-left_title">total members: </h4>
+            <p>200</p>
+        </div>
+
+        <div class="main-left_info">
+            <h4 class="main-left_title">current used: </h4>
+            <p>100</p>
+        </div>
+    </div>
+
 </div>
+
+<div class="navbar">
+    <h2 class="navbar_title">Members</h2>
+    <a href="{% url 'overview_app:employee_add' %}" class="navbar_add">Add employee</a>
+</div>
+<table class="table_main ">
+    <thead>
+    <tr class="table_list">
+        <th class="table_list-content">ID</th>
+        <th class="table_list-content">Name</th>
+        <th class="table_list-content">SSN</th>
+        <th class="table_list-content">Birth Days</th>
+        <th class="table_list-content">Address</th>
+        <th class="table_list-content">Phone</th>
+        <th class="table_list-content">Status</th>
+        <th class="table_list-content">Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% csrf_token %}
+    {% for employee, employment, personal in employee_data %}
+    <tr>
+        <td class="table_list-content">{{ employee.EmployeeNumber }}</td>
+        <td class="table_list-content">{{ employee.LastName }} {{ employee.FirstName }}</td>
+        <td class="table_list-content">{{ employee.SSN }}</td>
+        <td class="table_list-content">{{ personal.BIRTH_DATE }}</td>
+        <td class="table_list-content">{{ personal.CURRENT_ADDRESS_1 }}</td>
+        <td class="table_list-content">{{ personal.CURRENT_PHONE_NUMBER }}</td>
+        <td class="table_list-content">Active</td>
+        <td class="table_list-content">
+            <div class="table_list-edit">
+                <img src="{% static 'assest/edit.svg' %}" alt="">
+                <ul class="dropdown1">
+                    <a class="note_list" href="{% url 'overview_app:employee_update' employeeid=employee.idEmployee %}">Employee</a>
+                    <a class="note_list" href="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}">Employment</a>
+                    <a class="note_list" href="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}">Personal</a>
+                    <img class="img_note" src=" {% static 'assest/top-triangle.svg' %}" alt="">
+                </ul>
+            </div>
+
+            <a onclick="del_employee('{{employee.idEmployee}}', '{{employment.EMPLOYMENT_ID}}', '{{personal.PERSONAL_ID}}')" href="" class="table_list-delete">
+                <img src="{% static 'assest/delete.svg' %}" alt="">
+            </a>
+
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function del_employee(employeeid, employmentid, personalid) {
-    $.ajax({
-        type: "GET",
-        url: "/employee_delete/",
-        data: {
-            employee_id: employeeid,
-            employment_id: employmentid,
-            personal_id: personalid,
-        },
-        success: function (parsedData) {
-            console.log(parsedData)
-            alert(parsedData["mess"])
-            window.location.reload();
-        },
-    });
+function del_employee(employeeid, employmentid, personalid) {
+    var confirmation = confirm("Bạn có chắc chắn muốn xóa dữ liệu không?");
+    if (confirmation) {
+        $.ajax({
+            type: "GET",
+            url: "/employee_delete/",
+            data: {
+                employee_id: employeeid,
+                employment_id: employmentid,
+                personal_id: personalid,
+            },
+            success: function (parsedData) {
+                console.log(parsedData)
+                alert(parsedData["mess"])
+                window.location.reload();
+            },
+        });
+    }
 }
+</script>
+
+<script>
+    const tableListEdit = document.querySelectorAll('.table_list-edit');
+const dropdowns = document.querySelectorAll(".dropdown1")
+
+
+tableListEdit.forEach((item, index) =>{
+
+    item.addEventListener("click", () =>{
+        dropdowns[index].classList.toggle("active")
+    })
+})
 </script>
 
 {% endblock %}
