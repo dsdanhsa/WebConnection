@@ -9,9 +9,10 @@ from io import BytesIO
 from datetime import datetime
 import base64
 from django.http import JsonResponse, HttpResponse
+from uuid import uuid4
 from django.contrib import messages
+from django.utils import timezone
 from django.utils.dateparse import parse_date
-
 
 #tổng tiền lương và vẽ biểu đồ
 @login_required
@@ -121,14 +122,14 @@ def changebenefit_update(request, benefitid):
     changebenefits = get_object_or_404(BenefitPlans, BENEFIT_PLANS_ID=benefitid)
     if request.method == 'POST':
         planname = request.POST.get('planname')
-        deductable = request.POST.get('deductible')
+        deductable = request.POST.get('deductable')
         percentage_copay = request.POST.get('percentage_copay')
 
         changebenefits.PLAN_NAME = planname
         changebenefits.DEDUCTABLE = deductable
         changebenefits.PERCENTAGE_COPAY = percentage_copay
         changebenefits.save()
-        return redirect('overview_app:benefit_detail')
+        return redirect('benefit_detail')
     return render(request, 'overview_app/changebenefit_update.html', {'changebenefits': changebenefits})
 
 
@@ -236,61 +237,54 @@ def personal_update(request, personalid):
     personal = get_object_or_404(Personal, PERSONAL_ID=personalid)
 
     if request.method == "POST":
-        data = request.POST.copy()
-        birth_date = data.get("birth_date")
-        if birth_date:
-            try:
-                birth_date = datetime.strptime(birth_date, '%Y-%m-%d').date()
-            except ValueError:
-                birth_date = None
+        rq_current_first_name = request.POST.get("current_first_name")
+        rq_current_last_name = request.POST.get("current_last_name")
+        rq_current_middle_name = request.POST.get("current_middle_name")
+        rq_birth_date = request.POST.get("birth_date")
+        rq_social_security_number = request.POST.get("social_security_number")
+        rq_drivers_license = request.POST.get("drivers_license")
+        rq_current_address_1 = request.POST.get("current_address_1")
+        rq_current_address_2 = request.POST.get("current_address_2")
+        rq_current_city = request.POST.get("current_city")
+        rq_current_country = request.POST.get("current_country")
+        rq_current_zip = request.POST.get("current_zip")
+        rq_current_gender = request.POST.get("current_gender")
+        rq_current_phone_number = request.POST.get("current_phone_number")
+        rq_current_personal_email = request.POST.get("current_personal_email")
+        rq_current_marital_status = request.POST.get("current_marital_status")
+        rq_ethnicity = request.POST.get("ethnicity")
+        rq_shareholder_status = request.POST.get("shareholder_status")
+        rq_benefit_plan_id = request.POST.get("benefit_plan")
 
-        # Update personal information
-        personal.CURRENT_FIRST_NAME = data.get("first_name")
-        personal.CURRENT_LAST_NAME = data.get("last_name")
-        personal.CURRENT_MIDDLE_NAME = data.get("middle_name")
-        personal.BIRTH_DATE = birth_date
-        personal.SOCIAL_SECURITY_NUMBER = data.get("social_security_number")
-        personal.DRIVERS_LICENSE = data.get("drivers_license")
-        personal.CURRENT_ADDRESS_1 = data.get("current_address_1")
-        personal.CURRENT_ADDRESS_2 = data.get("current_address_2")
-        personal.CURRENT_CITY = data.get("current_city")
-        personal.CURRENT_COUNTRY = data.get("current_country")
-        personal.CURRENT_ZIP = data.get("current_zip")
-        personal.CURRENT_GENDER = data.get("current_gender")
-        personal.CURRENT_PHONE_NUMBER = data.get("current_phone_number")
-        personal.CURRENT_PERSONAL_EMAIL = data.get("current_personal_email")
-        personal.CURRENT_MARITAL_STATUS = data.get("current_marital_status")
-        personal.ETHNICITY = data.get("ethnicity")
-        personal.SHAREHOLDER_STATUS = data.get("shareholder_status")
+        # Cập nhật thông tin cá nhân
+        personal.CURRENT_FIRST_NAME = rq_current_first_name
+        personal.CURRENT_LAST_NAME = rq_current_last_name
+        personal.CURRENT_MIDDLE_NAME = rq_current_middle_name
+        personal.BIRTH_DATE = rq_birth_date
+        personal.SOCIAL_SECURITY_NUMBER = rq_social_security_number
+        personal.DRIVERS_LICENSE = rq_drivers_license
+        personal.CURRENT_ADDRESS_1 = rq_current_address_1
+        personal.CURRENT_ADDRESS_2 = rq_current_address_2
+        personal.CURRENT_CITY = rq_current_city
+        personal.CURRENT_COUNTRY = rq_current_country
+        personal.CURRENT_ZIP = rq_current_zip
+        personal.CURRENT_GENDER = rq_current_gender
+        personal.CURRENT_PHONE_NUMBER = rq_current_phone_number
+        personal.CURRENT_PERSONAL_EMAIL = rq_current_personal_email
+        personal.CURRENT_MARITAL_STATUS = rq_current_marital_status
+        personal.ETHNICITY = rq_ethnicity
+        personal.SHAREHOLDER_STATUS = rq_shareholder_status
+        personal.BENEFIT_PLAN = BenefitPlans.objects.get(BENEFIT_PLANS_ID=rq_benefit_plan_id)
 
-        try:
-            # Try to get benefit plan, handle if not found
-            benefit_plan_id = data.get("benefit_plan")
-            benefit_plan = BenefitPlans.objects.get(BENEFIT_PLANS_ID=benefit_plan_id)
-        except BenefitPlans.DoesNotExist:
-            # Handle if benefit plan does not exist
-            benefit_plan = None
+        personal.save()
 
-        personal.BENEFIT_PLAN = benefit_plan
-
-        try:
-            personal.full_clean()  # Validate all fields
-            personal.save()
-            return redirect('overview_app:employee_detail')
-        except ValidationError as e:
-            # Handle validation errors
-            error_message = e.message_dict
-            # Handle error messages appropriately
-            benefit_plans = BenefitPlans.objects.all()
-            context = {'personal': personal, 'benefit_plans': benefit_plans, 'error_message': error_message}
-            return render(request, 'overview_app/Update_personal.html', context)
+        return redirect('overview_app:employee_detail')
     else:
         benefit_plans = BenefitPlans.objects.all()
         context = {'personal': personal, 'benefit_plans': benefit_plans}
         return render(request, 'overview_app/Update_personal.html', context)
 
 #add emplployee
-@login_required
 def employee_add(request):
     if request.method == "POST":
         rq_pay_rate = request.POST.get("pay_rate")
@@ -390,7 +384,21 @@ def employment_add(request):
         context = {'employees': employees, 'personals': personals}
         return render(request, 'overview_app/Add_employment.html', context)
 
-#delete HR and Payroll
+'''
+@login_required
+def employee_delete(request):
+    if request.method == 'GET':
+        employee = Employee.objects.get(idEmployee=request.GET['employee_id'])
+        employment = Employment.objects.get(EMPLOYMENT_ID=request.GET['employment_id'])
+        personal = Personal.objects.get(PERSONAL_ID=request.GET['personal_id'])
+        employee.delete()
+        employment.delete()
+        personal.delete()
+        context = {
+            'mess': 'Đã xóa thành công'
+        }
+        return JsonResponse(context)
+'''
 @login_required
 def employee_delete(request):
     if request.method == 'GET':
@@ -402,12 +410,10 @@ def employee_delete(request):
             employee = Employee.objects.get(idEmployee=employeeid)
             employment = Employment.objects.get(EMPLOYMENT_ID=employmentid)
             personal = Personal.objects.get(PERSONAL_ID=personalid)
-            employment_working_times = EmploymentWorkingTime.objects.filter(EMPLOYMENT=employment)
 
             employee.delete()
             employment.delete()
             personal.delete()
-            employment_working_times.delete()
 
             context = {'mess': 'Đã xóa thành công'}
             return JsonResponse(context)
@@ -417,6 +423,3 @@ def employee_delete(request):
             return JsonResponse(context, status=400)
 
     return JsonResponse({'mess': 'Phương thức không hợp lệ.'}, status=405)
-
-
-

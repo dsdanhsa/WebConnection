@@ -1,286 +1,103 @@
 {% extends "base.html" %}
-{% load static %}
 {% block title %}Update Employment{% endblock %}
 
 {% block content123 %}
 <style>
-    .main{
-    margin-left: 300px;
-    padding: 40px 20px;
-    font-family: "Poppins", sans-serif;
-
-}
-.title_main{
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.list_main{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.previous_page{
-
-}
-.space{
-    font-weight: 600;
-    /* font-size: 20px;  */
-    color: #737791;
+    /* Cải thiện giao diện form */
+.card {
+    margin-top: 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.add_members{
-    background-color: #ffffff;
-    border-radius: 10px;
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+}
+
+.card-body {
     padding: 20px;
-    margin-top: 10px;
-
-    /* display: none; */
 }
 
-.add_members.active{
-    display: block;
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
-.add_member-list-1{
-    cursor: pointer;
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
-
-.list_content{
-
-}
-
-.add_member-title-1{
-    /* height: 0;
-    transition: all .3s;
-    overflow: hidden; */
-    padding: 10px;
-}
-
-/* .add_member-title-1.active{
-    height: max-content;
-
-} */
-
-
-
-
-.table-input_information{
-
-}
-
-.input_information{
-    display: flex;
-    padding: 10px;
-
-}
-.information_content{
-    min-width: 500px;
-    font-size: 20px;
-}
-
-.input{
-    width: 200px;
+.form-control {
     border-radius: 5px;
-    border: 2px solid #5d5fef;
-    padding: 3px;
 }
 
-/*alert*/
-    button{
-    padding: 10px;
-}
-.notifications{
-    position: fixed;
-    top: 30px;
-    right: 20px;
-}
-.toast{
-    position: relative;
-    padding: 10px;
-    color: #fff;
-    margin-bottom: 10px;
-    width: 400px;
-    display: grid;
-    grid-template-columns: 70px 1fr 70px;
-    border-radius: 5px;
-    --color: #0abf30;
-    background-image:
-        linear-gradient(
-            to right, #0abf3055, #22242f 30%
-        );
-    animation: show 0.3s ease 1 forwards
-}
-.toast i{
-    color: var(--color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: x-large;
-}
-.toast .title{
-    font-size: x-large;
-    font-weight: bold;
-}
-.toast span, .toast i:nth-child(3){
-    color: #fff;
-    opacity: 0.6;
-}
-@keyframes show{
-    0%{
-        transform: translateX(100%);
-    }
-    40%{
-        transform: translateX(-5%);
-    }
-    80%{
-        transform: translateX(0%);
-    }
-    100%{
-        transform: translateX(-10%);
-    }
-}
-.toast::before{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: var(--color);
-    width: 100%;
-    height: 3px;
-    content: '';
-    box-shadow: 0 0 10px var(--color);
-    animation: timeOut 5s linear 1 forwards
-}
-@keyframes timeOut{
-    to{
-        width: 0;
-    }
-}
-
-
-.buttons{
-    text-align: center;
-    margin-top: 20px;
-}
-
-#success{
-    background-color: #5d5fef;
-    color: #ffffff;
-    padding: 10px 30px;
-    border-radius: 5px;
-    border: none;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-
-}
 </style>
-
 {% endblock %}
 {% block content %}
-<form action="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}" method="post">
-    {% csrf_token %}
-        <div class="title_main">
-            <a style="padding-top: 5px;" href="">
-                <img src="{% static 'assest/previous.svg' %}" alt="">
-            </a>
-            <div class="list_main">
-                <a href="{% url 'overview_app:totalpayrate' %}" class="previous_page">DashBoard</a>
-                <p class="space">/</p>
-                <a href="{% url 'overview_app:employee_detail' %}" class="previous_page">Employee Management</a>
-                <p class="space">/</p>
-                <a style="color: black;" href="" class="previous_page">Update Employment</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Update Employment</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="employment_code" class="form-label">Employment Code</label>
+                            <input type="text" class="form-control" id="employment_code" name="employment_code"
+                                   value="{{ employment.EMPLOYMENT_CODE }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employment_status" class="form-label">Employment Status</label>
+                            <input type="text" class="form-control" id="employment_status" name="employment_status"
+                                   value="{{ employment.EMPLOYMENT_STATUS }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="hire_date_for_working" class="form-label">Hire Date for Working</label>
+                            <input type="date" class="form-control" id="hire_date_for_working" name="hire_date_for_working"
+                                   value="{% if employment.HIRE_DATE_FOR_WORKING %}{{ employment.HIRE_DATE_FOR_WORKING|date:'Y-m-d' }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="workers_comp_code" class="form-label">Workers Comp Code</label>
+                            <input type="text" class="form-control" id="workers_comp_code" name="workers_comp_code"
+                                   value="{{ employment.WORKERS_COMP_CODE }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="termination_date" class="form-label">Termination Date</label>
+                            <input type="date" class="form-control" id="termination_date" name="termination_date"
+                                   value="{% if employment.TERMINATION_DATE %}{{ employment.TERMINATION_DATE|date:'Y-m-d' }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="rehire_date_for_working" class="form-label">Rehire Date for Working</label>
+                            <input type="date" class="form-control" id="rehire_date_for_working" name="rehire_date_for_working"
+                                   value="{% if employment.REHIRE_DATE_FOR_WORKING %}{{ employment.REHIRE_DATE_FOR_WORKING|date:'Y-m-d' }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="last_review_date" class="form-label">Last Review Date</label>
+                            <input type="date" class="form-control" id="last_review_date" name="last_review_date"
+                                   value="{% if employment.LAST_REVIEW_DATE %}{{ employment.LAST_REVIEW_DATE|date:'Y-m-d' }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="number_days_requirement_of_working_per_month" class="form-label">Number Days Requirement of
+                                Working Per Month</label>
+                            <input type="number" class="form-control" id="number_days_requirement_of_working_per_month"
+                                   name="number_days_requirement_of_working_per_month"
+                                   value="{{ employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH }}">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-
-        <div class="add_members">
-            <div class="add_member-list-1">
-                <h1 class="list_content">Update Employment</h1>
-            </div>
-
-            <ul class="add_member-title-1">
-
-                <div class="input_information">
-                    <p for="employment_code" class="information_content">Employment Code </p>
-                    <input class="input" type="text" id="employment_code" name="employment_code" value="{{ employment.EMPLOYMENT_CODE }}">
-                </div>
-
-                <div class="input_information">
-                    <p for="employment_status" class="information_content">Employment Status </p>
-                    <input class="input" type="text" id="employment_status" name="employment_status" value="{{ employment.EMPLOYMENT_STATUS }}">
-                </div>
-
-                <div class="input_information">
-                    <p for="hire_date_for_working" class="information_content">Hire Date For Working </p>
-                    <input class="input" type="text" id="hire_date_for_working" name="hire_date_for_working"
-                    value="{% if employment.HIRE_DATE_FOR_WORKING %}{{ employment.HIRE_DATE_FOR_WORKING|date:'Y-m-d' }}{% endif %}">
-                </div>
-
-                <div class="input_information">
-                    <p for="workers_comp_code" class="information_content">Workers Comp Code </p>
-                    <input class="input" type="text" id="workers_comp_code" name="workers_comp_code"
-                    value="{{ employment.WORKERS_COMP_CODE }}">
-                </div>
-
-                <div class="input_information">
-                    <p for="termination_date" class="information_content">Termination date </p>
-                    <input class="input" type="text" id="termination_date" name="termination_date"
-                    value="{% if employment.TERMINATION_DATE %}{{ employment.TERMINATION_DATE|date:'Y-m-d' }}{% endif %}">
-                </div>
-
-                <div class="input_information">
-                    <p for="rehire_date_for_working" class="information_content">Rehire Date For Working </p>
-                    <input class="input" type="text" id="rehire_date_for_working" name="rehire_date_for_working"
-                    value="{% if employment.REHIRE_DATE_FOR_WORKING %}{{ employment.REHIRE_DATE_FOR_WORKING|date:'Y-m-d' }}{% endif %}">
-                </div>
-
-                <div class="input_information">
-                    <p for="last_review_date" class="information_content">Last review date </p>
-                    <input class="input" type="text" id="last_review_date" name="last_review_date"
-                    value="{% if employment.LAST_REVIEW_DATE %}{{ employment.LAST_REVIEW_DATE|date:'Y-m-d' }}{% endif %}">
-                </div>
-
-                <div class="input_information">
-                    <p for="number_days_requirement_of_working_per_month" class="information_content">Number days requirement of working per month </p>
-                    <input class="input" type="text" id="number_days_requirement_of_working_per_month" name="number_days_requirement_of_working_per_month"
-                    value="{{ employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH }}">
-                </div>
-            </ul>
-
-            <div class="notifications"></div>
-            <div class="buttons">
-                <button id="success">UPDATE</button>
-            </div>
-
-            <script>
-            let notifications = document.querySelector('.notifications');
-            let success = document.getElementById('success');
-
-            function createToast(type, icon, title, text){
-        let newToast = document.createElement('div');
-        newToast.innerHTML = `
-            <div class="toast ${type}">
-                <i class="${icon}"></i>
-                <div class="content">
-                    <div class="title">${title}</div>
-                    <span>${text}</span>
-                </div>
-                <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
-            </div>`;
-        notifications.appendChild(newToast);
-        newToast.timeOut = setTimeout(
-            ()=>newToast.remove(), 5000
-        )
-    }
-            success.onclick = function(){
-        let type = 'success';
-        let icon = 'fa-solid fa-circle-check';
-        let title = 'Success';
-        let text = 'This is a success toast.';
-        createToast(type, icon, title, text);
-    }
-        </script>
-        </div>
-    </form>
+    </div>
+</div>
 {% endblock %}

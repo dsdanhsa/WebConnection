@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H&P| {% block title %}{% endblock %}</title>
+    <title>CEO Memo | {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %} ">
@@ -367,7 +367,6 @@ li {
 {% endblock %}
 
 <body style="background: #F9FAFB; position: relative;">
-
 <div class="topBar">
     <h1 class="topBar_title">DashBoard</h1>
     <div class="topBar_right">
@@ -403,7 +402,7 @@ li {
             <a href="{% url 'login' %}" class="admin"
                style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">Login</a>
             <a href="{% url 'signup' %}" class="admin"
-               style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">| Siguup</a>
+               style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">| Sìnup</a>
             {% endif %}
         </div>
     </div>
@@ -415,7 +414,7 @@ li {
 
         <h1>
             <a class="side_bar-top-title" href="{% url 'overview_app:totalpayrate' %}"
-               style="color: black; text-decoration: none; font-family: Poppins, sans-serif;">H&P</a>
+               style="color: black; text-decoration: none; font-family: Poppins, sans-serif;">CEO MEMO</a>
         </h1>
     </div>
     <div class="side_bar-menu">
@@ -493,7 +492,6 @@ li {
     {% endblock %}
 </div>
 </body>
-
 <script>
 const dropdown = document.querySelector('.side_bar-content.dropdown-btn');
 const subMenu = document.querySelector('.submenu');
