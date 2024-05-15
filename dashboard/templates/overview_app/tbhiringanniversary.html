@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Hiring anniversary{% endblock %}
+{% block content123 %}
+<style>
+
+body {
+    font-family: sans-serif;
+margin: 0;
+    padding: 0;
+}
+
+main {
+    padding: 30px;
+    padding-left: .1rem;
+}
+
+section {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    background: #5D5FEF;
+    color: #fff;
+    padding: .6rem;
+}
+
+section div {
+  overflow: hidden;
+}
+
+section img {
+  border: 1px solid #999999;
+  float: left;
+  margin: 0 10px 0 0;
+  padding: 2px;
+}
+
+section a:hover {
+  color: #5D5FEF;
+}
+
+section p {
+  margin-left: 120px;
+  margin-top: .3rem;
+  font-size: 14px;
+}
+
+section .icon {
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+}
+
+
+
+.from h1 {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+.from p {
+  margin: 20px;
+}
+
+.from-2 {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.from-2 img {
+  width: 20%;
+  height: auto;
+  margin: 25px;
+  border: 1px solid #999999;
+
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="day_le01">
+        <h2>Ngày Lễ 30 Tháng 4 Và 1 Tháng 5</h2>
+        <div>
+            <img src="{% static 'img/ngay304.jpg' %}" alt=""/>
+            <p>
+                Ngày 30/4 được gọi là Ngày Giải phóng miền Nam, Thống nhất đất
+                nước ở Việt Nam, kỷ niệm sự kiện quân sự quyết định khi quân Giải
+                phóng miền Nam Việt Nam (Quân đội Nhân dân Việt Nam) chiếm được
+                Sài Gòn, chấm dứt chiến tranh Việt Nam và thống nhất đất nước vào
+                năm 1975...
+            </p>
+            <p>
+                Còn ngày 1/5 là Ngày Quốc tế Lao động, được kỷ niệm khắp nơi trên
+                thế giới để tôn vinh những cống hiến của lao động và đấu tranh cho
+                quyền lợi của họ...
+            </p>
+            <div class="icon">
+                <i class="fa-solid fa-chevron-right"></i>
+                <a href="{% url 'overview_app:hiringngay304' %}">Xem tiếp</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="day_le02">
+        <h2>Ngày 7 Tháng 5, 70 Năm Chiến Thắng Điện Biên Phủ</h2>
+        <div>
+            <img src="{% static 'img/img2.jpg' %}" alt=""/>
+            <p>
+                Chiến thắng Điện Biên Phủ là một trong những sự kiện quân sự quan
+                trọng nhất của chiến tranh Đông Dương (1946-1954), khi Quân đội
+                Nhân dân Việt Nam đánh bại quân Pháp, đánh dấu sự chấm dứt cho
+                thời kỳ thực dân Pháp tại Việt Nam. Trận đánh này kết thúc vào
+                ngày 7 tháng 5 năm 1954, khi quân Việt Minh (tên gọi của quân đội
+                Việt Nam Dân chủ Cộng hòa) dẹp tan hệ thống pháo đài của Pháp tại
+                Điện Biên Phủ, mở đường cho cuộc hội đàm Geneva và việc chia cắt
+                Việt Nam ra thành hai miền Bắc và Nam theo dãy núi 17 độ...
+            </p>
+            <div class="icon">
+                <i class="fa-solid fa-chevron-right"></i>
+                <a href="{% url 'overview_app:hiringngay75' %}">Xem tiếp</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="day_le03">
+        <h2>Ngày Lễ Thành Lập Công Ty</h2>
+        <div>
+            <img src="{% static 'img/img3.jpg' %}" alt=""/>
+            <p>
+                Ngày lễ thành lập công ty là một dịp đặc biệt để kỷ niệm và tôn
+                vinh sự khởi đầu, sự nỗ lực và thành tựu của doanh nghiệp. Mỗi
+                công ty có thể tự quyết định ngày nào trong năm là ngày lễ thành
+                lập của mình, thường dựa trên ngày mà công ty được thành lập hoặc
+                ngày mà hoạt động kinh doanh chính thức bắt đầu...
+            </p>
+            <div class="icon">
+                <i class="fa-solid fa-chevron-right"></i>
+                <a href="{% url 'overview_app:hiringthanhlapcongty' %}">Xem tiếp</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div class="main_last-chart" style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
+    <table border="1">
+        <tr>
+            <th>Employee code</th>
+            <th>Name</th>
+            <th>Birth Date</th>
+            <th>Hire Date For Working</th>
+        </tr>
+        {% for data in hiring_data %}
+        <tr>
+            <td>{{ data.employment.EMPLOYMENT_CODE }}</td>
+            <td>{{ data.personal.CURRENT_FIRST_NAME }} {{ data.personal.CURRENT_MIDDLE_NAME }} {{
+                data.personal.CURRENT_LAST_NAME }}
+            </td>
+            <td>{{ data.personal.BIRTH_DATE }}</td>
+            <td>{{ data.employment.HIRE_DATE_FOR_WORKING }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

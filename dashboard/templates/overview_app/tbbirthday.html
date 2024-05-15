@@ -1,9 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Home{% endblock %}
-
+{% block title %}Birth Day{% endblock %}
 
 {% block content %}
+<div class="main_last-chart" style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
+    <P>There are {{birthday_count}} people with birthdays this month:</P>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Address</th>
+            <th>Phone</th>
+        </tr>
+        {% for person in birthday_list %}
+        <tr>
+            <td>{{ person.0 }} {{ person.1 }} {{ person.2 }}</td>
+            <td>{{ person.3 }}</td>
+            <td>{{ person.4 }}</td>
+            <td>{{ person.5 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
 <div class="main_first-card">
     <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>

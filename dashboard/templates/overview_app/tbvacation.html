@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Benefit plan{% endblock %}
+{% block title %}Vacation{% endblock %}
 
 {% block content %}
+<div class="main_last-chart"
+     style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
+    <img src="data:image/png;base64,{{ chart_data }}" style="width: 500px;height: 375px;" alt="">
+</div>
 <div class="main_first-card">
     <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
     <div class="all-first_card">
-        <a href="{% url 'overview_app:totalpayrate' %}" class="card"
+        <a href="{% url 'overview_app:tbtotalpayrate' %}" class="card"
            style="background-color:#FFE2E5; text-decoration: none; color: black;">
             <img class="card_img" style="background-color: #FA5A7D;" src="{% static 'assest/earning.svg' %}" alt="">
             <div class="card_title">
@@ -32,10 +36,11 @@
             </div>
         </a>
 
-        <a href="#" class="card" style="background-color: #DCFCE7; text-decoration: none; color: black;">
+        <a href="{% url 'overview_app:hiringanniversary' %}" class="card"
+           style="background-color: #DCFCE7; text-decoration: none; color: black;">
             <img class="card_img" style="background-color: #3CD856;" src="{% static 'assest/anniversary.svg' %}" alt="">
             <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;">3%</p>
+                <p class="card_percent" style="margin-bottom: 20px;"></p>
                 <p>Hiring Anniversary</p>
             </div>
         </a>
@@ -56,11 +61,12 @@
         <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
         <div class="all-second_card">
 
-            <a href="#" class="card" style="background-color:#FFE2E5; text-decoration: none; color: black;">
+            <a href="{% url 'overview_app:benefit_detail' %}" class="card"
+               style="background-color:#FFE2E5; text-decoration: none; color: black;">
                 <img class="card_img" style="background-color: #FA5A7D;"
                      src="{% static 'assest/benefitplanchange.svg' %}" alt="">
                 <div class="card_title">
-                    <p class="card_percent" style="margin-bottom: 20px;">3%</p>
+                    <p class="card_percent" style="margin-bottom: 20px;"></p>
                     <p>Benefit Plan Change</p>
                 </div>
             </a>
@@ -74,27 +80,16 @@
                     <p>Birthdays</p>
                 </div>
             </a>
-        </div>
-    </div>
 
-    <div class="main_last-chart"
-         style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
-        <P style="margin-top: 20px; border-top-width: 20px; margin-bottom: 20px; margin-left: 30px;">List of benefits
-            for employees and shareholders</P>
-        <table border="1">
-            <tr>
-                <th>PLAN NAME</th>
-                <th>DEDUCTABLE</th>
-                <th>PERCENTAGE COPAY</th>
-            </tr>
-            {% for benefit in benefits %}
-            <tr>
-                <td style="padding-left: 15px;">{{ benefit.PLAN_NAME }}</td>
-                <td style="padding-left: 40px;">{{ benefit.DEDUCTABLE }}</td>
-                <td style="padding-left: 80px;">{{ benefit.PERCENTAGE_COPAY }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+            <a href="{% url 'overview_app:employee_detail' %}" class="card"
+               style="background-color: #FFF4DE; text-decoration: none; color: black;">
+                <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/birthday-cake.svg' %}"
+                     alt="">
+                <div class="card_title">
+                    <p>List Employee</p>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}

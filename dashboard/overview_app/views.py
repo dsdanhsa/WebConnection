@@ -15,34 +15,6 @@ from django.contrib import messages
 from django.utils.dateparse import parse_date
 
 
-#tổng tiền lương và vẽ biểu đồ
-# @login_required
-# def totalpayrate(request):
-#     totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
-#
-#     # Tạo biểu đồ Pay Amount by Employee Number
-#     plt.bar(categories, pay_values)
-#     plt.xlabel('Employee Number')
-#     plt.ylabel('Pay Amount')
-#     plt.title('Pay Amount by Employee Number')
-#     img_data = BytesIO()
-#     plt.savefig(img_data, format='png')
-#     img_data.seek(0)
-#     img_base64 = base64.b64encode(img_data.getvalue()).decode()
-#     plt.close()
-#
-#     content = {
-#         'totalpayrate': totalpayrate,
-#         'totalvacationday': totalvacationday,
-#         'chart_data': img_base64,
-#         'birthday_count': birthday_count,
-#         'totalexcess' : totalexcess
-#     }
-#
-#     return render(request, 'overview_app/home.html', content)
-
-#tổng ngày nghĩ và vẽ biểu đồ
-
 def generate_pay_amount_plot(categories, pay_values):
     plt.bar(categories, pay_values)
     plt.xlabel('Employee Number')
@@ -72,6 +44,22 @@ def totalpayrate(request):
     return render(request, 'overview_app/home.html', content)
 
 @login_required
+def tbtotalpayrate(request):
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
+
+    img_base64 = generate_pay_amount_plot(categories, pay_values)
+
+    content = {
+        'totalpayrate': totalpayrate,
+        'totalvacationday': totalvacationday,
+        'chart_data': img_base64,
+        'birthday_count': birthday_count,
+        'totalexcess': totalexcess
+    }
+
+    return render(request, 'overview_app/tbtotalpayrate.html', content)
+
+@login_required
 def totalvacation(request):
     totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
 
@@ -94,19 +82,28 @@ def totalvacation(request):
         'totalexcess' : totalexcess
     }
 
-    return render(request, 'overview_app/overview_vacation.html', context)
+    return render(request, 'overview_app/tbvacation.html', context)
 
 #tính tổng người sn trong tháng này và list ra
 @login_required
 def birthday_count(request):
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
     current_month = datetime.now().month
     birthdays = Personal.objects.filter(BIRTH_DATE__month=current_month)
     birthday_count = birthdays.count()
 
     birthday_list = birthdays.values_list('CURRENT_FIRST_NAME', 'CURRENT_MIDDLE_NAME', 'CURRENT_LAST_NAME', 'BIRTH_DATE', 'CURRENT_ADDRESS_1', 'CURRENT_PHONE_NUMBER')
 
-    return render(request, 'overview_app/birthday.html',
-                  {'birthday_count': birthday_count, 'birthday_list': birthday_list})
+    context = {
+        'birthday_count': birthday_count,
+        'birthday_list': birthday_list,
+        'totalpayrate': totalpayrate,
+        'totalvacationday': totalvacationday,
+        'birthday_count': birthday_count,
+        'totalexcess': totalexcess
+    }
+
+    return render(request, 'overview_app/tbbirthday.html',context)
 
 #hàm thông báo về benefit
 @login_required
@@ -120,7 +117,7 @@ def benefitplan(request):
         'birthday_count': birthday_count,
         'totalexcess' : totalexcess
     }
-    return render(request, 'overview_app/benefitplan.html', context)
+    return render(request, 'overview_app/tbbenefitplan.html', context)
 
 #hàm tính tổng ngày ngĩ và liệt kê từng người nghĩ
 @login_required
@@ -138,14 +135,57 @@ def excessvacationday(request):
         'totalexcess': totalexcess,
         'excess': excess
     }
-    return render(request, 'overview_app/excessvacationday.html', context)
+    return render(request, 'overview_app/tbexcessvacationday.html', context)
+
+# hàm thông báo ngày kỉ niệm
+@login_required
+def hiringanniversary(request):
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
+    employments = Employment.objects.all()
+    totalhiring = 0
+    hiring_data = []
+
+    current_year = datetime.now().year
+
+    for employment in employments:
+        if (current_year - employment.HIRE_DATE_FOR_WORKING.year) >= 3:
+            personal = employment.personal
+            if personal:
+                hiring_data.append({
+                    'employment': employment,
+                    'personal': personal
+                })
+                totalhiring += 1
+
+    context = {
+        'totalpayrate': totalpayrate,
+        'totalvacationday': totalvacationday,
+        'birthday_count': birthday_count,
+        'totalexcess': totalexcess,
+        'hiring_data': hiring_data,
+        'totalhiring': totalhiring,
+    }
+    return render(request, 'overview_app/tbhiringanniversary.html', context)
+
+def hiringngay304(request):
+    return render(request, 'overview_app/hiringngay304.html')
+def hiringngay75(request):
+    return render(request, 'overview_app/hiringngay75.html')
+def hiringthanhlapcongty(request):
+    return render(request, 'overview_app/hiringthanhlapcongty.html')
 
 #change benefit
 @login_required
 def changebenefit_detail(request):
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
     changebenefits = BenefitPlans.objects.all()
-    context = {'changebenefits': changebenefits}
-    return render(request, 'overview_app/changebenefit_detail.html', context)
+    context = {'changebenefits': changebenefits,
+               'totalpayrate': totalpayrate,
+               'totalvacationday': totalvacationday,
+               'birthday_count': birthday_count,
+               'totalexcess': totalexcess,
+               }
+    return render(request, 'overview_app/tbchangebenefit_detail.html', context)
 
 @login_required
 def changebenefit_update(request, benefitid):
@@ -191,11 +231,18 @@ def calculate_totals():
 @login_required
 def changeemployee_detail(request):
     employees = Employee.objects.all()
+    totalsalary = 0
+    totalmember = 0
+    for employee in employees:
+        totalsalary += employee.total_payrate()
+        totalmember += 1
     employments = Employment.objects.all()
     personals = Personal.objects.all()
     employee_data = zip(employees, employments, personals)
-    context = {'employee_data':employee_data}
+    context = {'employee_data':employee_data, 'totalsalary':totalsalary, 'totalmember':totalmember}
     return render(request, 'overview_app/changeemployee_detail.html', context)
+
+
 
 #update employee
 @login_required
@@ -414,21 +461,6 @@ def employment_add(request):
         context = {'employees': employees, 'personals': personals}
         return render(request, 'overview_app/Add_employment.html', context)
 
-'''
-@login_required
-def employee_delete(request):
-    if request.method == 'GET':
-        employee = Employee.objects.get(idEmployee=request.GET['employee_id'])
-        employment = Employment.objects.get(EMPLOYMENT_ID=request.GET['employment_id'])
-        personal = Personal.objects.get(PERSONAL_ID=request.GET['personal_id'])
-        employee.delete()
-        employment.delete()
-        personal.delete()
-        context = {
-            'mess': 'Đã xóa thành công'
-        }
-        return JsonResponse(context)
-'''
 @login_required
 def employee_delete(request):
     if request.method == 'GET':

@@ -1,9 +1,77 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Home{% endblock %}
+{% block title %}Benefit detail{% endblock %}
 
+{% block content123 %}
+<style>
+    /* Table styling */
+.main_last-chart {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 25px;
+}
 
+/* Table header */
+.main_last-chart table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main_last-chart th {
+  padding: 15px;
+  background-color: #0095ff;
+  color: #ffffff;
+  border-bottom: 2px solid #007acc;
+  text-align: left;
+}
+
+/* Table rows */
+.main_last-chart td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternate row background */
+.main_last-chart tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Update link */
+.main_last-chart a {
+  color: #007acc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.main_last-chart a:hover {
+  color: #005a9c;
+}
+
+</style>
+{% endblock %}
 {% block content %}
+<div class="main_last-chart" style="background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
+    <p style="margin-top: 20px; border-top-width: 20px; margin-bottom: 20px; margin-left: 30px;">List of benefits for employees and shareholders</p>
+    <table border="1">
+        <tr>
+            <th>PLAN NAME</th>
+            <th>DEDUCTABLE</th>
+            <th>PERCENTAGE COPAY</th>
+            <th></th>
+        </tr>
+        {% for benefit in changebenefits %}
+        <tr>
+            <td style="padding-left: 15px;">{{ benefit.PLAN_NAME }}</td>
+            <td style="padding-left: 40px;">{{ benefit.DEDUCTABLE }}</td>
+            <td style="padding-left: 80px;">{{ benefit.PERCENTAGE_COPAY }}</td>
+            <td>
+                <a href="{% url 'overview_app:benefit_update' benefitid=benefit.BENEFIT_PLANS_ID %}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
 <div class="main_first-card">
     <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>

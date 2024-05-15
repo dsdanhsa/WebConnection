@@ -251,6 +251,7 @@
 
 
 
+
 </style>
 {% endblock %}
 
@@ -259,19 +260,19 @@
 <div class="header_main">
     <div class="header_main-right">
         <a href="#" class="right_title1">Employee</a>
-        <a href="#" class="right_title">Admin</a>
+        <a href="http://127.0.0.1:8000/admin/" class="right_title">Admin</a>
         <div class="line"></div>
     </div>
 
     <div class="header_main-left">
         <div class="main-left_info">
-            <h4 class="main-left_title">total members: </h4>
-            <p>200</p>
+            <h4 class="main-left_title">total salary: </h4>
+            <p>{{totalsalary}}</p>
         </div>
 
         <div class="main-left_info">
-            <h4 class="main-left_title">current used: </h4>
-            <p>100</p>
+            <h4 class="main-left_title">total members: </h4>
+            <p>{{totalmember}}</p>
         </div>
     </div>
 
@@ -310,13 +311,16 @@
                 <img src="{% static 'assest/edit.svg' %}" alt="">
                 <ul class="dropdown1">
                     <a class="note_list" href="{% url 'overview_app:employee_update' employeeid=employee.idEmployee %}">Employee</a>
-                    <a class="note_list" href="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}">Employment</a>
-                    <a class="note_list" href="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}">Personal</a>
+                    <a class="note_list"
+                       href="{% url 'overview_app:employment_update' employmentid=employment.EMPLOYMENT_ID %}">Employment</a>
+                    <a class="note_list"
+                       href="{% url 'overview_app:personal_update' personalid=personal.PERSONAL_ID %}">Personal</a>
                     <img class="img_note" src=" {% static 'assest/top-triangle.svg' %}" alt="">
                 </ul>
             </div>
 
-            <a onclick="del_employee('{{employee.idEmployee}}', '{{employment.EMPLOYMENT_ID}}', '{{personal.PERSONAL_ID}}')" href="" class="table_list-delete">
+            <a onclick="del_employee('{{employee.idEmployee}}', '{{employment.EMPLOYMENT_ID}}', '{{personal.PERSONAL_ID}}')"
+               href="" class="table_list-delete">
                 <img src="{% static 'assest/delete.svg' %}" alt="">
             </a>
 
@@ -346,6 +350,7 @@ function del_employee(employeeid, employmentid, personalid) {
         });
     }
 }
+
 </script>
 
 <script>
@@ -359,6 +364,7 @@ tableListEdit.forEach((item, index) =>{
         dropdowns[index].classList.toggle("active")
     })
 })
+
 </script>
 
 {% endblock %}

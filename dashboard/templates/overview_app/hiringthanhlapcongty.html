@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Hiring anniversary{% endblock %}
+{% block content123 %}
+<style>
+    .from h1 {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+.from p {
+  margin: 20px;
+}
+
+.from-2 {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.from-2 img {
+  width: 20%;
+  height: auto;
+  margin: 25px;
+  border: 1px solid #999999;
+
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="from">
+    <h1>Ngày Lễ Thành Lập Công Ty</h1>
+    <p>
+        Ngày Lễ Thành Lập Công Ty là dịp quan trọng để kỷ niệm và tôn vinh sự
+        bắt đầu của doanh nghiệp. Đây là cơ hội để tạo ra không gian để đánh
+        giá, tổng kết, và cảm ơn công lao của những người sáng lập và nhân
+        viên. Các hoạt động kỷ niệm có thể bao gồm buổi lễ tổng kết, trao
+        thưởng, tổ chức sự kiện giao lưu, và các hoạt động từ thiện. Đồng
+        thời, ngày này cũng là dịp để nhìn lại quá trình phát triển của công
+        ty và củng cố lòng tự hào và lòng trung thành của nhân viên và đối tác
+        với thương hiệu và mục tiêu của công ty.
+    </p>
+    <p>
+        Ngoài ra, Ngày Lễ Thành Lập Công Ty cũng là cơ hội để tạo ra sự nhận
+        thức và hiểu biết sâu hơn về văn hóa tổ chức và giá trị cốt lõi của
+        doanh nghiệp. Việc tổ chức các hoạt động như trò chơi, workshop và
+        buổi thảo luận về văn hóa doanh nghiệp giúp tăng cường sự hiểu biết và
+        sự gắn kết trong tổ chức, đồng thời tạo ra một môi trường làm việc
+        tích cực và truyền cảm hứng cho mọi thành viên.
+    </p>
+</div>
+<div class="from-2">
+        <img src="{% static 'img/tl1.jpg' %}" alt="" />
+        <img src="{% static 'img/tl3.jpg' %}" alt="" />
+        <img src="{% static 'img/tl4.jpg' %}" alt="" />
+        <img src="{% static 'img/tl2.jpg' %}" alt="" />
+      </div>
+{% endblock %}
