@@ -57,7 +57,7 @@ def tbtotalpayrate(request):
         'totalexcess': totalexcess
     }
 
-    return render(request, 'overview_app/tbtotalpayrate.html', content)
+    return render(request, 'overview_app/tb/tbtotalpayrate.html', content)
 
 @login_required
 def totalvacation(request):
@@ -82,7 +82,7 @@ def totalvacation(request):
         'totalexcess' : totalexcess
     }
 
-    return render(request, 'overview_app/tbvacation.html', context)
+    return render(request, 'overview_app/tb/tbvacation.html', context)
 
 #tính tổng người sn trong tháng này và list ra
 @login_required
@@ -103,7 +103,7 @@ def birthday_count(request):
         'totalexcess': totalexcess
     }
 
-    return render(request, 'overview_app/tbbirthday.html',context)
+    return render(request, 'overview_app/tb/tbbirthday.html',context)
 
 #hàm thông báo về benefit
 @login_required
@@ -117,7 +117,7 @@ def benefitplan(request):
         'birthday_count': birthday_count,
         'totalexcess' : totalexcess
     }
-    return render(request, 'overview_app/tbbenefitplan.html', context)
+    return render(request, 'overview_app/tb/tbbenefitplan.html', context)
 
 #hàm tính tổng ngày ngĩ và liệt kê từng người nghĩ
 @login_required
@@ -135,7 +135,7 @@ def excessvacationday(request):
         'totalexcess': totalexcess,
         'excess': excess
     }
-    return render(request, 'overview_app/tbexcessvacationday.html', context)
+    return render(request, 'overview_app/tb/tbexcessvacationday.html', context)
 
 # hàm thông báo ngày kỉ niệm
 @login_required
@@ -165,14 +165,14 @@ def hiringanniversary(request):
         'hiring_data': hiring_data,
         'totalhiring': totalhiring,
     }
-    return render(request, 'overview_app/tbhiringanniversary.html', context)
+    return render(request, 'overview_app/tb/tbhiringanniversary.html', context)
 
 def hiringngay304(request):
-    return render(request, 'overview_app/hiringngay304.html')
+    return render(request, 'overview_app/hiring/hiringngay304.html')
 def hiringngay75(request):
-    return render(request, 'overview_app/hiringngay75.html')
+    return render(request, 'overview_app/hiring/hiringngay75.html')
 def hiringthanhlapcongty(request):
-    return render(request, 'overview_app/hiringthanhlapcongty.html')
+    return render(request, 'overview_app/hiring/hiringthanhlapcongty.html')
 
 #change benefit
 @login_required
@@ -185,7 +185,7 @@ def changebenefit_detail(request):
                'birthday_count': birthday_count,
                'totalexcess': totalexcess,
                }
-    return render(request, 'overview_app/tbchangebenefit_detail.html', context)
+    return render(request, 'overview_app/tb/tbchangebenefit_detail.html', context)
 
 @login_required
 def changebenefit_update(request, benefitid):
@@ -273,7 +273,7 @@ def employee_update(request, employeeid):
         return redirect('overview_app:employee_detail')
     else:
         context = {'employee': employee}
-        return render(request, 'overview_app/Update_employee.html', context)
+        return render(request, 'overview_app/update/Update_employee.html', context)
 
 #update employment
 @login_required
@@ -306,7 +306,7 @@ def employment_update(request, employmentid):
         return redirect('overview_app:employee_detail')  # Using the correct URL pattern name
     else:
         context = {'employment': employment}
-        return render(request, 'overview_app/Update_employment.html', context)
+        return render(request, 'overview_app/update/Update_employment.html', context)
 
 #update personal
 @login_required
@@ -359,7 +359,7 @@ def personal_update(request, personalid):
     else:
         benefit_plans = BenefitPlans.objects.all()
         context = {'personal': personal, 'benefit_plans': benefit_plans}
-        return render(request, 'overview_app/Update_personal.html', context)
+        return render(request, 'overview_app/update/Update_personal.html', context)
 
 #add emplployee
 def employee_add(request):
@@ -387,7 +387,7 @@ def employee_add(request):
         return redirect('overview_app:personal_add')
     else:
         context = {'employees': Employee.objects.all(), 'payrate': PayRate.objects.all()}
-        return render(request, 'overview_app/Add_employee.html', context)
+        return render(request, 'overview_app/add/Add_employee.html', context)
 
 @login_required
 def personal_add(request):
@@ -422,7 +422,7 @@ def personal_add(request):
         employees = Employee.objects.all()
         benefit_plans = BenefitPlans.objects.all()
         context = {'employees': employees, 'benefit_plans': benefit_plans}
-        return render(request, 'overview_app/Add_personal.html', context)
+        return render(request, 'overview_app/add/Add_personal.html', context)
 
 @login_required
 def employment_add(request):
@@ -459,7 +459,7 @@ def employment_add(request):
         employees = Employee.objects.all()
         personals = Personal.objects.all()
         context = {'employees': employees, 'personals': personals}
-        return render(request, 'overview_app/Add_employment.html', context)
+        return render(request, 'overview_app/add/Add_employment.html', context)
 
 @login_required
 def employee_delete(request):

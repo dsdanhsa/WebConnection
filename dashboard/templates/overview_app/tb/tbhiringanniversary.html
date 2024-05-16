@@ -160,8 +160,7 @@ section .icon {
         {% for data in hiring_data %}
         <tr>
             <td>{{ data.employment.EMPLOYMENT_CODE }}</td>
-            <td>{{ data.personal.CURRENT_FIRST_NAME }} {{ data.personal.CURRENT_MIDDLE_NAME }} {{
-                data.personal.CURRENT_LAST_NAME }}
+            <td>{{ data.personal.CURRENT_FIRST_NAME }} {{ data.personal.CURRENT_MIDDLE_NAME }} {{data.personal.CURRENT_LAST_NAME }}
             </td>
             <td>{{ data.personal.BIRTH_DATE }}</td>
             <td>{{ data.employment.HIRE_DATE_FOR_WORKING }}</td>

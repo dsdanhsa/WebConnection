@@ -139,38 +139,39 @@
         .social i {
             margin-right: 4px;
         }
-    </style>
+
+</style>
 
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    <h3>Sign Up</h3>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="Username" id="username" name="username"> <label for="email">Email</label>
+    <input type="email" placeholder="Email" id="email" name="email">
+
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" id="password" name="password">
+
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" placeholder="Confirm Password" id="confirmPassword" name="cpassword">
+
+    <button>Sign Up</button>
+
+    <div class="bottom-text">
+        <p>Already a member? <a href="{% url 'login' %}">LogIn Here</a></p>
     </div>
-    <form method="post">
-        {% csrf_token %}
-        <h3>Sign Up</h3>
 
-        <label for="username">Username</label>
-        <input type="text" placeholder="Username" id="username" name="username">  <label for="email">Email</label>
-        <input type="email" placeholder="Email" id="email" name="email">
-
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="password">
-
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" placeholder="Confirm Password" id="confirmPassword" name="cpassword">
-
-        <button>Sign Up</button>
-
-        <div class="bottom-text">
-            <p>Already a member? <a href="{% url 'login' %}">LogIn Here</a></p>
-        </div>
-
-        <div class="social">
-            <div class="go"><i class="fab fa-google"></i>  Google</div>
-            <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
-        </div>
-    </form>
+    <div class="social">
+        <div class="go"><i class="fab fa-google"></i> Google</div>
+        <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+    </div>
+</form>
 
 </body>
 </html>
