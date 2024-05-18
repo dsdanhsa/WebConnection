@@ -3,6 +3,49 @@
 {% block title %}Benefit plan{% endblock %}
 
 {% block content %}
+<style>
+    .main_last-chart {
+  background-color: #fff;
+  border: 4px solid black;
+  border-radius: 20px;
+  padding: 20px;
+  padding-top: 5px;
+  width: 75%;
+  margin-left: 7.5rem;
+}
+
+.main_last-chart table {
+  width: 100%;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.main_last-chart th {
+  padding: 15px;
+  background-color: #5D5FEF;
+  color: #ffffff;
+  border-bottom: 2px solid #5D5FEF;
+  text-align: left;
+}
+
+.main_last-chart td {
+  padding: 15px;
+}
+
+.main_last-chart tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.main_last-chart a {
+  color: #999999;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.main_last-chart a:hover {
+  color: #5D5FEF;
+}
+</style>
 <div class="main_last-chart"
          style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
         <P style="margin-top: 20px; border-top-width: 20px; margin-bottom: 20px; margin-left: 30px;">List of benefits
@@ -21,88 +64,5 @@
             </tr>
             {% endfor %}
         </table>
-</div>
-<div class="main_first-card">
-    <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
-    <div class="all-first_card">
-        <a href="{% url 'overview_app:tbtotalpayrate' %}" class="card"
-           style="background-color:#FFE2E5; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #FA5A7D;" src="{% static 'assest/earning.svg' %}" alt="">
-            <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;">{{ totalpayrate }}</p>
-                <p>Earnings</p>
-            </div>
-        </a>
-
-        <a href="{% url 'overview_app:totalvacation' %}" class="card"
-           style="background-color: #FFF4DE; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/vacation.svg' %}" alt="">
-            <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;">{{ totalvacationday }}</p>
-                <p>Vacation Days</p>
-            </div>
-        </a>
-
-        <a href="{% url 'overview_app:benefitplan' %}" class="card"
-           style="background-color: #E0E9FF; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #A0BBFF;" src="{% static 'assest/benefit1.svg' %}" alt="">
-            <div class="card_title">
-                <p>Benefit</p>
-            </div>
-        </a>
-
-        <a href="{% url 'overview_app:hiringanniversary' %}" class="card" style="background-color: #DCFCE7; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #3CD856;" src="{% static 'assest/anniversary.svg' %}" alt="">
-            <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;"></p>
-                <p>Hiring Anniversary</p>
-            </div>
-        </a>
-
-        <a href="{% url 'overview_app:excessvacationday' %}" class="card"
-           style="background-color: #F3E8FF; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #BF83FF;" src="{% static 'assest/vacationday.svg' %}" alt="">
-            <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;">{{totalexcess}}</p>
-                <p style="margin-right: 10px;">Excess vacation days</p>
-            </div>
-        </a>
-    </div>
-</div>
-
-<div class="main_generality">
-    <div class="main_second-card">
-        <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
-        <div class="all-second_card">
-
-            <a href="{% url 'overview_app:benefit_detail' %}" class="card" style="background-color:#FFE2E5; text-decoration: none; color: black;">
-                <img class="card_img" style="background-color: #FA5A7D;"
-                     src="{% static 'assest/benefitplanchange.svg' %}" alt="">
-                <div class="card_title">
-                    <p class="card_percent" style="margin-bottom: 20px;"></p>
-                    <p>Benefit Plan Change</p>
-                </div>
-            </a>
-
-            <a href="{% url 'overview_app:birthday_count' %}" class="card"
-               style="background-color: #FFF4DE; text-decoration: none; color: black;">
-                <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/birthday-cake.svg' %}"
-                     alt="">
-                <div class="card_title">
-                    <p class="card_percent" style="margin-bottom: 20px;">{{birthday_count}}</p>
-                    <p>Birthdays</p>
-                </div>
-            </a>
-
-            <a href="{% url 'overview_app:employee_detail' %}" class="card"
-               style="background-color: #FFF4DE; text-decoration: none; color: black;">
-                <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/birthday-cake.svg' %}"
-                     alt="">
-                <div class="card_title">
-                    <p>List Employee</p>
-                </div>
-            </a>
-        </div>
-    </div>
 </div>
 {% endblock %}

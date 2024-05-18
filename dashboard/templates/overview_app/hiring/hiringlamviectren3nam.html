@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Hiring anniversary{% endblock %}
+
+{% block content %}
+<style>
+   .main_last-chart {
+  background-color: #fff;
+  border: 4px solid black;
+  border-radius: 20px;
+  padding: 20px;
+  padding-top: 5px;
+  width: 75%;
+  margin-left: 7.5rem;
+}
+
+.main_last-chart table {
+  width: 100%;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.main_last-chart th {
+  padding: 15px;
+  background-color: #5D5FEF;
+  color: #ffffff;
+  border-bottom: 2px solid #5D5FEF;
+  text-align: left;
+}
+
+.main_last-chart td {
+  padding: 15px;
+}
+
+.main_last-chart tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.main_last-chart a {
+  color: #999999;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.main_last-chart a:hover {
+  color: #5D5FEF;
+}
+</style>
+
+<div class="main_last-chart" style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
+    <table border="1">
+        <tr>
+            <th>Employee code</th>
+            <th>Name</th>
+            <th>Birth Date</th>
+            <th>Hire Date For Working</th>
+        </tr>
+        {% for data in hiring_data %}
+        <tr>
+            <td>{{ data.employment.EMPLOYMENT_CODE }}</td>
+            <td>{{ data.personal.CURRENT_FIRST_NAME }} {{ data.personal.CURRENT_MIDDLE_NAME }} {{ data.personal.CURRENT_LAST_NAME }}</td>
+            <td>{{ data.personal.BIRTH_DATE }}</td>
+            <td>{{ data.employment.HIRE_DATE_FOR_WORKING }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

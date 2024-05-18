@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import totalpayrate, totalvacation, birthday_count, benefitplan, excessvacationday, changebenefit_detail, changebenefit_update, changeemployee_detail, employee_update, employment_update, personal_update, employee_add, personal_add, employment_add, employee_delete,tbtotalpayrate, hiringanniversary, hiringngay304,hiringngay75,hiringthanhlapcongty
+from .views import totalpayrate, totalvacation, birthday_count, benefitplan, excessvacationday, changebenefit_detail, changebenefit_update, changeemployee_detail, employee_update, employment_update, personal_update, employee_add, personal_add, employment_add, employee_delete,tbtotalpayrate, hiringanniversary, hiringngay304,hiringngay75,hiringthanhlapcongty, hiringlamviectren3nam
 
 app_name = 'overview_app'
 
@@ -19,6 +19,7 @@ urlpatterns = [
     path('hiringngay304/', hiringngay304, name='hiringngay304'),
     path('hiringngay75/', hiringngay75, name='hiringngay75'),
     path('hiringthanhlapcongty/', hiringthanhlapcongty, name='hiringthanhlapcongty'),
+    path('hiringlamviectren3nam/', hiringlamviectren3nam, name='hiringlamviectren3nam'),
 
     #cập nhật của bảng HR và Payroll
     path('employee_detail/', changeemployee_detail, name='employee_detail'),

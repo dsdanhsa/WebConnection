@@ -15,39 +15,57 @@ from django.contrib import messages
 from django.utils.dateparse import parse_date
 
 
-def generate_pay_amount_plot(categories, pay_values):
-    plt.bar(categories, pay_values)
-    plt.xlabel('Employee Number')
-    plt.ylabel('Pay Amount')
-    plt.title('Pay Amount by Employee Number')
-
-    img_data = BytesIO()
-    plt.savefig(img_data, format='png')
-    img_data.seek(0)
-    img_base64 = base64.b64encode(img_data.getvalue()).decode()
-    plt.close()
-    return img_base64
 @login_required
 def totalpayrate(request):
     totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
-
-    img_base64 = generate_pay_amount_plot(categories, pay_values)
-
     content = {
         'totalpayrate': totalpayrate,
         'totalvacationday': totalvacationday,
-        'chart_data': img_base64,
         'birthday_count': birthday_count,
         'totalexcess': totalexcess
     }
 
     return render(request, 'overview_app/home.html', content)
 
+def generate_bar_chart(title, xlabel, ylabel, categories, values):
+    fig, ax = plt.subplots(figsize=(10, 6))  # Tạo biểu đồ với kích thước tùy chỉnh
+
+    bars = ax.bar(categories, values, color='#5D5FEF', edgecolor='black', linewidth=1.2)
+
+    ax.set_xlabel(xlabel, fontsize=14, fontweight='bold')
+    ax.set_ylabel(ylabel, fontsize=14, fontweight='bold')
+    ax.set_title(title, fontsize=16, fontweight='bold', color='#333333')
+
+    ax.grid(True, which='both', linestyle='--', linewidth=0.5, color='gray', alpha=0.7)
+
+    # Tạo nhãn dữ liệu trên đầu các cột
+    for bar in bars:
+        yval = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width() / 2.0, yval, f'{yval:.2f}', ha='center', va='bottom', fontsize=10, color='black')
+
+    ax.tick_params(axis='x', rotation=45, labelsize=12)
+    ax.tick_params(axis='y', labelsize=12)
+
+    fig.tight_layout()
+
+    img_data = BytesIO()
+    plt.savefig(img_data, format='png', bbox_inches='tight')
+    img_data.seek(0)
+    img_base64 = base64.b64encode(img_data.getvalue()).decode()
+    plt.close()
+    return img_base64
+
 @login_required
 def tbtotalpayrate(request):
     totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
 
-    img_base64 = generate_pay_amount_plot(categories, pay_values)
+    img_base64 = generate_bar_chart(
+        title='Số tiền trả theo số nhân viên',
+        xlabel='Số nhân viên',
+        ylabel='Số tiền trả',
+        categories=categories,
+        values=pay_values
+    )
 
     content = {
         'totalpayrate': totalpayrate,
@@ -63,23 +81,20 @@ def tbtotalpayrate(request):
 def totalvacation(request):
     totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
 
-    # Tạo biểu đồ Vacation Days by Employee Number
-    plt.bar(categories, vacation_values)
-    plt.xlabel('Employee Number')
-    plt.ylabel('Vacation Days')
-    plt.title('Vacation Days by Employee Number')
-    img_data = BytesIO()
-    plt.savefig(img_data, format='png')
-    img_data.seek(0)
-    img_base64 = base64.b64encode(img_data.getvalue()).decode()
-    plt.close()
+    img_base64 = generate_bar_chart(
+        title='Số ngày nghỉ theo số nhân viên',
+        xlabel='Số nhân viên',
+        ylabel='Số ngày nghỉ',
+        categories=categories,
+        values=vacation_values
+    )
 
     context = {
         'chart_data': img_base64,
         'totalpayrate': totalpayrate,
         'totalvacationday': totalvacationday,
         'birthday_count': birthday_count,
-        'totalexcess' : totalexcess
+        'totalexcess': totalexcess
     }
 
     return render(request, 'overview_app/tb/tbvacation.html', context)
@@ -167,12 +182,49 @@ def hiringanniversary(request):
     }
     return render(request, 'overview_app/tb/tbhiringanniversary.html', context)
 
+@login_required
 def hiringngay304(request):
     return render(request, 'overview_app/hiring/hiringngay304.html')
+
+@login_required
 def hiringngay75(request):
     return render(request, 'overview_app/hiring/hiringngay75.html')
+
+@login_required
 def hiringthanhlapcongty(request):
     return render(request, 'overview_app/hiring/hiringthanhlapcongty.html')
+
+
+def calculate_totals():
+    return 0, 0, [], [], [], 0, 0
+@login_required
+def hiringlamviectren3nam(request):
+    totalpayrate, totalvacationday, categories, pay_values, vacation_values, birthday_count, totalexcess = calculate_totals()
+    employments = Employment.objects.all()
+    totalhiring = 0
+    hiring_data = []
+
+    current_year = datetime.now().year
+
+    for employment in employments:
+        if (current_year - employment.HIRE_DATE_FOR_WORKING.year) >= 3:
+            personal = employment.personal
+            if personal:
+                hiring_data.append({
+                    'employment': employment,
+                    'personal': personal
+                })
+                totalhiring += 1
+
+    context = {
+        'totalpayrate': totalpayrate,
+        'totalvacationday': totalvacationday,
+        'birthday_count': birthday_count,
+        'totalexcess': totalexcess,
+        'hiring_data': hiring_data,
+        'totalhiring': totalhiring,
+    }
+    return render(request, 'overview_app/hiring/hiringlamviectren3nam.html', context)
 
 #change benefit
 @login_required
