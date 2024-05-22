@@ -7,361 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CEO Memo | {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/boo...in.css">
     <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %} ">
     <link rel="preconnect" href="{% static 'https://fonts.gstatic.com' %}" crossorigin>
     <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;...lay=swap"
             rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.topBar {
-  display: flex;
-  justify-content: space-between;
-  background: #ffffff;
-  padding: 10px;
-  position: relative;
-  margin-left: 345px;
-  align-items: center;
-  height: 115px;
-}
-
-.topBar_title {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
-
-.search {
-  position: relative;
-}
-
-.img_search {
-  position: absolute;
-  left: 2%;
-  top: 10px;
-}
-
-.header__search {
-  background-color: #f9fafb;
-  border-radius: 16px;
-  border: none;
-  padding: 20px;
-  padding-left: 45px;
-  width: 439px;
-}
-
-.topBar_right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-
-.dropdown{
-  position: relative;
-}
-
-
-.dropdown_select {
-  position: relative;
-}
-.dropdown_list {
-  margin-top: 2.5rem;
-  border-radius: 4px;
-  overflow: hidden;
-  position: absolute;
-  top: 100%;
-  left: -100px;
-  width: 308px;
-  display: none;
-}
-
-.dropdown:hover .dropdown_list{
-  display: block;
-
-}
-
-/* .dropdown_list::before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 3rem;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid ;
-  transform: translateY(-100%);
-
-
-} */
-
-/* .dropdown_items {
-  padding: 20px 60px;
-  background-color: #ffff;
-  color: #ffffff;
-  cursor: pointer;
-  transition: background-color 0.2s linear;
-  opacity: 0.9;
-
-} */
-.dropdown::before{
-  content: "";
-  height: 70px;
-  position: absolute;
-  bottom: 0;
-  width: 308px;
-  top: 62px;
-  background-color: black;
-  right: -151px;
-  background-color: transparent;
-}
-
-
-.dropdown_items:first-child {
-  border-radius: 4px 4px 0 0;
-}
-
-.dropdown_items:last-child {
-  border-radius: 0 0 20px 20px;
-}
-
-
-
-.dropdown_items a{
-  padding: 20px 60px;
-  background-color: #ffff;
-  /* color: #ffffff; */
-  cursor: pointer;
-  transition: background-color 0.2s linear;
-  opacity: 0.9;
-  display: block;
-}
-
-.dropdown_items a:hover{
-  background-color: #808080;
-  color: #ffff;
-}
-
-.body {
-  background-color: #f9fafb;
-}
-
-.side_bar {
-  background-color: #ffff;
-  width: 346px;
-  height: 1080px;
-  position: absolute;
-  top: 0;
-}
-
-.side_bar-top {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  text-align: center;
-  margin-top: 38px;
-}
-
-.side_bar-top-img {
-  background-color: #5d5fef;
-  padding: 7px;
-  border-radius: 8px;
-}
-
-.side_bar-top-title {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
-
-.side_bar-menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 32px;
-}
-
-.side_bar-content {
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #808080;
-  /* margin: 10px 10px 0 10px; */
-  margin: 10px;
-  width: 287px;
-  height: 70px;
-  font-size: 18px;
-  padding: 21.5px 0 21.5px 37px;
-}
-
-/*them*/
-.side_bar-content:hover {
-  background-color: #5d5fef;
-  color: #ffff;
-}
-
-a {
-  color: #737791;
-  text-decoration: none;
-  font-family: Poppins, sans-serif;
-  font-weight: 500;
-}
-
-.side_bar-content:hover a {
-  color: white;
-}
-
-.main_first-card {
-  background-color: #ffffff;
-  padding: 10px;
-  margin-top: 25px;
-  margin-right: 21px;
-  border-radius: 20px;
-}
-
-.all-first_card {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-bottom: 44px;
-}
-
-.card {
-  width: 195px;
-  height: 199px;
-  border-radius: 16px;
-}
-
-.card_img {
-  border-radius: 30px;
-  padding: 7px;
-  margin: 20px 0 25px 20px;
-}
-
-.card_title {
-  font-family: "Poppins", sans-serif;
-  margin-left: 21px;
-}
-.card_percent {
-  font-weight: bold;
-}
-
-.main_generality {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.main_second-card {
-  background-color: #ffffff;
-  padding: 10px;
-  margin-top: 25px;
-  margin-right: 21px;
-  border-radius: 20px;
-}
-
-.all-second_card {
-  display: flex;
-  justify-content: space-around;
-  gap: 31px;
-  margin: 0 25px 0 25px;
-}
-
-/*payroll*/
-.submenu li {
-  list-style: none;
-  text-align: center;
-  font-family: Poppins, sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  color: #808080;
-  margin: 20px 0px;
-}
-
-.submenu li a {
-  padding: 10px 75px;
-  border-radius: 10px;
-}
-li {
-  list-style: none;
-}
-
-.submenu {
-  background-color: #d9d9d9;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 0;
-  transition: all 0.3s;
-  overflow: hidden;
-  padding: 0px 14px;
-}
-.submenu.active {
-  height: 161px;
-  /* width: 287px; */
-  /* border-radius: 0 0 15px 15px; */
-}
-
-.submenu li a:hover {
-  background-color: #7d7d7e;
-  color: #ffff;
-}
-
-/*HR*/
-.submenu1 li {
-  list-style: none;
-  text-align: center;
-  font-family: Poppins, sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  color: #808080;
-  margin: 20px 0px;
-}
-
-.submenu1 li a:hover {
-  background-color: #7d7d7e;
-  color: #ffff;
-}
-
-.submenu1 li a {
-  padding: 10px 3px;
-  border-radius: 10px;
-  word-break: break-word;
-}
-li {
-  list-style: none;
-}
-
-.submenu1 {
-  background-color: #d9d9d9;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 0;
-  transition: all 0.3s;
-  overflow: hidden;
-}
-.submenu1.active1 {
-  height: 400px;
-  /* width: 287px; */
-  /* border-radius: 0 0 15px 15px; */
-}
-
-.submenu1 li a:hover {
-  background-color: #7d7d7e;
-  color: #ffff;
-}
-
-
-</style>
 
 {% block content123 %}
 {% endblock %}
@@ -377,7 +31,8 @@ li {
             </div>
             <ul class="dropdown_list">
                 <li class="dropdown_items">
-                    <a href="{% url 'overview_app:excessvacationday' %}" class="drowdown_text">Quá số ngày nghĩ trong tháng </a>
+                    <a href="{% url 'overview_app:excessvacationday' %}" class="drowdown_text">Ngày nghỉ phép tích
+                        lũy </a>
                 </li>
 
                 <li class="dropdown_items">
@@ -401,7 +56,7 @@ li {
             <a href="{% url 'login' %}" class="admin"
                style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">Login</a>
             <a href="{% url 'signup' %}" class="admin"
-               style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">| Sìnup</a>
+               style="font-family: Poppins, sans-serif; text-decoration: none; color: black;">| Signup</a>
             {% endif %}
         </div>
     </div>
@@ -413,7 +68,7 @@ li {
 
         <h1>
             <a class="side_bar-top-title" href="{% url 'overview_app:totalpayrate' %}"
-               style="color: black; text-decoration: none; font-family: Poppins, sans-serif;">CEO MEMO</a>
+               style="color: black; text-decoration: none; font-family: Poppins, sans-serif;">H&P System</a>
         </h1>
     </div>
     <div class="side_bar-menu">
@@ -476,8 +131,8 @@ li {
             </svg>
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
-                <button type="submit"
-                        style="color: #737791; background: none; border: none; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 500;">
+                <button class="btn_signout" type="submit"
+                        style=" background: none; border: none; cursor: pointer; font-size: 18px">
                     Sign Out
                 </button>
             </form>
@@ -491,22 +146,5 @@ li {
     {% endblock %}
 </div>
 </body>
-<script>
-const dropdown = document.querySelector('.side_bar-content.dropdown-btn');
-const subMenu = document.querySelector('.submenu');
-
-dropdown.onclick = function(){
-    subMenu.classList.toggle('active');
-}
-
-
-const dropdown1 = document.querySelector('.side_bar-content.dropdown-btn1');
-const subMenu1 = document.querySelector('.submenu1');
-
-dropdown1.onclick = function(){
-    subMenu1.classList.toggle('active1');
-}
-
-</script>
-
+<script src="{% static 'js/base.js'%}"></script>
 </html>
