@@ -3,150 +3,118 @@
 {% block title %}Birth Day{% endblock %}
 
 {% block content %}
-<style>
-    .main_last-chart {
-  background-color: #fff;
-  border: 4px solid black;
-  border-radius: 20px;
-  padding: 20px;
-  padding-top: 5px;
-  width: 75%;
-  margin-left: 7.5rem;
-}
-
-.main_last-chart table {
-  width: 100%;
-  margin: auto;
-  border-collapse: collapse;
-}
-
-.main_last-chart th {
-  padding: 15px;
-  background-color: #5D5FEF;
-  color: #ffffff;
-  border-bottom: 2px solid #5D5FEF;
-  text-align: left;
-}
-
-.main_last-chart td {
-  padding: 15px;
-}
-
-.main_last-chart tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.main_last-chart a {
-  color: #999999;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.main_last-chart a:hover {
-  color: #5D5FEF;
-}
-</style>
-<div class="main_last-chart" style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;">
-    <P>There are {{birthday_count}} people with birthdays this month:</P>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Birthday</th>
-            <th>Address</th>
-            <th>Phone</th>
-        </tr>
-        {% for person in birthday_list %}
-        <tr>
-            <td>{{ person.0 }} {{ person.1 }} {{ person.2 }}</td>
-            <td>{{ person.3 }}</td>
-            <td>{{ person.4 }}</td>
-            <td>{{ person.5 }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
-
-<div class="main_first-card">
-    <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
-    <div class="all-first_card">
-        <a href="{% url 'overview_app:tbtotalpayrate' %}" class="card"
-           style="background-color:#FFE2E5; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #FA5A7D;" src="{% static 'assest/earning.svg' %}" alt="">
-            <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;">{{ totalpayrate }}</p>
-                <p>Earnings</p>
-            </div>
+<link rel="stylesheet" href="{% static 'css/birthday.css' %}" />
+<body style="background: #f9fafb; position: relative">
+<div class="main">
+    <div class="title_main">
+        <a style="padding-top: 5px" href="../index.html">
+            <img src="{% static 'assest/previous.svg' %}" alt=""/>
         </a>
-
-        <a href="{% url 'overview_app:totalvacation' %}" class="card"
-           style="background-color: #FFF4DE; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/vacation.svg' %}" alt="">
-            <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;">{{ totalvacationday }}</p>
-                <p>Vacation Days</p>
-            </div>
-        </a>
-
-        <a href="{% url 'overview_app:benefitplan' %}" class="card"
-           style="background-color: #E0E9FF; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #A0BBFF;" src="{% static 'assest/benefit1.svg' %}" alt="">
-            <div class="card_title">
-                <p>Benefit</p>
-            </div>
-        </a>
-
-        <a href="{% url 'overview_app:hiringanniversary' %}" class="card" style="background-color: #DCFCE7; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #3CD856;" src="{% static 'assest/anniversary.svg' %}" alt="">
-            <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;"></p>
-                <p>Hiring Anniversary</p>
-            </div>
-        </a>
-
-        <a href="{% url 'overview_app:excessvacationday' %}" class="card"
-           style="background-color: #F3E8FF; text-decoration: none; color: black;">
-            <img class="card_img" style="background-color: #BF83FF;" src="{% static 'assest/vacationday.svg' %}" alt="">
-            <div class="card_title">
-                <p class="card_percent" style="margin-bottom: 20px;">{{totalexcess}}</p>
-                <p style="margin-right: 10px;">Excess vacation days</p>
-            </div>
-        </a>
+        <div class="list_main">
+            <a href="{% url 'overview_app:totalpayrate' %}" class="previous_page">DashBoard</a>
+            <p class="space">/</p>
+            <a style="color: #ffff" href="" class="previous_page">BirthDay</a>
+        </div>
     </div>
-</div>
-
-<div class="main_generality">
-    <div class="main_second-card">
-        <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
-        <div class="all-second_card">
-
-            <a href="{% url 'overview_app:benefit_detail' %}" class="card" style="background-color:#FFE2E5; text-decoration: none; color: black;">
-                <img class="card_img" style="background-color: #FA5A7D;"
-                     src="{% static 'assest/benefitplanchange.svg' %}" alt="">
-                <div class="card_title">
-                    <p class="card_percent" style="margin-bottom: 20px;"></p>
-                    <p>Benefit Plan Change</p>
+    <div class="container_main">
+        <div class="container">
+            <div class="left">
+                <div class="calendar">
+                    <div class="month">
+                        <i class="fas fa-angle-left prev"></i>
+                        <div class="date">december 2015</div>
+                        <i class="fas fa-angle-right next"></i>
+                    </div>
+                    <div class="weekdays">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div class="days"></div>
+                    <div class="goto-today">
+                        <div class="goto">
+                            <input type="text" placeholder="mm/yyyy" class="date-input"/>
+                            <button class="goto-btn">Go</button>
+                        </div>
+                        <button class="today-btn">Today</button>
+                    </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="{% url 'overview_app:birthday_count' %}" class="card"
-               style="background-color: #FFF4DE; text-decoration: none; color: black;">
-                <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/birthday-cake.svg' %}"
-                     alt="">
-                <div class="card_title">
-                    <p class="card_percent" style="margin-bottom: 20px;">{{birthday_count}}</p>
-                    <p>Birthdays</p>
+            <div class="right">
+                <div class="today-date">
+                    <div class="event-day">wed</div>
+                    <div class="event-date">12th december 2022</div>
                 </div>
-            </a>
+                <div class="events"></div>
+                <div class="add-event-wrapper">
+                    <div class="add-event-header">
+                        <div class="title">Add Event</div>
+                        <i class="fas fa-times close"></i>
+                    </div>
+                    <div class="add-event-body">
+                        <div class="add-event-input">
+                            <input
+                                    type="text"
+                                    placeholder="Event Name"
+                                    class="event-name"
+                            />
+                        </div>
+                        <div class="add-event-input">
+                            <input
+                                    type="text"
+                                    placeholder="Event Time From"
+                                    class="event-time-from"
+                            />
+                        </div>
+                        <div class="add-event-input">
+                            <input
+                                    type="text"
+                                    placeholder="Event Time To"
+                                    class="event-time-to"
+                            />
+                        </div>
+                    </div>
+                    <div class="add-event-footer">
+                        <button class="add-event-btn">Add Event</button>
+                    </div>
+                </div>
+            </div>
 
-            <a href="{% url 'overview_app:employee_detail' %}" class="card"
-               style="background-color: #FFF4DE; text-decoration: none; color: black;">
-                <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/birthday-cake.svg' %}"
-                     alt="">
-                <div class="card_title">
-                    <p>List Employee</p>
+            <button class="add-event">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <div class="menu_card">
+            <div class="menu_card_top">
+                <h2 class="menu_card_top_title">Upcoming</h2>
+                <div class="line"></div>
+            </div>
+
+            <P style="color:white;F">There are {{birthday_count}} people with birthdays this month:</P>
+            <div class="menu_card_main">
+                {% for person in birthday_list %}
+                <div class="card_info">
+                    <div class="card_info_top">
+                        <img src="{% static 'img/avatar.jpg' %}" alt="Avatar" class="avatar"/>
+                        <p class="card_days">{{ person.3 }}</p>
+                    </div>
+                    <p class="card_name">{{ person.0 }} {{ person.1 }} {{ person.2 }}</p>
+                    <div class="card_info_footer">
+                        <p class="card_1">{{ person.4 }}</p>
+                        <p class="card-1">{{ person.5 }}</p>
+                    </div>
                 </div>
-            </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
+</body>
+<script src="{% static 'js/birthday.js' %}"></script>
 {% endblock %}

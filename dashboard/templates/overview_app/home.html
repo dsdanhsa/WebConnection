@@ -2,61 +2,8 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 
-
 {% block content %}
-<style>
-    .main_last-chart {
-        background-color: #ffffff;
-        padding: 10px;
-        margin-top: 25px;
-        /*margin-right: 21px;*/
-        border-radius: 20px;
-        width: 630px;
-    }
-
-    .all-last_card {
-        display: flex;
-        /* justify-content: space-around; */
-        gap: 31px;
-        margin: 0 25px 0 25px;
-    }
-
-    .card-employee_management {
-        width: 300px;
-        height: 199px;
-        border-radius: 16px;
-    }
-
-    .clock {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 200px;
-        width: 320px;
-        background: transparent;
-        border-radius: 3px;
-    }
-
-    .clock .item {
-        height: 50px;
-        width: 50px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        background-color: rgb(5, 5, 0.9);
-        padding: 50px;
-        border-radius: 7px;
-        letter-spacing: 3px;
-    }
-
-    .clock span {
-        font-weight: bolder;
-        font-size: 25px;
-    }
-
-</style>
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
 <div class="main_first-card">
     <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
     <div class="all-first_card">
@@ -137,12 +84,11 @@
 
         <div class="all-last_card">
             <a href="{% url 'overview_app:employee_detail' %}" class="card"
-               style="background-color: #FFF4DE; text-decoration: none; color: black;">
-                <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/birthday-cake.svg' %}"
-                     alt="">
+               style="background-color: #00b8e452; text-decoration: none; color: black;">
+                <img class="card_img" style="width:50px; height: 50px; margin-left: 10px; margin-top: 15px;" src="{% static 'img/user.jpg' %}" alt="">
                 <div class="card_title">
-                    <p class="card_percent" style="margin-bottom: 20px;">3%</p>
-                    <p>Birthdays</p>
+                    <p class="card_percent" style="margin-bottom: 20px;"></p>
+                    <p>Employee</p>
                 </div>
             </a>
 
@@ -169,20 +115,22 @@
     const min = document.getElementById('min');
     const sec = document.getElementById('sec');
 
-    const clock = setInterval(function time() {
+    function updateTime() {
         let today = new Date();
         let hr = today.getHours();
         let mn = today.getMinutes();
         let se = today.getSeconds();
 
         if (hr < 10) hr = '0' + hr;
-        if (mn < 10) min = '0' + mn;
+        if (mn < 10) mn = '0' + mn;
         if (se < 10) se = '0' + se;
 
         hour.textContent = hr;
         min.textContent = mn;
         sec.textContent = se;
-    })
+    }
 
+    setInterval(updateTime, 1000);
+    updateTime();
 </script>
 {% endblock %}

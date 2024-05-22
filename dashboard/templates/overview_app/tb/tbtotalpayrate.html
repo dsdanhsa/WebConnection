@@ -5,10 +5,11 @@
 
 {% block content %}
 
-<div class="main_last-chart" style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px; text-align:center;">
+<div class="main_last-chart" style=" background-color: #ffffff; border-radius: 20px; padding: 20px; margin-top: 25px;margin-left: 300px;">
     <img src="data:image/png;base64,{{ chart_data }}" style="width: 500px;height: 375px;" alt="">
 </div>
 
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
 <div class="main_first-card">
     <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
     <div class="all-first_card">
@@ -38,7 +39,8 @@
             </div>
         </a>
 
-        <a href="{% url 'overview_app:hiringanniversary' %}" class="card" style="background-color: #DCFCE7; text-decoration: none; color: black;">
+        <a href="{% url 'overview_app:hiringanniversary' %}" class="card"
+           style="background-color: #DCFCE7; text-decoration: none; color: black;">
             <img class="card_img" style="background-color: #3CD856;" src="{% static 'assest/anniversary.svg' %}" alt="">
             <div class="card_title">
                 <p class="card_percent" style="margin-bottom: 20px;"></p>
@@ -62,7 +64,8 @@
         <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Overview</h3>
         <div class="all-second_card">
 
-            <a href="{% url 'overview_app:benefit_detail' %}" class="card" style="background-color:#FFE2E5; text-decoration: none; color: black;">
+            <a href="{% url 'overview_app:benefit_detail' %}" class="card"
+               style="background-color:#FFE2E5; text-decoration: none; color: black;">
                 <img class="card_img" style="background-color: #FA5A7D;"
                      src="{% static 'assest/benefitplanchange.svg' %}" alt="">
                 <div class="card_title">
@@ -80,17 +83,61 @@
                     <p>Birthdays</p>
                 </div>
             </a>
-
-            <a href="{% url 'overview_app:employee_detail' %}" class="card"
-               style="background-color: #FFF4DE; text-decoration: none; color: black;">
-                <img class="card_img" style="background-color: #FF947A;" src="{% static 'assest/birthday-cake.svg' %}"
-                     alt="">
-                <div class="card_title">
-                    <p>List Employee</p>
-                </div>
-            </a>
         </div>
     </div>
+    <div class="main_last-chart" style="margin-top: 30px;border: none;margin-left: 0px;">
+        <h3 style="margin: 23px 0 50px 31px; font-family: Poppins, sans-serif;">Employee Management</h3>
+
+        <div class="all-last_card">
+            <a href="{% url 'overview_app:employee_detail' %}" class="card"
+               style="background-color: #00b8e452; text-decoration: none; color: black;">
+                <img class="card_img" style="width:50px; height: 50px; margin-left: 10px; margin-top: 15px;" src="{% static 'img/user.jpg' %}" alt="">
+                <div class="card_title">
+                    <p class="card_percent" style="margin-bottom: 20px;"></p>
+                    <p>Employee</p>
+                </div>
+            </a>
+
+            <div class="clock">
+                <div class="item">
+                    <span id="hour">00</span>
+                    <span id="time">Hour</span>
+                </div>
+                <div class="item">
+                    <span id="min">00</span>
+                    <span id="time">Minute</span>
+                </div>
+                <div class="item">
+                    <span id="sec">00</span>
+                    <span id="time">Second</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+<script>
+    const hour = document.getElementById('hour');
+    const min = document.getElementById('min');
+    const sec = document.getElementById('sec');
+
+    function updateTime() {
+        let today = new Date();
+        let hr = today.getHours();
+        let mn = today.getMinutes();
+        let se = today.getSeconds();
+
+        if (hr < 10) hr = '0' + hr;
+        if (mn < 10) mn = '0' + mn;
+        if (se < 10) se = '0' + se;
+
+        hour.textContent = hr;
+        min.textContent = mn;
+        sec.textContent = se;
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+</script>
 
 {% endblock %}

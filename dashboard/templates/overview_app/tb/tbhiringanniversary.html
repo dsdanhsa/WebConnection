@@ -83,12 +83,35 @@ section .icon {
 
 
 
+
+
 </style>
 
 {% endblock %}
 
 {% block content %}
 <main>
+    <section class="day_le04">
+        <a href="{% url 'overview_app:hiringlamviectren3nam' %}">
+            <h2>Những Thành Viên Làm Việc Trên 3 Năm</h2>
+            <div class="slide_img">
+                <img src="{% static 'img/conghien.jpg' %}" width="166" height="106" alt="">
+                <div class="description">
+                    <p style="margin-left:0px">
+                        Nhóm nhân viên này đã tích lũy được hơn 3 năm kinh nghiệm làm việc tại công ty.
+                        Họ đóng góp không nhỏ vào sự ổn định và phát triển của tổ chức.
+                        Sự kiên nhẫn, tận tụy và sự am hiểu sâu sắc về quy trình công việc là điều mà nhóm này đem lại.
+                        Với sự chuyên nghiệp và cam kết của mình, họ đã trở thành trụ cột quan trọng trong tổ chức.
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <a href="{% url 'overview_app:hiringlamviectren3nam' %}">Xem tiếp</a>
+                </div>
+            </div>
+        </a>
+    </section>
+
     <section class="day_le01">
         <a href="{% url 'overview_app:hiringngay304' %}">
             <h2>Ngày Lễ 30 Tháng 4 Và 1 Tháng 5</h2>
@@ -157,22 +180,5 @@ section .icon {
         </a>
     </section>
 
-    <section class="day_le04">
-        <a href="{% url 'overview_app:hiringlamviectren3nam' %}">
-            <h2>Những Thành Viên Làm Việc Trên 3 Năm</h2>
-            <div class="slide_img">
-                <img src="{% static 'img/user.jpg' %}" width="166" height="106" alt="">
-                <img src="{% static 'img/user.jpg' %}" width="166" height="106" alt="">
-                <img src="{% static 'img/user.jpg' %}" width="166" height="106" alt="">
-                <img src="{% static 'img/user.jpg' %}" width="166" height="106" alt="">
-                <img src="{% static 'img/user.jpg' %}" width="166" height="106" alt="">
-
-                <div class="icon">
-                    <i class="fa-solid fa-chevron-right"></i>
-                    <a href="{% url 'overview_app:hiringlamviectren3nam' %}">Xem tiếp</a>
-                </div>
-            </div>
-        </a>
-    </section>
 </main>
 {% endblock %}
