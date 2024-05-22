@@ -1,47 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Employee list {% endblock %}
-
+{% load static %}
 {% block content123 %}
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    .list_employee__payroll {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-        text-align: left;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    tr:hover {
-        background-color: #ddd;
-    }
-
-</style>
+<link rel="stylesheet" href="{% static 'css/pemployee.css' %}" />
 {% endblock %}
 
 {% block content %}

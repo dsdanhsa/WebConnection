@@ -56,9 +56,6 @@
     text-align: center;
 }
 
-
-
-
 </style>
 {% endblock %}
 
@@ -92,10 +89,10 @@
                                    value="{{ personal.CURRENT_MIDDLE_NAME }}">
                         </div>
                         <div class="mb-3">
-                            <label for="birth_date" class="form-label">Birth Date</label>
-                            <input type="date" class="form-control" id="birth_date" name="birth_date"
-                                   value="{% if personal.BIRTH_DATE %}{{ personal.BIRTH_DATE|date:'Y-m-d' }}{% endif %}">
-                        </div>
+    <label for="birth_date" class="form-label">Birth Date</label>
+    <input type="date" class="form-control" id="birth_date" name="birth_date"
+           value="{% if personal.BIRTH_DATE %}{{ personal.BIRTH_DATE|date:"Y-m-d" }}{% endif %}">
+</div>
                         <div class="mb-3">
                             <label for="social_security_number" class="form-label">Social Security Number</label>
                             <input type="text" class="form-control" id="social_security_number"

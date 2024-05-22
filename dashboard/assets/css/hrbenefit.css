@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.list_benefitplan table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.list_benefitplan th, .list_benefitplan td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.list_benefitplan th {
+    background-color: #5d5fef;
+    color: #fff;
+}
+
+.list_benefitplan tbody tr:nth-child(odd) {
+    background-color: #fff; /* Màu trắng nhẹ cho hàng lẻ */
+}
+
+.list_benefitplan tbody tr:nth-child(even) {
+    background-color: #e6f7ff; /* Màu xanh nhẹ cho hàng chẵn */
+}
+
+.list_benefitplan tbody tr:hover {
+    background-color: #e9e9e9;
+}
+
+.list_benefitplan td:last-child {
+    text-align: center;
+}
+
+.list_benefitplan a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.list_benefitplan a:hover {
+    color: #0056b3;
+}

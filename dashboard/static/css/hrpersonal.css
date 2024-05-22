@@ -1,0 +1,47 @@
+/* hrpersonal.css */
+
+.list_personal {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 0 15px;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.list_personal table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.list_personal th,
+.list_personal td {
+    border: 1px solid #ddd;
+    padding: 12px; /* Increase padding for better balance */
+    text-align: center; /* Center align content */
+}
+
+.list_personal th {
+    background-color: #5d5fef; /* Main color */
+    color: #fff; /* Text color */
+}
+
+.list_personal tbody tr:nth-child(odd) {
+    background-color: #fff; /* Changed to white */
+}
+
+.list_personal tbody tr:nth-child(even) {
+    background-color: #e6f7ff; /* Light blue for even rows */
+}
+
+.list_personal tbody tr:hover {
+    background-color: #e9e9e9; /* Hover color */
+}
+
+.list_personal td:last-child {
+    text-align: center;
+}
