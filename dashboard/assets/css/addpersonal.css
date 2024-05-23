@@ -1,64 +1,60 @@
-
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    .card {
-        margin-top: 50px;
-        border-radius: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-    }
-
-    .card-header {
-        background-color: #007bff;
-        color: #fff;
-        padding: 15px;
-        border-radius: 15px 15px 0 0;
-        text-align: center;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-        border-radius: 5px;
-        padding: 10px 20px;
+/* Định dạng phần tử container */
+    .container {
         font-size: 16px;
-        transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        text-align: left;
+        margin-top: 30px;
     }
 
-    .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-        color: #fff;
+    /* Định dạng tiêu đề */
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
     }
 
-    .form-control {
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-bottom: 15px;
-    }
-
+    /* Định dạng các nhãn trường nhập */
     .form-label {
         font-weight: bold;
     }
 
-    .text-center {
-        text-align: center;
+    /* Định dạng các khung nhập liệu */
+    .form-control {
+        width: calc(100% - 22px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
     }
 
-    /*them*/
-    .main {
-        margin-left: 300px;
-        padding: 40px 20px;
-        font-family: "Poppins", sans-serif;
-
+    /* Định dạng khi hover vào các khung nhập liệu */
+    .form-control:hover,
+    .form-control:focus {
+        border-color: #007bff;
     }
+
+    /* Định dạng nút submit */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Định dạng khi hover vào nút submit */
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    /* Định dạng phần tử hidden */
+    input[type="hidden"] {
+        display: none;
+    }
+
+    /*title_main header*/
 
     .title_main {
         display: flex;
@@ -130,6 +126,7 @@
     }
 
     .information_content {
+        display: block;
         /* min-width: 500px; */
         /* font-size: 20px; */
     }
@@ -139,7 +136,6 @@
         border-radius: 5px;
         border: 2px solid #5d5fef;
         padding: 3px;
-        display: block;
     }
 
     /*alert*/
