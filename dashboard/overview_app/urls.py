@@ -15,6 +15,7 @@ urlpatterns = [
     path('benefit_detail/', changebenefit_detail, name='benefit_detail'),
     path('benefit_update/<int:benefitid>/', changebenefit_update, name='benefit_update'),
 
+
     #tb hiring các sự kiện quan trọng
     path('hiringngay304/', hiringngay304, name='hiringngay304'),
     path('hiringngay75/', hiringngay75, name='hiringngay75'),
